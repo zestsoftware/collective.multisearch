@@ -24,7 +24,8 @@ setup(name='collective.multisearch',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'setuptools',
+          'five.grok',
+          'feedparser',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

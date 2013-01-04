@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<portlets>
+  <portletmanager
+     name="multisearch.MultisearchPortletManager"
+    type="collective.multisearch.browser.interfaces.IMultisearchPortletManager"
+    />
+
+  <portlet
+    addview="multisearch.RemoteSearchPortlet"
+    title="Remote search portlet"
+    description="Remote search portlet"
+    />
+
+  <portlet
+    addview="multisearch.LocalSearchPortlet"
+    title="Local search portlet"
+    description="Local search portlet"
+    />
+</portlets>

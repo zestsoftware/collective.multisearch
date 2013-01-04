@@ -1,0 +1,31 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+    <plone:portlet
+        name="multisearch.RemoteSearchPortlet"
+        interface=".portlet_remote_search.IRemoteSearchPortlet"
+        assignment=".portlet_remote_search.Assignment"
+        renderer=".portlet_remote_search.Renderer"
+        addview=".portlet_remote_search.AddForm"
+        editview=".portlet_remote_search.EditForm"
+        />
+
+    <plone:portlet
+        name="multisearch.LocalSearchPortlet"
+        interface=".portlet_local_search.ILocalSearchPortlet"
+        assignment=".portlet_local_search.Assignment"
+        renderer=".portlet_local_search.Renderer"
+        addview=".portlet_local_search.AddForm"
+        editview=".portlet_local_search.EditForm"
+        />
+
+  <!-- <browser:page -->
+  <!--     for="plone.portlets.interfaces.ILocalPortletAssignable" -->
+  <!--     class="plone.app.portlets.browser.manage.ManageContextualPortlets" -->
+  <!--     name="[your view name]" -->
+  <!--     template="[your template name].pt" -->
+  <!--     permission="plone.app.portlets.ManagePortlets" -->
+  <!--     /> -->
+</configure>

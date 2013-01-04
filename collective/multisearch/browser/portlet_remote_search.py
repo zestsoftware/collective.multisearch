@@ -1,8 +1,8 @@
 # Remote search portlet
-
+import logging
 import feedparser
+import urllib2
 from  urllib import quote_plus
-from  urllib2 import urlopen
 
 from zope import schema
 from zope.formlib import form
@@ -15,6 +15,7 @@ from plone.app.portlets.portlets import base
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.browser import portlet_local_search
 
+logging = getLogger('collective.multisearch.browser.portlet_remote_search')
 
 class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     remote_site_url = schema.TextLine(
@@ -66,7 +67,12 @@ class Renderer(portlet_local_search.Renderer):
             self.data.remote_site_url,
             quote_plus(query))
 
-        rss = urlopen(search_url).read()
+        try:
+            rss = urllib2.urlopen(search_url).read()
+        except urllib2.URLError:
+            logger.info('Unable to open rss feed: %s' % search_url)
+            return []
+
         data = feedparser.parse(rss)
 
         return [

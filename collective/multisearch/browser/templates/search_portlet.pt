@@ -7,8 +7,7 @@
 
   <dt class="portletHeader">
     <span class="portletTopLeft"></span>
-    <span class="tile"
-       i18n:translate="box_search">Search</span>
+    <span class="tile" tal:content="view/data/dtitle" />
     <span class="portletTopRight"></span>
   </dt>
 

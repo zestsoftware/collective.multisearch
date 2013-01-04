@@ -8,52 +8,51 @@ from zope import schema
 from zope.formlib import form
 from zope.interface import implements
 
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from plone.portlets.interfaces import IPortletDataProvider
-
 from plone.app.portlets.portlets import base
 
-from collective.multisearch import MultiSearchMessageFactory as _
 
-class IRemoteSearchPortlet(IPortletDataProvider):
+from collective.multisearch import MultiSearchMessageFactory as _
+from collective.multisearch.browser import portlet_local_search
+
+
+class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     remote_site_url = schema.TextLine(
         title=_('Remote site URL'),
         required=True)
 
-    results_number = schema.Int(
-        title=_('Number of results displayed'),
-        required=True,
-        default=5)
-
-    show_more_results = schema.Bool(
-        title=_('Show link for more results'),
-        default=True
-        )
+    remote_site_search_url = schema.TextLine(
+        title=_('Remote site search page'),
+        required = False)
 
 
-class Assignment(base.Assignment):
+class Assignment(portlet_local_search.Assignment):
     implements(IRemoteSearchPortlet)
 
     def __init__(self,
+                 dtitle = '',
                  remote_site_url='',
+                 remote_site_search_url='',
                  results_number=5,
                  show_more_results=True):
+
+        if not dtitle:
+            dtitle = 'Remote results for: %s' % remote_site_url
+
+        super(Assignment, self).__init__(dtitle, results_number, show_more_results)
         self.remote_site_url = remote_site_url
-        self.show_more_results = show_more_results
-        self.results_number = results_number
+        self.remote_site_search_url = remote_site_search_url
 
-    @property
-    def title(self):
-        return _(u"Remote search")
 
-class Renderer(base.Renderer):
-    render = ViewPageTemplateFile('templates/remote_search.pt')
+class Renderer(portlet_local_search.Renderer):
 
     @property
     def extra_results_link(self):
         query = self.request.get('SearchableText', None)
 
+        if self.data.remote_site_search_url:
+            return self.data.remote_site_search_url % query
+        
         return '%s/search?SearchableText=%s' % (
             self.data.remote_site_url,
             query)
@@ -82,10 +81,8 @@ class AddForm(base.AddForm):
     label = "Add Remote Search Portlet"
 
     def create(self, data):
-        return Assignment(
-            remote_site_url=data.get('remote_site_url'),
-            results_number=data.get('results_number'),
-            show_more_results=data.get('show_more_results'))
+        return Assignment(**data)
+
 
 class EditForm(base.EditForm):
     form_fields = form.Fields(IRemoteSearchPortlet)

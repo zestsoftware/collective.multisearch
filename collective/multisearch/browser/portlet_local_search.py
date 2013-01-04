@@ -5,13 +5,17 @@ from zope.formlib import form
 from zope.interface import implements
 
 from plone.app.portlets.portlets import base
-from plone.app.portlets.portlets import search
+from plone.portlets.interfaces import IPortletDataProvider
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from collective.multisearch import MultiSearchMessageFactory as _
 
-class ILocalSearchPortlet(search.ISearchPortlet):
+class ILocalSearchPortlet(IPortletDataProvider):
+    dtitle = schema.TextLine(
+        title=_('Title for the portlet'),
+        required=False)
+    
     results_number = schema.Int(
         title=_('Number of results displayed'),
         required=True,
@@ -23,22 +27,27 @@ class ILocalSearchPortlet(search.ISearchPortlet):
         )
 
 
-class Assignment(search.Assignment):
+class Assignment(base.Assignment):
     implements(ILocalSearchPortlet)
 
     def __init__(self,
+                 dtitle='',
                  results_number=5,
                  show_more_results=True):
+        if not dtitle:
+            dtitle = _('Local results')
+
+        self.dtitle = dtitle
         self.show_more_results = show_more_results
         self.results_number = results_number
 
     @property
     def title(self):
-        return _(u"Local search")
+        return self.dtitle
+    
 
-
-class Renderer(search.Renderer):
-    render = ViewPageTemplateFile('templates/local_search.pt')
+class Renderer(base.Renderer):
+    render = ViewPageTemplateFile('templates/search_portlet.pt')
 
     def extra_results_link(self):
         query = self.request.get('SearchableText', None)
@@ -62,16 +71,14 @@ class Renderer(search.Renderer):
             for x in results]
 
 
-class AddForm(search.AddForm):
+class AddForm(base.AddForm):
     form_fields = form.Fields(ILocalSearchPortlet)
     label = "Add Local Search Portlet"
 
     def create(self, data):
-        return Assignment(
-            results_number=data.get('results_number'),
-            show_more_results=data.get('show_more_results'))
+        return Assignment(**data)
 
 
-class EditForm(search.EditForm):
+class EditForm(base.EditForm):
     form_fields = form.Fields(ILocalSearchPortlet)
     label = "Edit Local Search Portlet"

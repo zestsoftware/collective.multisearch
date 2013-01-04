@@ -15,7 +15,7 @@ from plone.app.portlets.portlets import base
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.browser import portlet_local_search
 
-logging = getLogger('collective.multisearch.browser.portlet_remote_search')
+logger = logging.getLogger('collective.multisearch.browser.portlet_remote_search')
 
 class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     remote_site_url = schema.TextLine(

@@ -21,11 +21,17 @@
         editview=".portlet_local_search.EditForm"
         />
 
-  <!-- <browser:page -->
-  <!--     for="plone.portlets.interfaces.ILocalPortletAssignable" -->
-  <!--     class="plone.app.portlets.browser.manage.ManageContextualPortlets" -->
-  <!--     name="[your view name]" -->
-  <!--     template="[your template name].pt" -->
-  <!--     permission="plone.app.portlets.ManagePortlets" -->
-  <!--     /> -->
+    <browser:page
+        for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+        class="plone.app.portlets.browser.manage.ManageContextualPortlets"
+        name="manage-multisearch"
+        template="templates/manage-multisearch.pt"
+        permission="plone.app.portlets.ManagePortlets"
+        />
+
+    <browser:resource
+        name="multisearch.css"
+        file="resources/multisearch.css"
+        />
+
 </configure>

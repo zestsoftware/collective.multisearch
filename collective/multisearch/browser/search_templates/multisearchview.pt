@@ -1,2 +1,40 @@
-<div>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+<head>
+    <div metal:fill-slot="javascript_head_slot" tal:omit-tag="">
+        <link type="text/css" rel="kinetic-stylesheet"
+            tal:attributes="href string:${context/absolute_url}/++resource++manage-portlets.kss"/>
+    </div>
+</head>
+<body>
+<div metal:fill-slot="main">
+  <h1 class="documentFirstHeading">Search</h1>
+
+  <form method="GET"
+        tal:define="here_url here/absolute_url"
+        tal:attributes="action python: '%s/@@multisearch' % here_url">
+    <input type="text"
+           name="SearchableText"
+           tal:attributes="value here/REQUEST/SearchableText|nothing" />
+    <input type="submit" value="Search" />
+  </form>
+
+  <tal:block tal:define="columns view/get_portlets">
+    <div class="multi_search_column"
+         tal:repeat="column columns">
+      <span tal:repeat="portlet column"
+            tal:replace="structure portlet/render" />
+    </div>
+  </tal:block>
+
+  <div class="multi_search_spacer" />
+  <a tal:define="here_url here/absolute_url"
+     tal:condition="view/can_manage_portlets"
+     tal:attributes="href python: '%s/@@manage-multisearch' % here_url">Manage search portlets</a>
 </div>
+</body>
+</html>

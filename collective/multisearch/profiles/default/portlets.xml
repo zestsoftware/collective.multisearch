@@ -2,7 +2,7 @@
 <portlets>
   <portletmanager
      name="multisearch.MultisearchPortletManager"
-    type="collective.multisearch.browser.interfaces.IMultisearchPortletManager"
+     type="collective.multisearch.browser.interfaces.IMultisearchPortletManager"
     />
 
   <portlet

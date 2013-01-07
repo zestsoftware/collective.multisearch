@@ -1,0 +1,9 @@
+div.multi_search_column {
+    float: left;
+    width: 45%;
+    margin-right: 5px;
+}
+
+div.multi_search_spacer {
+    clear: both;
+}

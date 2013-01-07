@@ -26,6 +26,11 @@ class ILocalSearchPortlet(IPortletDataProvider):
         default=True
         )
 
+    assigned_column = schema.Int(
+        title=_('Column where the portlet is rendered (0 for no preference)'),
+        required=True,
+        default=0,
+        )
 
 class Assignment(base.Assignment):
     implements(ILocalSearchPortlet)
@@ -33,13 +38,15 @@ class Assignment(base.Assignment):
     def __init__(self,
                  dtitle='',
                  results_number=5,
-                 show_more_results=True):
+                 show_more_results=True,
+                 assigned_column=0):
         if not dtitle:
             dtitle = _('Local results')
 
         self.dtitle = dtitle
         self.show_more_results = show_more_results
         self.results_number = results_number
+        self.assigned_column = assigned_column
 
     @property
     def title(self):
@@ -56,7 +63,7 @@ class Renderer(base.Renderer):
             self.context.absolute_url(),
             query)
 
-    def results(self):
+    def make_results(self):
         query = self.request.get('SearchableText', None)
         if not query:
             return []
@@ -69,6 +76,12 @@ class Renderer(base.Renderer):
              'url': x.getURL(),
              'desc': x.Description()}
             for x in results]
+
+    def results(self):
+        if not hasattr(self, '_results'):
+            self._results = self.make_results()
+
+        return self._results
 
 
 class AddForm(base.AddForm):

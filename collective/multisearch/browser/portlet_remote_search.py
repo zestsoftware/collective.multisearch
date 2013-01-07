@@ -31,16 +31,18 @@ class Assignment(portlet_local_search.Assignment):
     implements(IRemoteSearchPortlet)
 
     def __init__(self,
-                 dtitle = '',
-                 remote_site_url='',
-                 remote_site_search_url='',
+                 dtitle='',
                  results_number=5,
-                 show_more_results=True):
+                 show_more_results=True,
+                 assigned_column=0,
+                 remote_site_url='',
+                 remote_site_search_url=''):
 
         if not dtitle:
             dtitle = 'Remote results for: %s' % remote_site_url
 
-        super(Assignment, self).__init__(dtitle, results_number, show_more_results)
+        super(Assignment, self).__init__(
+            dtitle, results_number, show_more_results, assigned_column)
         self.remote_site_url = remote_site_url
         self.remote_site_search_url = remote_site_search_url
 
@@ -58,7 +60,7 @@ class Renderer(portlet_local_search.Renderer):
             self.data.remote_site_url,
             query)
 
-    def results(self):
+    def make_results(self):
         query = self.request.get('SearchableText', None)
         if not query:
             return []
@@ -74,7 +76,6 @@ class Renderer(portlet_local_search.Renderer):
             return []
 
         data = feedparser.parse(rss)
-
         return [
             {'title': x['title'],
              'url': x['links'][0]['href'],

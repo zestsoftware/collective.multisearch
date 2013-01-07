@@ -12,15 +12,47 @@
 </head>
 <body>
 <div metal:fill-slot="main">
-  <h1 class="documentFirstHeading">Search</h1>
+  <form name="searchform"
+        action="@@multisearch"
+        class="searchPage enableAutoFocus"
+        tal:define="portal context/@@plone_portal_state/portal;
+                    first_call not:request/advanced_search|nothing;
+                    st python:request.get('SearchableText', '');
+                    DateTime python:modules['DateTime'].DateTime;
+                    ">
 
-  <form method="GET"
-        tal:define="here_url here/absolute_url"
-        tal:attributes="action python: '%s/@@multisearch' % here_url">
-    <input type="text"
-           name="SearchableText"
-           tal:attributes="value here/REQUEST/SearchableText|nothing" />
-    <input type="submit" value="Search" />
+    <fieldset id="search-field" class="noborder">
+      <input class="searchPage"
+             name="SearchableText"
+             type="text"
+             size="25"
+             title="Search Site"
+             i18n:attributes="title title_search_title;"
+             tal:attributes="value st;"
+             />
+      <input class="searchPage searchButton allowMultiSubmit"
+             type="submit"
+             value="Search"
+             i18n:attributes="value label_search;"/>
+    </fieldset>
+
+    <div class="row">
+      <div class="cell width-full position-0">
+        <h1 class="documentFirstHeading"
+            i18n:translate=""
+            tal:condition="not:st">
+          Search results
+        </h1>
+        <h1 class="documentFirstHeading"
+            i18n:translate=""
+            tal:condition="st">
+          Search results for
+          <strong id="search-term" tal:content="st" i18n:name="term">
+            Search Term
+          </strong>
+        </h1>
+      </div>
+    </div>
   </form>
 
   <tal:block tal:define="columns view/get_portlets">

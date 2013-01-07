@@ -31,6 +31,14 @@
         editview=".search_portlet.EditForm"
         />
 
+    <!-- Custom search box -->
+    <browser:viewlet
+        name="multisearch.searchbox"
+        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+        class=".search_viewlet.SearchBoxViewlet"
+        permission="zope2.View"
+        />
+
     <browser:page
         for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
         class="plone.app.portlets.browser.manage.ManageContextualPortlets"

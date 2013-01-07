@@ -21,6 +21,16 @@
         editview=".portlet_local_search.EditForm"
         />
 
+    <!-- Custom version of the default plone search portlet -->
+    <plone:portlet
+        name="multisearch.SearchPortlet"
+        interface=".search_portlet.ISearchPortlet"
+        assignment=".search_portlet.Assignment"
+        renderer=".search_portlet.Renderer"
+        addview=".search_portlet.AddForm"
+        editview=".search_portlet.EditForm"
+        />
+
     <browser:page
         for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
         class="plone.app.portlets.browser.manage.ManageContextualPortlets"

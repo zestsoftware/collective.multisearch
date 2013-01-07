@@ -7,13 +7,20 @@
 
   <portlet
     addview="multisearch.RemoteSearchPortlet"
-    title="Remote search portlet"
-    description="Remote search portlet"
+    title="Remote search results portlet"
+    description="Remote search results portlet"
     />
 
   <portlet
     addview="multisearch.LocalSearchPortlet"
-    title="Local search portlet"
-    description="Local search portlet"
+    title="Local search results portlet"
+    description="Local search results portlet"
     />
+
+  <portlet
+    addview="multisearch.SearchPortlet"
+    title="Multi search portlet"
+    description="Search portlet (overriden to point to multisearch)"
+    />
+
 </portlets>

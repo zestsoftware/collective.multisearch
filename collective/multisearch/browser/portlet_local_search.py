@@ -54,7 +54,7 @@ class Assignment(base.Assignment):
     
 
 class Renderer(base.Renderer):
-    render = ViewPageTemplateFile('templates/search_portlet.pt')
+    render = ViewPageTemplateFile('templates/results_portlet.pt')
 
     def extra_results_link(self):
         query = self.request.get('SearchableText', None)

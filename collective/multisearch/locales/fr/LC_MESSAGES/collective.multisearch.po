@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-01-08 12:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: ./browser/portlet_local_search.py:30
+msgid "Column where the portlet is rendered (0 for no preference)"
+msgstr "Colonne où la portlet est placée (0 pour un placement flottant dépendant des résultats)"
+
+#: ./browser/portlet_local_search.py:44
+msgid "Local results"
+msgstr "Résultats locaux"
+
+#: ./browser/search_portlet.py:15
+msgid "MultiSearch"
+msgstr "Recherche multiple"
+
+#: ./browser/portlet_local_search.py:20
+msgid "Number of results displayed"
+msgstr "Nombre de résultats affichés"
+
+#: ./browser/portlet_remote_search.py:22
+msgid "Remote site URL"
+msgstr "Adresse du site"
+
+#: ./browser/portlet_remote_search.py:26
+msgid "Remote site search page"
+msgstr "Résultats de recherche sur un site distant"
+
+#: ./browser/portlet_local_search.py:25
+msgid "Show link for more results"
+msgstr "Afficher le lien 'plus de résultats'"
+
+#: ./browser/portlet_local_search.py:16
+msgid "Title for the portlet"
+msgstr "Titre de la portlet"
+
+#. Default: "Manage search portlets"
+#: ./browser/search_templates/multisearchview.pt:62
+#: ./browser/templates/manage-multisearch.pt:17
+msgid "label_manage_multisearch"
+msgstr "Gérer les portlets de recherche"
+
+#. Default: "View more results"
+#: ./browser/templates/results_portlet.pt:31
+msgid "label_more_results"
+msgstr "Voir plus de résultats"
+
+#. Default: "Sorry, there's no results to display"
+#: ./browser/templates/results_portlet.pt:18
+msgid "label_no_results"
+msgstr "Désolé, aucun résultat trouvé"
+

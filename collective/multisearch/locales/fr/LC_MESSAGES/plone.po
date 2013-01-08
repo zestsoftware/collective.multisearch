@@ -1,0 +1,28 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-01-08 12:20+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+msgid "Local search results portlet"
+msgstr "Résultats de la recherche locale"
+
+msgid "Multi search portlet"
+msgstr "Recherche (pointe vers la page de recherche multiple)"
+
+msgid "Remote search results portlet"
+msgstr "Résultats de recherche distante"
+
+msgid "Search portlet (overriden to point to multisearch)"
+msgstr "Portlet de recherche pointant vers la page de recherche multiple"
+

@@ -3,7 +3,7 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="collective.multisearch">
 <head>
     <div metal:fill-slot="javascript_head_slot" tal:omit-tag="">
         <link type="text/css" rel="kinetic-stylesheet"
@@ -11,9 +11,12 @@
     </div>
 </head>
 <body>
-<div metal:fill-slot="main">
-  <h1 class="documentFirstHeading">Manage search portlets</h1>
-  <span tal:replace="structure provider:multisearch.MultisearchPortletManager" />
-</div>
+  <metal:column_one fill-slot="column_one_slot" />
+  <metal:column_one fill-slot="column_two_slot" />
+  <div metal:fill-slot="main">
+    <h1 class="documentFirstHeading"
+        i18n:translate="label_manage_multisearch">Manage search portlets</h1>
+    <span tal:replace="structure provider:multisearch.MultisearchPortletManager" />
+  </div>
 </body>
 </html>

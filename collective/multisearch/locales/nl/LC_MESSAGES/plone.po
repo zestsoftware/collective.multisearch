@@ -15,14 +15,14 @@ msgstr ""
 "Domain: DOMAIN\n"
 
 msgid "Local search results portlet"
-msgstr ""
+msgstr "Portlet voor lokale zoekresultaten"
 
 msgid "Multi search portlet"
-msgstr ""
+msgstr "Portlet voor multisearch"
 
 msgid "Remote search results portlet"
-msgstr ""
+msgstr "Portlet voor remote search"
 
 msgid "Search portlet (overriden to point to multisearch)"
-msgstr ""
+msgstr "Zoekportlet (overschreven en verwijst naar multisearch)"
 

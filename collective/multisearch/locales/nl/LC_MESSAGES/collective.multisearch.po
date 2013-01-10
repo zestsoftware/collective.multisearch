@@ -16,49 +16,49 @@ msgstr ""
 
 #: ./browser/portlet_local_search.py:30
 msgid "Column where the portlet is rendered (0 for no preference)"
-msgstr ""
+msgstr "Kolom waar de portlet staat (0 voor geen voorkeur)"
 
 #: ./browser/portlet_local_search.py:44
 msgid "Local results"
-msgstr ""
+msgstr "Lokale resultaten"
 
 #: ./browser/search_portlet.py:15
 msgid "MultiSearch"
-msgstr ""
+msgstr "MultiSearch"
 
 #: ./browser/portlet_local_search.py:20
 msgid "Number of results displayed"
-msgstr ""
+msgstr "Aantal getoonde resultaten"
 
 #: ./browser/portlet_remote_search.py:22
 msgid "Remote site URL"
-msgstr ""
+msgstr "URL van de externe website"
 
 #: ./browser/portlet_remote_search.py:26
 msgid "Remote site search page"
-msgstr ""
+msgstr "Zoekpagina van de externe website"
 
 #: ./browser/portlet_local_search.py:25
 msgid "Show link for more results"
-msgstr ""
+msgstr "Toon link naar meer resultaten"
 
 #: ./browser/portlet_local_search.py:16
 msgid "Title for the portlet"
-msgstr ""
+msgstr "Titel voor de portlet"
 
 #. Default: "Manage search portlets"
 #: ./browser/search_templates/multisearchview.pt:62
 #: ./browser/templates/manage-multisearch.pt:17
 msgid "label_manage_multisearch"
-msgstr ""
+msgstr "Beheer zoekportlets"
 
 #. Default: "View more results"
 #: ./browser/templates/results_portlet.pt:31
 msgid "label_more_results"
-msgstr ""
+msgstr "Bekijk meer resultaten"
 
 #. Default: "Sorry, there's no results to display"
 #: ./browser/templates/results_portlet.pt:18
 msgid "label_no_results"
-msgstr ""
+msgstr "Er zijn geen resultaten om te tonen"
 

@@ -3,6 +3,7 @@
 from zope import schema
 from zope.formlib import form
 from zope.interface import implements
+from zope.schema.vocabulary import SimpleVocabulary
 
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
@@ -10,6 +11,11 @@ from plone.portlets.interfaces import IPortletDataProvider
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from collective.multisearch import MultiSearchMessageFactory as _
+from collective.multisearch.config import COLUMN_COUNT
+
+columnVocabulary = SimpleVocabulary.fromItems(
+    [(_('No prefered column'), 0)] +
+    [(x+1, x+1) for x in range(0, COLUMN_COUNT)])
 
 class ILocalSearchPortlet(IPortletDataProvider):
     dtitle = schema.TextLine(
@@ -26,11 +32,12 @@ class ILocalSearchPortlet(IPortletDataProvider):
         default=True
         )
 
-    assigned_column = schema.Int(
-        title=_('Column where the portlet is rendered (0 for no preference)'),
+    assigned_column = schema.Choice(
+        title=_('Column where the portlet is rendered'),
         required=True,
-        default=0,
+        vocabulary=columnVocabulary
         )
+
 
 class Assignment(base.Assignment):
     implements(ILocalSearchPortlet)

@@ -12,6 +12,7 @@ from plone.portlets.interfaces import IPortletAssignmentMapping
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 
+from collective.multisearch.config import COLUMN_COUNT
 
 class MultiSearchView(grok.View):
     grok.context(IPloneSiteRoot)
@@ -30,15 +31,15 @@ class MultiSearchView(grok.View):
 
         retriever = getMultiAdapter((self.context, column),
                                     IPortletRetriever)
-        columns = dict([(index, []) for index in range(0, 3)])
+        columns = dict([(index, []) for index in range(0, COLUMN_COUNT + 1)])
 
         for portlet in retriever.getPortlets():
             assignment = portlet.get('assignment', None)
             if assignment is None:
                 continue
 
-            # Column number must be btween 0 and 2
-            assignment_column = max(0, min(assignment.assigned_column, 2))
+            # Column number must be btween 0 and COLUMN_COUNT
+            assignment_column = max(0, min(assignment.assigned_column, COLUMN_COUNT))
             renderer = queryMultiAdapter((self.context, self.request, self, column, assignment),
                                          IPortletRenderer)
             renderer.update()

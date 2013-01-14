@@ -1,3 +1,5 @@
+# Custom manager for the multisearch portlet manager: inactive for the moment.
+
 from zope import component
 from zope.interface import implements
 
@@ -13,7 +15,4 @@ class MultisearchPortletManager(PortletManager):
     implements(IMultisearchPortletManager)
 
     def getAddablePortletTypes(self):
-        base = super(MultisearchManager, self).getAddablePortletTypes()
-
-        import ipdb; ipdb.set_trace()
-        return base
+        return super(MultisearchManager, self).getAddablePortletTypes()

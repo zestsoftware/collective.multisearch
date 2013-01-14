@@ -3,6 +3,9 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:browser="http://namespaces.zope.org/browser">
 
+    <adapter factory=".manager.MultisearchPortletManager"
+             provides="plone.portlets.interfaces.IPortletManager"/>
+
     <plone:portlet
         name="multisearch.RemoteSearchPortlet"
         interface=".portlet_remote_search.IRemoteSearchPortlet"

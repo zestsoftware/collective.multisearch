@@ -8,19 +8,22 @@
   <portlet
     addview="multisearch.RemoteSearchPortlet"
     title="Remote search results portlet"
-    description="Remote search results portlet"
-    />
+    description="Remote search results portlet">
+    <for interface="collective.multisearch.browser.interfaces.IMultisearchPortletManager"/>
+  </portlet>
 
   <portlet
     addview="multisearch.LocalSearchPortlet"
     title="Local search results portlet"
-    description="Local search results portlet"
-    />
+    description="Local search results portlet">
+    <for interface="collective.multisearch.browser.interfaces.IMultisearchPortletManager"/>
+  </portlet>
 
   <portlet
     addview="multisearch.SearchPortlet"
     title="Multi search portlet"
-    description="Search portlet (overriden to point to multisearch)"
-    />
+    description="Search portlet (overriden to point to multisearch)">
+    <for interface="collective.multisearch.browser.interfaces.IMultisearchPortletManager"/>
+  </portlet>
 
 </portlets>

@@ -7,6 +7,7 @@
 <body>
 <metal:column_one fill-slot="column_one_slot" />
 <metal:column_one fill-slot="column_two_slot" />
+<metal:block fill-slot="top_slot" tal:define="dummy python:request.set('disable_border', 0)" />
 <div metal:fill-slot="main">
   <form method="GET"
         id="multisearch"

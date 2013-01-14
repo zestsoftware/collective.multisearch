@@ -63,6 +63,9 @@ class Renderer(base.Renderer):
             self.context.absolute_url(),
             query)
 
+    def show_more_results(self):
+        return self.data.show_more_results and len(self.make_results()) > 0
+
     def make_results(self):
         query = self.request.get('SearchableText', None)
         if not query:

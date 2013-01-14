@@ -27,10 +27,10 @@
     </tal:block>
   </tal:block>
 
-  <dd class="portletFooter">
+  <dd class="portletFooter"
+      tal:condition="view/show_more_results">
     <a href="#"
        class="tile"
-       tal:condition="view/data/show_more_results"
        tal:attributes="href view/extra_results_link"
        i18n:translate="label_more_results">
       View more results

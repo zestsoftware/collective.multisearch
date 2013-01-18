@@ -19,10 +19,9 @@ from plone.app.portlets.browser.interfaces import IManageContextualPortletsView
 from collective.multisearch.browser.interfaces import IMultisearchPortletManager
 from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
 
-class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManagerRenderer):
-    implements = IMultiSearchPortletManagerRenderer
-    adapts(Interface, IDefaultBrowserLayer, IManageContextualPortletsView, IPortletManager)
+from plone.portlets.interfaces import IPortletManagerRenderer
 
+class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManagerRenderer):
     template = ViewPageTemplateFile('templates/edit-manager-contextual.pt')
 
 

@@ -20,4 +20,8 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
   <!-- -*- extra stuff goes here -*- -->
+
+  <subscriber handler=".events.dispatchToComponent" />
+  <subscriber handler=".events.registerPortletManagerRenderer" />
+  <subscriber handler=".events.unregisterPortletManagerRenderer" />  
 </configure>

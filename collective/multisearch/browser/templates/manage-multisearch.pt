@@ -16,7 +16,7 @@
   <div metal:fill-slot="main">
     <h1 class="documentFirstHeading"
         i18n:translate="label_manage_multisearch">Manage search portlets</h1>
-    <span tal:replace="structure provider:multisearch.MultisearchPortletManager" />
+    <span tal:content="structure view/get_manager"/>
   </div>
 </body>
 </html>

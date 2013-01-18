@@ -21,6 +21,12 @@
         editview=".portlet_local_search.EditForm"
         />
 
+    <!-- Our custom view for managing the portlets -->
+    <adapter
+        factory=".manager.MultiSearchContextualEditPortletManagerRenderer"
+        provides=".interfaces.IMultiSearchPortletManagerRenderer"
+        />
+
     <!-- Custom version of the default plone search portlet -->
     <plone:portlet
         name="multisearch.SearchPortlet"
@@ -41,7 +47,7 @@
 
     <browser:page
         for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
-        class="plone.app.portlets.browser.manage.ManageContextualPortlets"
+        class=".manager.MultiSearchManagerContextualPortlets"
         name="manage-multisearch"
         template="templates/manage-multisearch.pt"
         permission="plone.app.portlets.ManagePortlets"

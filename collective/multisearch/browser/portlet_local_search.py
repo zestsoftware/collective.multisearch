@@ -38,6 +38,12 @@ class ILocalSearchPortlet(IPortletDataProvider):
         vocabulary=columnVocabulary
         )
 
+    show_if_no_results = schema.Bool(
+        title=_('Show when there\'s no results'),
+        required=False,
+        default=True
+        )
+
 
 class Assignment(base.Assignment):
     implements(ILocalSearchPortlet)
@@ -46,7 +52,8 @@ class Assignment(base.Assignment):
                  dtitle='',
                  results_number=5,
                  show_more_results=True,
-                 assigned_column=0):
+                 assigned_column=0,
+                 show_if_no_results=True):
         if not dtitle:
             dtitle = _('Local results')
 
@@ -54,6 +61,7 @@ class Assignment(base.Assignment):
         self.show_more_results = show_more_results
         self.results_number = results_number
         self.assigned_column = assigned_column
+        self.show_if_no_results = show_if_no_results
 
     @property
     def title(self):
@@ -63,6 +71,17 @@ class Assignment(base.Assignment):
 class Renderer(base.Renderer):
     render = ViewPageTemplateFile('templates/results_portlet.pt')
 
+    @property
+    def has_results(self):
+        return len(self.make_results()) > 0
+
+    @property
+    def available(self):
+        if self.has_results:
+            return True
+
+        return self.data.show_if_no_results
+
     def extra_results_link(self):
         query = self.request.get('SearchableText', None)
 
@@ -71,7 +90,7 @@ class Renderer(base.Renderer):
             query)
 
     def show_more_results(self):
-        return self.data.show_more_results and len(self.make_results()) > 0
+        return self.data.show_more_results and self.has_results
 
     def make_results(self):
         query = self.request.get('SearchableText', None)

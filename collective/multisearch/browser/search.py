@@ -42,6 +42,9 @@ class MultiSearchView(grok.View):
             assignment_column = max(0, min(assignment.assigned_column, COLUMN_COUNT))
             renderer = queryMultiAdapter((self.context, self.request, self, column, assignment),
                                          IPortletRenderer)
+            if not renderer.available:
+                continue
+
             renderer.update()
 
             columns[assignment_column].append(renderer)

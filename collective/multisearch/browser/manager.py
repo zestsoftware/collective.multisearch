@@ -22,6 +22,7 @@ from collective.multisearch.browser.interfaces import IMultiSearchPortletManager
 from plone.portlets.interfaces import IPortletManagerRenderer
 
 class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManagerRenderer):
+    adapts(Interface, IDefaultBrowserLayer, IManageContextualPortletsView, IMultisearchPortletManager)
     template = ViewPageTemplateFile('templates/edit-manager-contextual.pt')
 
 

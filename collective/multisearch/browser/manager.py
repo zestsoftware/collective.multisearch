@@ -15,7 +15,8 @@ from plone.portlets.interfaces import IPortletManager
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 from plone.app.portlets.browser.interfaces import IManageContextualPortletsView
 
-
+from collective.multisearch.config import COLUMN_COUNT
+from collective.multisearch.utils import get_column_number
 from collective.multisearch.browser.interfaces import IMultisearchPortletManager
 from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
 
@@ -24,6 +25,10 @@ from plone.portlets.interfaces import IPortletManagerRenderer
 class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManagerRenderer):
     adapts(Interface, IDefaultBrowserLayer, IManageContextualPortletsView, IMultisearchPortletManager)
     template = ViewPageTemplateFile('templates/edit-manager-contextual.pt')
+
+    def get_column_number(self):
+        return {'current': get_column_number(self.context),
+                'available': range(1, COLUMN_COUNT+1)}
 
 
 class MultiSearchManagerContextualPortlets(ManageContextualPortlets):

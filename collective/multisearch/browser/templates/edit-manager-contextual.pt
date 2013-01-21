@@ -13,13 +13,27 @@
   <p />
 
   <form method="POST"
-        action="@@multisearch">
+        action="@@manage-multisearch">
+    <label for="column_count"
+           i18n:domain="collective.multisearch"
+           i18n:translate="label_column_count">
+      Number of columns in the search page
+    </label>
+    <select name="column_count"
+            tal:define="data view/get_column_number">
+      <tal:block tal:repeat="value data/available">
+        <option tal:attributes="value value;
+                               selected python: value == data['current'] and 'selected' or None"
+                tal:content="value"/>
+      </tal:block>
+    </select>
+
     <div class="formControls">
       <input class="context"
              type="submit"
              value="Save settings"
              i18n:attributes="value label_save_settings"/>
-    </div>    
+    </div>
   </form>
 </div>
 </html>

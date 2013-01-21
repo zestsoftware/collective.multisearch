@@ -35,6 +35,7 @@ class Assignment(portlet_local_search.Assignment):
                  results_number=5,
                  show_more_results=True,
                  assigned_column=0,
+                 show_if_no_results=True,
                  remote_site_url='',
                  remote_site_search_url=''):
 
@@ -42,7 +43,7 @@ class Assignment(portlet_local_search.Assignment):
             dtitle = 'Remote results for: %s' % remote_site_url
 
         super(Assignment, self).__init__(
-            dtitle, results_number, show_more_results, assigned_column)
+            dtitle, results_number, show_more_results, assigned_column, show_if_no_results)
         self.remote_site_url = remote_site_url
         self.remote_site_search_url = remote_site_search_url
 

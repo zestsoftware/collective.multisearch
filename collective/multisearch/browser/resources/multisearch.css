@@ -1,5 +1,12 @@
 div.multi_search_column {
     float: left;
+}
+
+div.multi_search_column-1 {
+    width: 95%;
+}
+
+div.multi_search_column-2 {
     width: 45%;
     margin-right: 5px;
 }

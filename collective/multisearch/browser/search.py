@@ -13,6 +13,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 
 from collective.multisearch.config import COLUMN_COUNT
+from collective.multisearch.utils import get_column_number
 
 class MultiSearchView(grok.View):
     grok.context(IPloneSiteRoot)
@@ -24,6 +25,9 @@ class MultiSearchView(grok.View):
         return mtool.checkPermission('plone.app.portlets.ManagePortlets',
                                      self.context)
 
+    def get_column_number(self):
+        return get_column_number(self.context)
+
     def get_portlets(self):
         column = getUtility(IPortletManager,
                              name='multisearch.MultisearchPortletManager',
@@ -31,7 +35,9 @@ class MultiSearchView(grok.View):
 
         retriever = getMultiAdapter((self.context, column),
                                     IPortletRetriever)
-        columns = dict([(index, []) for index in range(0, COLUMN_COUNT + 1)])
+
+        column_number = get_column_number(self.context)
+        columns = dict([(index, []) for index in range(0, column_number + 1)])
 
         for portlet in retriever.getPortlets():
             assignment = portlet.get('assignment', None)
@@ -39,7 +45,7 @@ class MultiSearchView(grok.View):
                 continue
 
             # Column number must be btween 0 and COLUMN_COUNT
-            assignment_column = max(0, min(assignment.assigned_column, COLUMN_COUNT))
+            assignment_column = max(0, min(assignment.assigned_column, column_number))
             renderer = queryMultiAdapter((self.context, self.request, self, column, assignment),
                                          IPortletRenderer)
             if not renderer.available:

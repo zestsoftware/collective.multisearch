@@ -37,6 +37,44 @@ class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManag
                 'available': range(1, COLUMN_COUNT+1)}
 
 
+    def addable_portlets(self):
+        """ We can't do a normal 'super', so it's a copy/paste form the base class.
+        """
+        baseUrl = self.baseUrl()
+        addviewbase = baseUrl.replace(self.context_url(), '')
+
+        def sort_key(v):
+            return v.get('title')
+
+        def check_permission(p):
+            addview = p.addview
+            if not addview:
+                return False
+
+            # We only use portlets that are specifically
+            # designed for this manager.
+            if not IMultisearchPortletManager in p.for_:
+                return False
+
+            addview = "%s/+/%s" % (addviewbase, addview,)
+            if addview.startswith('/'):
+                addview = addview[1:]
+            try:
+                self.context.restrictedTraverse(str(addview))
+            except (AttributeError, KeyError, Unauthorized,):
+                return False
+            return True
+
+        portlets =  [{
+            'title' : p.title,
+            'description' : p.description,
+            'addview' : '%s/+/%s' % (addviewbase, p.addview)
+            } for p in self.manager.getAddablePortletTypes() if check_permission(p)]
+
+        portlets.sort(key=sort_key)
+        return portlets
+
+
 class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
     def get_manager(self):
         editmanager = queryMultiAdapter(

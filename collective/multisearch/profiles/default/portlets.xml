@@ -23,7 +23,6 @@
     addview="multisearch.SearchPortlet"
     title="Multi search portlet"
     description="Search portlet (overriden to point to multisearch)">
-    <for interface="collective.multisearch.browser.interfaces.IMultisearchPortletManager"/>
   </portlet>
 
 </portlets>

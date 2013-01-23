@@ -19,27 +19,36 @@ columnVocabulary = SimpleVocabulary.fromItems(
 
 class ILocalSearchPortlet(IPortletDataProvider):
     dtitle = schema.TextLine(
-        title=_('Title for the portlet'),
+        title=_(u'Title for the portlet'),
+        description=_(u'Title shown in the header'),
         required=False)
     
     results_number = schema.Int(
-        title=_('Number of results displayed'),
+        title=_(u'Number of results displayed'),
+        description=_(u'Maximum number of results displayed'),
         required=True,
         default=5)
 
     show_more_results = schema.Bool(
-        title=_('Show link for more results'),
+        title=_(u'Show link for more results'),
+        description=_(u'If selected, show a link in the portlet ' + \
+                      'footer to show ore results'),
         default=True
         )
 
     assigned_column = schema.Choice(
-        title=_('Column where the portlet is rendered'),
+        title=_(u'Column where the portlet is rendered'),
+        description=_(u'Specify if the portlet is assigned to a ' + \
+                      'particular column'),
         required=True,
         vocabulary=columnVocabulary
         )
 
     show_if_no_results = schema.Bool(
-        title=_('Show when there\'s no results'),
+        title=_(u'Show when there\'s no results'),
+        description=_(u'If selected, the portlet will display a message ' + \
+                      'saying that no results were found. Otherwise the ' + \
+                      'portlet is hidden'),
         required=False,
         default=True
         )

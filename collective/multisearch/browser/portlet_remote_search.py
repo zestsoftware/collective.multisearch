@@ -19,11 +19,16 @@ logger = logging.getLogger('collective.multisearch.browser.portlet_remote_search
 
 class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     remote_site_url = schema.TextLine(
-        title=_('Remote site URL'),
+        title=_(u'Remote site URL'),
+        description=_(u'URL of the site were the search is performed ' + \
+                      '(http://www.example.com)'),
         required=True)
 
     remote_site_search_url = schema.TextLine(
-        title=_('Remote site search page'),
+        title=_(u'Remote site search page'),
+        description=_(u'You can specify here a custom search page. If left blank, ' +\
+                      'it will use the address of the remote site and append "/search" ' +\
+                      '(http://www.example.com/search with the previous example)'),
         required = False)
 
 

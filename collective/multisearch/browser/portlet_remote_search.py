@@ -28,7 +28,8 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
         title=_(u'Remote site search page'),
         description=_(u'You can specify here a custom search page. If left blank, ' +\
                       'it will use the address of the remote site and append "/search" ' +\
-                      '(http://www.example.com/search with the previous example)'),
+                      '("http://www.example.com/search?SearchableText=%s" with the previous ' +\
+                      'example, note the %s part that allows to copy the searched text.)'),
         required = False)
 
 
@@ -55,7 +56,6 @@ class Assignment(portlet_local_search.Assignment):
 
 class Renderer(portlet_local_search.Renderer):
 
-    @property
     def extra_results_link(self):
         query = self.request.get('SearchableText', None)
 
@@ -64,7 +64,7 @@ class Renderer(portlet_local_search.Renderer):
         
         return '%s/search?SearchableText=%s' % (
             self.data.remote_site_url,
-            query)
+            quote_plus(query))
 
     def make_results(self):
         query = self.request.get('SearchableText', None)

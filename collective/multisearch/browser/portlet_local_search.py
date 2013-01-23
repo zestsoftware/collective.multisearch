@@ -1,4 +1,5 @@
 # Local search portlet: customized for the multi_search view.
+from  urllib import quote_plus
 
 from zope import schema
 from zope.formlib import form
@@ -96,7 +97,7 @@ class Renderer(base.Renderer):
 
         return '%s/search?SearchableText=%s' % (
             self.context.absolute_url(),
-            query)
+            quote_plus(query))
 
     def show_more_results(self):
         return self.data.show_more_results and self.has_results

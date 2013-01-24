@@ -120,6 +120,16 @@ def assign_columns(portlets, column_count):
     ...                 (Assignment(0), Renderer(5))], 2)
     [[<Renderer: 10 results>, <Renderer: 5 results>, <Renderer: 5 results>],
      [<Renderer: 1 results>, <Renderer: 15 results>]]
+
+    If a portlet has no results but it still shown, it is considered has having one
+    result (otherwise they'll all be stacked in the same column.
+    >>> assign_columns([(Assignment(2), Renderer(1)),
+    ...                 (Assignment(0), Renderer(0)),
+    ...                 (Assignment(0), Renderer(0)),
+    ...                 (Assignment(0), Renderer(0))], 2)
+    [[<Renderer: 0 results>, <Renderer: 0 results>],
+     [<Renderer: 1 results>, <Renderer: 0 results>]]
+
     """
     columns = dict([(index, []) for index in
                     range(0, column_count + 1)])

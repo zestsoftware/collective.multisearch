@@ -93,9 +93,8 @@ def assign_columns(portlets, column_count):
     ...         self.assigned_column = assigned_column
 
     >>> class Renderer(object):
-    ...     def __init__(self, res_count, show_desc=False, desc_count=0):
+    ...     def __init__(self, res_count, desc_count=0):
     ...         self.res_count = res_count
-    ...         self.show_desc = show_desc
     ...         self.desc_count = desc_count
     ...         self.lines_count = res_count + desc_count
     ...         if self.lines_count == 0:
@@ -103,7 +102,9 @@ def assign_columns(portlets, column_count):
     ...     def results(self):
     ...         return [x for x in range(0, self.res_count)]
     ...     def __repr__(self):
-    ...         return '<Renderer: %s results>' % self.res_count
+    ...         return '<Renderer: %s results%s>' % (
+    ...             self.res_count,
+    ...             ' (%s descs)' % self.desc_count if self.desc_count else '')
 
     If there's no floating column, it will no try doing any balancing:
     >>> assign_columns([(Assignment(1), Renderer(10)),
@@ -134,6 +135,26 @@ def assign_columns(portlets, column_count):
     ...                 (Assignment(0), Renderer(0))], 2)
     [[<Renderer: 0 results>, <Renderer: 0 results>],
      [<Renderer: 1 results>, <Renderer: 0 results>]]
+
+
+    As we base the balancing on the 'line_count' property (and not only the results),
+    there might be less results in one column but have equivalent sizes.
+
+    First without descriptions:
+    >>> assign_columns([(Assignment(0), Renderer(10)),
+    ...                 (Assignment(0), Renderer(10)),
+    ...                 (Assignment(0), Renderer(5)),
+    ...                 (Assignment(0), Renderer(5))], 2)
+    [[<Renderer: 10 results>, <Renderer: 5 results>],
+     [<Renderer: 10 results>, <Renderer: 5 results>]]
+
+    Now one column has some descriptions shown:
+    >>> assign_columns([(Assignment(0), Renderer(10)),
+    ...                 (Assignment(0), Renderer(10, desc_count=10)),
+    ...                 (Assignment(0), Renderer(5)),
+    ...                 (Assignment(0), Renderer(5))], 2)
+    [[<Renderer: 10 results (10 descs)>],
+     [<Renderer: 10 results>, <Renderer: 5 results>, <Renderer: 5 results>]]
 
     """
     columns = dict([(index, []) for index in

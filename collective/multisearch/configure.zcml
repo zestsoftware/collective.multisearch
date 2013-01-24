@@ -21,6 +21,14 @@
       />
   <!-- -*- extra stuff goes here -*- -->
 
+  <genericsetup:upgradeStep
+      title="Add 'show description' field to portlets"
+      description=""
+      source="1000"
+      destination="1001"
+      handler="collective.multisearch.migrations.add_show_description_field"
+      profile="collective.multisearch:default" />
+
   <subscriber handler=".events.dispatchToComponent" />
   <subscriber handler=".events.registerPortletManagerRenderer" />
   <subscriber handler=".events.unregisterPortletManagerRenderer" />  

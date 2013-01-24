@@ -40,6 +40,7 @@ class Assignment(portlet_local_search.Assignment):
                  dtitle='',
                  results_number=5,
                  show_more_results=True,
+                 show_description=False,
                  assigned_column=0,
                  show_if_no_results=True,
                  remote_site_url='',

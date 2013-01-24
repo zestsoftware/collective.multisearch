@@ -30,6 +30,12 @@ class ILocalSearchPortlet(IPortletDataProvider):
         required=True,
         default=5)
 
+    show_description = schema.Bool(
+        title=_(u'Show result description'),
+        description=_(u'If selected, show a exceprt of the description'),
+        default=False,
+        )
+
     show_more_results = schema.Bool(
         title=_(u'Show link for more results'),
         description=_(u'If selected, show a link in the portlet ' + \
@@ -62,6 +68,7 @@ class Assignment(base.Assignment):
                  dtitle='',
                  results_number=5,
                  show_more_results=True,
+                 show_description=False,
                  assigned_column=0,
                  show_if_no_results=True):
         if not dtitle:
@@ -69,6 +76,7 @@ class Assignment(base.Assignment):
 
         self.dtitle = dtitle
         self.show_more_results = show_more_results
+        self.show_description = show_description
         self.results_number = results_number
         self.assigned_column = assigned_column
         self.show_if_no_results = show_if_no_results

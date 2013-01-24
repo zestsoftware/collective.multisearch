@@ -23,8 +23,10 @@
         <a tal:attributes="href item/url;
                            title item/desc"
            tal:content="item/title" />
-        <p tal:condition="item/s_desc|nothing"
-           tal:content="structure item/s_desc" />
+        <tal:block tal:condition="item/s_desc|nothing">
+          <br />
+          <span tal:content="structure item/s_desc" />
+        </tal:block>
       </dd>
     </tal:block>
   </tal:block>

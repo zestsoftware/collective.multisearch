@@ -13,6 +13,8 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.config import COLUMN_COUNT
+from collective.multisearch.config import CHARACTERS_PER_LINE
+
 from collective.multisearch.utils import make_excerpt
 
 columnVocabulary = SimpleVocabulary.fromItems(
@@ -114,7 +116,7 @@ class Renderer(base.Renderer):
             return 1
 
         count = 0
-        for res in self.results:
+        for res in results:
             count += 1
             if res['s_desc']:
                 count += 1
@@ -148,8 +150,7 @@ class Renderer(base.Renderer):
     def make_excerpt(self, desc):
         if not self.data.show_description or not desc:
             return
-        max_length = getattr(self, 'max_length', 100)
-
+        max_length = getattr(self, 'max_length', CHARACTERS_PER_LINE)
         return make_excerpt(desc, max_length)
 
     def results(self):

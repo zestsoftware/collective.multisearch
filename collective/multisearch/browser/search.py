@@ -13,6 +13,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 
 from collective.multisearch.config import COLUMN_COUNT
+from collective.multisearch.config import CHARACTERS_PER_LINE
+
 from collective.multisearch.utils import assign_columns
 from collective.multisearch.utils import get_column_number
 
@@ -38,6 +40,7 @@ class MultiSearchView(grok.View):
                                     IPortletRetriever)
 
         columns_number = get_column_number(self.context)
+        max_length = CHARACTERS_PER_LINE / columns_number
         portlets = []
 
         for portlet in retriever.getPortlets():
@@ -48,6 +51,7 @@ class MultiSearchView(grok.View):
             renderer = queryMultiAdapter(
                 (self.context, self.request, self, manager, assignment),
                 IPortletRenderer)
+            renderer.max_length = max_length
 
             if not renderer.available:
                 continue

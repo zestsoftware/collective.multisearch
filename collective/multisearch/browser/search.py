@@ -13,6 +13,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 
 from collective.multisearch.config import COLUMN_COUNT
+from collective.multisearch.utils import assign_columns
 from collective.multisearch.utils import get_column_number
 
 class MultiSearchView(grok.View):
@@ -29,50 +30,29 @@ class MultiSearchView(grok.View):
         return get_column_number(self.context)
 
     def get_portlets(self):
-        column = getUtility(IPortletManager,
+        manager = getUtility(IPortletManager,
                              name='multisearch.MultisearchPortletManager',
                              context=self.context)
 
-        retriever = getMultiAdapter((self.context, column),
+        retriever = getMultiAdapter((self.context, manager),
                                     IPortletRetriever)
 
-        column_number = get_column_number(self.context)
-        columns = dict([(index, []) for index in range(0, column_number + 1)])
+        columns_number = get_column_number(self.context)
+        portlets = []
 
         for portlet in retriever.getPortlets():
             assignment = portlet.get('assignment', None)
             if assignment is None:
                 continue
 
-            # Column number must be btween 0 and COLUMN_COUNT
-            assignment_column = max(0, min(assignment.assigned_column, column_number))
-            renderer = queryMultiAdapter((self.context, self.request, self, column, assignment),
-                                         IPortletRenderer)
+            renderer = queryMultiAdapter(
+                (self.context, self.request, self, manager, assignment),
+                IPortletRenderer)
+
             if not renderer.available:
                 continue
 
             renderer.update()
+            portlets.append((assignment, renderer))
 
-            columns[assignment_column].append(renderer)
-
-        if columns[0]:
-            # We need to place the portlets in the existing columns.
-            # First we sort them by size.
-            unplaced = sorted(
-                [(renderer, len(renderer.results()) or 1)
-                 for renderer in columns[0]],
-                key = lambda x: x[1],
-                reverse=True)
-
-            sizes = dict(
-                [(index, sum([len(renderer.results()) or 1 for renderer in columns[index]]))
-                 for index in columns.keys() if index])
-
-            for portlet, p_size in unplaced:
-                col_index = sorted(sizes.items(),
-                                   key = lambda x: x[1])[0][0]
-
-                columns[col_index].append(portlet)
-                sizes[col_index] += p_size
-
-        return [columns[index] for index in sorted(columns.keys()) if index]
+        return assign_columns(portlets, columns_number)

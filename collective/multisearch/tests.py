@@ -1,7 +1,8 @@
 import unittest
+import doctest
 
-#from zope.testing import doctestunit
-#from zope.component import testing
+from zope.testing import doctestunit
+from zope.component import testing
 from Testing import ZopeTestCase as ztc
 
 from Products.Five import fiveconfigure
@@ -11,6 +12,7 @@ ptc.setupPloneSite()
 
 import collective.multisearch
 
+OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 
 class TestCase(ptc.PloneTestCase):
 
@@ -35,9 +37,11 @@ def test_suite():
         #    'README.txt', package='collective.multisearch',
         #    setUp=testing.setUp, tearDown=testing.tearDown),
 
-        #doctestunit.DocTestSuite(
-        #    module='collective.multisearch.mymodule',
-        #    setUp=testing.setUp, tearDown=testing.tearDown),
+        doctestunit.DocTestSuite(
+            module='collective.multisearch.utils',
+            setUp=testing.setUp,
+            tearDown=testing.tearDown,
+            optionflags=OPTIONFLAGS),
 
 
         # Integration tests that use PloneTestCase

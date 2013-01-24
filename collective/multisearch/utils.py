@@ -93,8 +93,13 @@ def assign_columns(portlets, column_count):
     ...         self.assigned_column = assigned_column
 
     >>> class Renderer(object):
-    ...     def __init__(self, res_count):
+    ...     def __init__(self, res_count, show_desc=False, desc_count=0):
     ...         self.res_count = res_count
+    ...         self.show_desc = show_desc
+    ...         self.desc_count = desc_count
+    ...         self.lines_count = res_count + desc_count
+    ...         if self.lines_count == 0:
+    ...             self.lines_count = 1
     ...     def results(self):
     ...         return [x for x in range(0, self.res_count)]
     ...     def __repr__(self):
@@ -142,13 +147,14 @@ def assign_columns(portlets, column_count):
         # We need to place the portlets in the existing columns.
         # First we sort them by size.
         unplaced = sorted(
-            [(renderer, len(renderer.results()) or 1)
+            [(renderer, renderer.lines_count)
              for renderer in columns[0]],
             key = lambda x: x[1],
             reverse=True)
 
         sizes = dict(
-            [(index, sum([len(renderer.results()) or 1 for renderer in columns[index]]))
+            [(index, sum([renderer.lines_count
+                          for renderer in columns[index]]))
              for index in columns.keys() if index])
 
         for portlet, p_size in unplaced:

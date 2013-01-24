@@ -101,6 +101,26 @@ class Renderer(base.Renderer):
 
         return self.data.show_if_no_results
 
+    @property
+    def lines_count(self):
+        """ Count the number of lines displayed.
+        Basically, the number of results + the number of
+        available short description.
+        Return 1 when there is no results (in order to take
+        the header into account).
+        """
+        results = self.results()
+        if not results:
+            return 1
+
+        count = 0
+        for res in self.results:
+            count += 1
+            if res['s_desc']:
+                count += 1
+
+        return count
+
     def extra_results_link(self):
         query = self.request.get('SearchableText', None)
 

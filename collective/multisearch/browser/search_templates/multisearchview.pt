@@ -53,11 +53,14 @@
 
   <tal:block tal:define="columns view/get_portlets;
                          column_number view/get_column_number">
-    <div tal:attributes="class python: 'multi_search_column multi_search_column-%s' % column_number"
-         tal:repeat="column columns">
-      <span tal:repeat="portlet column"
-            tal:replace="structure portlet/render" />
-    </div>
+    <tal:block tal:repeat="column columns">
+      <div tal:define="column_index repeat/column/index"
+           tal:attributes="class python: 'multi_search_column multi_search_column-%s' % column_number;
+                           id python: 'multi_search_column-%s' % column_index">
+        <span tal:repeat="portlet column"
+              tal:replace="structure portlet/render" />
+      </div>
+    </tal:block>
   </tal:block>
 
   <div class="multi_search_spacer" />

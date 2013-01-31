@@ -39,6 +39,12 @@ class ILocalSearchPortlet(IPortletDataProvider):
         default=False,
         )
 
+    allow_rss_subscription = schema.Bool(
+        title=_(u'Allow RSS subscription'),
+        description=_(u'If selected, show an RSS icon in the title'),
+        default=True,
+        )
+
     show_more_results = schema.Bool(
         title=_(u'Show link for more results'),
         description=_(u'If selected, show a link in the portlet ' + \
@@ -72,6 +78,7 @@ class Assignment(base.Assignment):
                  results_number=5,
                  show_more_results=True,
                  show_description=False,
+                 allow_rss_subscription=True,
                  assigned_column=0,
                  show_if_no_results=True):
         if not dtitle:
@@ -80,6 +87,7 @@ class Assignment(base.Assignment):
         self.dtitle = dtitle
         self.show_more_results = show_more_results
         self.show_description = show_description
+        self.allow_rss_subscription = allow_rss_subscription
         self.results_number = results_number
         self.assigned_column = assigned_column
         self.show_if_no_results = show_if_no_results
@@ -127,6 +135,15 @@ class Renderer(base.Renderer):
         query = self.request.get('SearchableText', None)
 
         return '%s/search?SearchableText=%s' % (
+            self.context.absolute_url(),
+            quote_plus(query))
+
+    def rss_link(self):
+        query = self.request.get('SearchableText', None)
+        if query is None:
+            return None
+
+        return '%s/search_rss?SearchableText=%s' % (
             self.context.absolute_url(),
             quote_plus(query))
 

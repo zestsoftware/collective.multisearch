@@ -8,6 +8,12 @@
   <dt class="portletHeader">
     <span class="portletTopLeft"></span>
     <span class="tile" tal:content="view/data/dtitle" />
+    <a tal:define="link view/rss_link;
+                   allowed view/data/allow_rss_subscription"
+       tal:condition="python: allowed and link"
+       tal:attributes="href view/rss_link">
+      <img class="rss" src="rss.png" alt="RSS" />
+    </a>
     <span class="portletTopRight"></span>
   </dt>
 

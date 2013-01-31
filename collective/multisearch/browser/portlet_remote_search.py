@@ -41,6 +41,7 @@ class Assignment(portlet_local_search.Assignment):
                  results_number=5,
                  show_more_results=True,
                  show_description=False,
+                 allow_rss_subscription=True,
                  assigned_column=0,
                  show_if_no_results=True,
                  remote_site_url='',
@@ -64,6 +65,15 @@ class Renderer(portlet_local_search.Renderer):
             return self.data.remote_site_search_url % query
         
         return '%s/search?SearchableText=%s' % (
+            self.data.remote_site_url,
+            quote_plus(query))
+
+    def rss_link(self):
+        query = self.request.get('SearchableText', None)
+        if query is None:
+            return None
+
+        return '%s/search_rss?SearchableText=%s' % (
             self.data.remote_site_url,
             quote_plus(query))
 

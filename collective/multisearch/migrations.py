@@ -27,3 +27,6 @@ def update_schemas(context, new_fields=[]):
 
 def add_show_description_field(context):
     update_schemas(context, [('show_description', False)])
+
+def add_allow_subscription_field(context):
+    update_schemas(context, [('allow_rss_subscription', True)])

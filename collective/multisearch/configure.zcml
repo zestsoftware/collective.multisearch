@@ -29,6 +29,14 @@
       handler="collective.multisearch.migrations.add_show_description_field"
       profile="collective.multisearch:default" />
 
+  <genericsetup:upgradeStep
+      title="Add 'allow_rss_subscription' field to portlets"
+      description=""
+      source="1001"
+      destination="1002"
+      handler="collective.multisearch.migrations.add_allow_subscription_field"
+      profile="collective.multisearch:default" />
+
   <subscriber handler=".events.dispatchToComponent" />
   <subscriber handler=".events.registerPortletManagerRenderer" />
   <subscriber handler=".events.unregisterPortletManagerRenderer" />  

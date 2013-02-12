@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-08 12:22+0000\n"
+"POT-Creation-Date: 2013-01-30 10:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,46 +14,103 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ./browser/portlet_local_search.py:30
-msgid "Column where the portlet is rendered (0 for no preference)"
-msgstr "Colonne où la portlet est placée (0 pour un placement flottant dépendant des résultats)"
+#: ./browser/portlet_local_search.py:50
+msgid "Column where the portlet is rendered"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:38
+msgid "If selected, show a exceprt of the description"
+msgstr ""
 
 #: ./browser/portlet_local_search.py:44
+msgid "If selected, show a link in the portlet footer to show ore results"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:59
+msgid "If selected, the portlet will display a message saying that no results were found. Otherwise the portlet is hidden"
+msgstr ""
+
+#: ./browser/manager.py:102
+msgid "Invalid value for column number"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:78
 msgid "Local results"
 msgstr "Résultats locaux"
+
+#: ./browser/portlet_local_search.py:32
+msgid "Maximum number of results displayed"
+msgstr ""
 
 #: ./browser/search_portlet.py:15
 msgid "MultiSearch"
 msgstr "Recherche multiple"
 
-#: ./browser/portlet_local_search.py:20
+#: ./browser/portlet_local_search.py:21
+msgid "No prefered column"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:31
 msgid "Number of results displayed"
 msgstr "Nombre de résultats affichés"
+
+#: ./browser/manager.py:97
+msgid "Properties updated"
+msgstr ""
 
 #: ./browser/portlet_remote_search.py:22
 msgid "Remote site URL"
 msgstr "Adresse du site"
 
-#: ./browser/portlet_remote_search.py:26
+#: ./browser/portlet_remote_search.py:28
 msgid "Remote site search page"
 msgstr "Résultats de recherche sur un site distant"
 
-#: ./browser/portlet_local_search.py:25
+#: ./browser/portlet_local_search.py:43
 msgid "Show link for more results"
 msgstr "Afficher le lien 'plus de résultats'"
 
-#: ./browser/portlet_local_search.py:16
+#: ./browser/portlet_local_search.py:37
+msgid "Show result description"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:58
+msgid "Show when there's no results"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:51
+msgid "Specify if the portlet is assigned to a particular column"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:26
 msgid "Title for the portlet"
 msgstr "Titre de la portlet"
 
+#: ./browser/portlet_local_search.py:27
+msgid "Title shown in the header"
+msgstr ""
+
+#: ./browser/portlet_remote_search.py:23
+msgid "URL of the site were the search is performed (http://www.example.com)"
+msgstr ""
+
+#: ./browser/portlet_remote_search.py:29
+msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append "/search" ("http://www.example.com/search?SearchableText=%s" with the previous example, note the %s part that allows to copy the searched text.)"
+msgstr ""
+
+#. Default: "Number of columns in the search page"
+#: ./browser/templates/edit-manager-contextual.pt:17
+msgid "label_column_count"
+msgstr ""
+
 #. Default: "Manage search portlets"
-#: ./browser/search_templates/multisearchview.pt:62
+#: ./browser/search_templates/multisearchview.pt:67
 #: ./browser/templates/manage-multisearch.pt:17
 msgid "label_manage_multisearch"
 msgstr "Gérer les portlets de recherche"
 
 #. Default: "View more results"
-#: ./browser/templates/results_portlet.pt:31
+#: ./browser/templates/results_portlet.pt:36
 msgid "label_more_results"
 msgstr "Voir plus de résultats"
 

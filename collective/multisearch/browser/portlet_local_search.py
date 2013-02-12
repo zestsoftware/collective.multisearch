@@ -48,7 +48,7 @@ class ILocalSearchPortlet(IPortletDataProvider):
     show_more_results = schema.Bool(
         title=_(u'Show link for more results'),
         description=_(u'If selected, show a link in the portlet ' + \
-                      'footer to show ore results'),
+                      'footer to show more results'),
         default=True
         )
 

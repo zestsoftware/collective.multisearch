@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-30 10:37+0000\n"
+"POT-Creation-Date: 2013-02-12 13:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,7 +14,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ./browser/portlet_local_search.py:50
+#: ./browser/portlet_local_search.py:43
+msgid "Allow RSS subscription"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:56
 msgid "Column where the portlet is rendered"
 msgstr ""
 
@@ -22,11 +26,15 @@ msgstr ""
 msgid "If selected, show a exceprt of the description"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:44
+#: ./browser/portlet_local_search.py:50
 msgid "If selected, show a link in the portlet footer to show more results"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:59
+#: ./browser/portlet_local_search.py:44
+msgid "If selected, show an RSS icon in the title"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:65
 msgid "If selected, the portlet will display a message saying that no results were found. Otherwise the portlet is hidden"
 msgstr ""
 
@@ -34,7 +42,7 @@ msgstr ""
 msgid "Invalid value for column number"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:78
+#: ./browser/portlet_local_search.py:85
 msgid "Local results"
 msgstr "Lokale resultaten"
 
@@ -66,7 +74,7 @@ msgstr "URL van de externe website"
 msgid "Remote site search page"
 msgstr "Zoekpagina van de externe website"
 
-#: ./browser/portlet_local_search.py:43
+#: ./browser/portlet_local_search.py:49
 msgid "Show link for more results"
 msgstr "Toon link naar meer resultaten"
 
@@ -74,11 +82,11 @@ msgstr "Toon link naar meer resultaten"
 msgid "Show result description"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:58
+#: ./browser/portlet_local_search.py:64
 msgid "Show when there's no results"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:51
+#: ./browser/portlet_local_search.py:57
 msgid "Specify if the portlet is assigned to a particular column"
 msgstr ""
 
@@ -104,18 +112,18 @@ msgid "label_column_count"
 msgstr ""
 
 #. Default: "Manage search portlets"
-#: ./browser/search_templates/multisearchview.pt:67
+#: ./browser/search_templates/multisearchview.pt:76
 #: ./browser/templates/manage-multisearch.pt:17
 msgid "label_manage_multisearch"
 msgstr "Beheer zoekportlets"
 
 #. Default: "View more results"
-#: ./browser/templates/results_portlet.pt:36
+#: ./browser/templates/results_portlet.pt:42
 msgid "label_more_results"
 msgstr "Bekijk meer resultaten"
 
 #. Default: "Sorry, there's no results to display"
-#: ./browser/templates/results_portlet.pt:18
+#: ./browser/templates/results_portlet.pt:24
 msgid "label_no_results"
 msgstr "Er zijn geen resultaten om te tonen"
 

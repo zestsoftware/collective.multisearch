@@ -24,7 +24,7 @@ columnVocabulary = SimpleVocabulary.fromItems(
 class ILocalSearchPortlet(IPortletDataProvider):
     dtitle = schema.TextLine(
         title=_(u'Title for the portlet'),
-        description=_(u'Title shown in the header'),
+        description=_(u'Title shown in the header of the portlet'),
         required=False)
     
     results_number = schema.Int(
@@ -35,7 +35,7 @@ class ILocalSearchPortlet(IPortletDataProvider):
 
     show_description = schema.Bool(
         title=_(u'Show result description'),
-        description=_(u'If selected, show a exceprt of the description'),
+        description=_(u'If selected, show a excerpt of the description'),
         default=False,
         )
 
@@ -47,24 +47,25 @@ class ILocalSearchPortlet(IPortletDataProvider):
 
     show_more_results = schema.Bool(
         title=_(u'Show link for more results'),
-        description=_(u'If selected, show a link in the portlet ' + \
-                      'footer to show more results'),
+        description=_(u'Show a link in the portlet footer to show more results'),
         default=True
         )
 
     assigned_column = schema.Choice(
         title=_(u'Column where the portlet is rendered'),
-        description=_(u'Specify if the portlet is assigned to a ' + \
-                      'particular column'),
+        description=_(u'Assign the portlet to a fixed column. Otherwise ' + \
+                       'multisearch will try to balance the result portlets ' + \
+                       'to fill up the page the portlet is assigned to a ' + \
+                       'particular column'),
         required=True,
         vocabulary=columnVocabulary
         )
 
     show_if_no_results = schema.Bool(
-        title=_(u'Show when there\'s no results'),
-        description=_(u'If selected, the portlet will display a message ' + \
-                      'saying that no results were found. Otherwise the ' + \
-                      'portlet is hidden'),
+        title=_(u'Show portlet even if no results are returned.'),
+        description=_(u'The portlet shows a message ' + \
+                      'that no results were found. Default behaviour is ' + \
+                      'to remove the portlet from the page results'),
         required=False,
         default=True
         )

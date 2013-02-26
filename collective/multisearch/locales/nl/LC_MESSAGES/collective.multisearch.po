@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-02-12 13:48+0000\n"
+"Project-Id-Version: collective.multisearch 1.0\n"
+"POT-Creation-Date: 2013-02-26 16:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,10 +9,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Language-Code: nl\n"
+"Language-Name: Nederlands\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: DOMAIN\n"
+"Domain: collective.multisearch\n"
 
 #: ./browser/portlet_local_search.py:43
 msgid "Allow RSS subscription"
@@ -34,7 +34,7 @@ msgstr "Toon een ingekorte versie van de omschrijving"
 msgid "If selected, show an RSS icon in the title"
 msgstr "Toon een RSS pictogram in de titelbalk"
 
-#: ./browser/manager.py:102
+#: ./browser/manager.py:119
 msgid "Invalid value for column number"
 msgstr "Ongeldige waarde voor kolomnummer"
 
@@ -58,7 +58,7 @@ msgstr "Geen voorkeurskolom"
 msgid "Number of results displayed"
 msgstr "Aantal getoonde resultaten"
 
-#: ./browser/manager.py:97
+#: ./browser/manager.py:114
 msgid "Properties updated"
 msgstr "Eigenschappen bijgewerkt"
 
@@ -103,8 +103,8 @@ msgid "URL of the site were the search is performed (http://www.example.com)"
 msgstr "URL van de website waar de zoekopdracht naar toe gaat (http://www.example.com)"
 
 #: ./browser/portlet_remote_search.py:29
-msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append "/search" ("http://www.example.com/search?SearchableText=%s" with the previous example, note the %s part that allows to copy the searched text.)"
-msgstr "Geef hier een afwijkende zoekpagina op. Indien leeg wordt hier"
+msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append \"/search\" (\"http://www.example.com/search?SearchableText=%s\" with the previous example, note the %s part that allows to copy the searched text.)"
+msgstr ""
 
 #. Default: "Number of columns in the search page"
 #: ./browser/templates/edit-manager-contextual.pt:17

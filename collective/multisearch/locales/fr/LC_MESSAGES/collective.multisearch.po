@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-30 10:37+0000\n"
+"Project-Id-Version: collective.multisearch 1.0\n"
+"POT-Creation-Date: 2013-02-26 16:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,12 +9,20 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: DOMAIN\n"
+"Domain: collective.multisearch\n"
 
-#: ./browser/portlet_local_search.py:50
+#: ./browser/portlet_local_search.py:43
+msgid "Allow RSS subscription"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:56
+msgid "Assign the portlet to a fixed column. Otherwise multisearch will try to balance the result portlets to fill up the page the portlet is assigned to a particular column"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:55
 msgid "Column where the portlet is rendered"
 msgstr ""
 
@@ -23,18 +31,14 @@ msgid "If selected, show a excerpt of the description"
 msgstr ""
 
 #: ./browser/portlet_local_search.py:44
-msgid "If selected, show a link in the portlet footer to show ore results"
+msgid "If selected, show an RSS icon in the title"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:59
-msgid "If selected, the portlet will display a message saying that no results were found. Otherwise the portlet is hidden"
-msgstr ""
-
-#: ./browser/manager.py:102
+#: ./browser/manager.py:119
 msgid "Invalid value for column number"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:78
+#: ./browser/portlet_local_search.py:86
 msgid "Local results"
 msgstr "Résultats locaux"
 
@@ -54,7 +58,7 @@ msgstr ""
 msgid "Number of results displayed"
 msgstr "Nombre de résultats affichés"
 
-#: ./browser/manager.py:97
+#: ./browser/manager.py:114
 msgid "Properties updated"
 msgstr ""
 
@@ -66,20 +70,24 @@ msgstr "Adresse du site"
 msgid "Remote site search page"
 msgstr "Résultats de recherche sur un site distant"
 
-#: ./browser/portlet_local_search.py:43
+#: ./browser/portlet_local_search.py:50
+msgid "Show a link in the portlet footer to show more results"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:49
 msgid "Show link for more results"
 msgstr "Afficher le lien 'plus de résultats'"
+
+#: ./browser/portlet_local_search.py:65
+msgid "Show portlet even if no results are returned."
+msgstr ""
 
 #: ./browser/portlet_local_search.py:37
 msgid "Show result description"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:58
-msgid "Show when there's no results"
-msgstr ""
-
-#: ./browser/portlet_local_search.py:51
-msgid "Specify if the portlet is assigned to a particular column"
+#: ./browser/portlet_local_search.py:66
+msgid "The portlet shows a message that no results were found. Default behaviour is to remove the portlet from the page results"
 msgstr ""
 
 #: ./browser/portlet_local_search.py:26
@@ -87,7 +95,7 @@ msgid "Title for the portlet"
 msgstr "Titre de la portlet"
 
 #: ./browser/portlet_local_search.py:27
-msgid "Title shown in the header"
+msgid "Title shown in the header of the portlet"
 msgstr ""
 
 #: ./browser/portlet_remote_search.py:23
@@ -95,7 +103,7 @@ msgid "URL of the site were the search is performed (http://www.example.com)"
 msgstr ""
 
 #: ./browser/portlet_remote_search.py:29
-msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append "/search" ("http://www.example.com/search?SearchableText=%s" with the previous example, note the %s part that allows to copy the searched text.)"
+msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append \"/search\" (\"http://www.example.com/search?SearchableText=%s\" with the previous example, note the %s part that allows to copy the searched text.)"
 msgstr ""
 
 #. Default: "Number of columns in the search page"
@@ -104,18 +112,18 @@ msgid "label_column_count"
 msgstr ""
 
 #. Default: "Manage search portlets"
-#: ./browser/search_templates/multisearchview.pt:67
+#: ./browser/search_templates/multisearchview.pt:76
 #: ./browser/templates/manage-multisearch.pt:17
 msgid "label_manage_multisearch"
 msgstr "Gérer les portlets de recherche"
 
 #. Default: "View more results"
-#: ./browser/templates/results_portlet.pt:36
+#: ./browser/templates/results_portlet.pt:42
 msgid "label_more_results"
 msgstr "Voir plus de résultats"
 
 #. Default: "Sorry, there's no results to display"
-#: ./browser/templates/results_portlet.pt:18
+#: ./browser/templates/results_portlet.pt:24
 msgid "label_no_results"
 msgstr "Désolé, aucun résultat trouvé"
 

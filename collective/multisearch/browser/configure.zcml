@@ -27,6 +27,33 @@
         provides=".interfaces.IMultiSearchPortletManagerRenderer"
         />
 
+    <browser:pages
+      for=".interfaces.IMultiSearchPortletAssignmentMapping"
+      class=".manager.MultiSearchManagePortletAssignments"
+      permission="plone.app.portlets.ManageOwnPortlets"
+      >
+
+      <browser:page
+        name="delete-portlet"
+        attribute="delete_portlet"
+        />
+
+      <browser:page
+        name="move-portlet-up"
+        attribute="move_portlet_up"
+        />
+
+      <browser:page
+        name="move-portlet-down"
+        attribute="move_portlet_down"
+        />
+
+      <browser:page
+        name="toggle-visibility"
+        attribute="toggle_visibility"
+        />
+    </browser:pages>
+
     <!-- Custom version of the default plone search portlet -->
     <plone:portlet
         name="multisearch.SearchPortlet"

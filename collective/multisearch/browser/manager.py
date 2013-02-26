@@ -1,10 +1,12 @@
 # Custom manager for the multisearch portlet manager: inactive for the moment.
 
-from zope import component
 from zope.component import adapts
-from zope.component import queryMultiAdapter
+from zope.component import adapter
 from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
+from zope.component import getMultiAdapter
+from zope.component import queryMultiAdapter
 
 from plone.app.portlets.browser.manage import ManageContextualPortlets
 
@@ -15,6 +17,11 @@ from plone.app.portlets.browser.editmanager import ContextualEditPortletManagerR
 from plone.portlets.interfaces import IPortletManager
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 from plone.app.portlets.browser.interfaces import IManageContextualPortletsView
+from plone.app.portlets.storage import PortletAssignmentMapping
+
+from plone.portlets.interfaces import ILocalPortletAssignable
+from plone.app.portlets.assignable import localPortletAssignmentMappingAdapter
+from plone.app.portlets.browser.editmanager import ManagePortletAssignments
 
 from collective.multisearch.config import COLUMN_COUNT
 from collective.multisearch.config import DEFAULT_COLUMN
@@ -24,8 +31,10 @@ from collective.multisearch.utils import set_column_number
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.browser.interfaces import IMultisearchPortletManager
 from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
+from collective.multisearch.browser.interfaces import IMultiSearchPortletAssignmentMapping
 
 from plone.portlets.interfaces import IPortletManagerRenderer
+
 
 
 class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManagerRenderer):
@@ -35,7 +44,6 @@ class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManag
     def get_column_number(self):
         return {'current': get_column_number(self.context),
                 'available': range(1, COLUMN_COUNT+1)}
-
 
     def addable_portlets(self):
         """ We can't do a normal 'super', so it's a copy/paste form the base class.
@@ -85,6 +93,12 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
         editmanager.update()
         return editmanager.render()
 
+    def getAssignmentsForManager(self, manager):
+        from plone.portlets.interfaces import IPortletAssignmentMapping
+        assignments = getMultiAdapter((self.context, manager),
+                                      IMultiSearchPortletAssignmentMapping)
+        return assignments.values()
+
     def __call__(self):
         if self.request.get('REQUEST_METHOD') != 'POST':
             return self.index()
@@ -103,3 +117,33 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
                 'error')
             
         return self.index()
+
+class MultiSearchPortletAssignmentMapping(PortletAssignmentMapping):
+    implements(IMultiSearchPortletAssignmentMapping)
+
+@adapter(ILocalPortletAssignable, IPortletManager)
+@implementer(IMultiSearchPortletAssignmentMapping)
+def localPortletAssignmentMappingAdapter(context, manager):
+    """When adapting (context, manager), get an IPortletAssignmentMapping
+    by finding one in the object's annotations. The container will be created
+    if necessary.
+    """
+    if IAnnotations.providedBy(context):
+        annotations = context
+    else:
+        annotations = queryAdapter(context, IAnnotations)
+    local = annotations.get(CONTEXT_ASSIGNMENT_KEY, None)
+    if local is None:
+        local = annotations[CONTEXT_ASSIGNMENT_KEY] = OOBTree()
+    portlets = local.get(manager.__name__, None)
+    if portlets is None:
+        portlets = local[manager.__name__] = MultiSearchPortletAssignmentMapping(
+            manager=manager.__name__,
+            category=CONTEXT_CATEGORY)
+    return portlets
+
+
+class MultiSearchManagePortletAssignments(ManagePortletAssignments):
+    def _nextUrl(self):
+        return '@@manage-multisearch'
+

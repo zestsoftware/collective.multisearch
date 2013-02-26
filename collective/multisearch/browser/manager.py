@@ -7,7 +7,11 @@ from zope.interface import implementer
 from zope.interface import Interface
 from zope.component import getMultiAdapter
 from zope.component import queryMultiAdapter
+from zope.component import queryAdapter
+from zope.annotation.interfaces import IAnnotations
 
+from AccessControl import Unauthorized
+from BTrees.OOBTree import OOBTree
 from plone.app.portlets.browser.manage import ManageContextualPortlets
 
 from Products.statusmessages.interfaces import IStatusMessage
@@ -19,8 +23,10 @@ from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 from plone.app.portlets.browser.interfaces import IManageContextualPortletsView
 from plone.app.portlets.storage import PortletAssignmentMapping
 
+from plone.portlets.constants import CONTEXT_ASSIGNMENT_KEY
+from plone.portlets.constants import CONTEXT_CATEGORY
+
 from plone.portlets.interfaces import ILocalPortletAssignable
-from plone.app.portlets.assignable import localPortletAssignmentMappingAdapter
 from plone.app.portlets.browser.editmanager import ManagePortletAssignments
 
 from collective.multisearch.config import COLUMN_COUNT
@@ -32,9 +38,6 @@ from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.browser.interfaces import IMultisearchPortletManager
 from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
 from collective.multisearch.browser.interfaces import IMultiSearchPortletAssignmentMapping
-
-from plone.portlets.interfaces import IPortletManagerRenderer
-
 
 
 class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManagerRenderer):
@@ -94,7 +97,6 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
         return editmanager.render()
 
     def getAssignmentsForManager(self, manager):
-        from plone.portlets.interfaces import IPortletAssignmentMapping
         assignments = getMultiAdapter((self.context, manager),
                                       IMultiSearchPortletAssignmentMapping)
         return assignments.values()

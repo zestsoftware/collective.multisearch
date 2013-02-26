@@ -97,6 +97,11 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
         editmanager.update()
         return editmanager.render()
 
+    def getAssignmentsForManager(self, manager):
+        assignments = getMultiAdapter((self.context, manager),
+                                      IMultiSearchPortletAssignmentMapping)
+        return assignments.values()
+
     def __call__(self):
         if self.request.get('REQUEST_METHOD') != 'POST':
             return self.index()
@@ -116,7 +121,42 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
             
         return self.index()
 
-class MultiSearchManagePortletAssignments(ManagePortletAssignments):
+class MultiSearchPortletAssignmentMapping(PortletAssignmentMapping):
+    implements(IMultiSearchPortletAssignmentMapping)
 
+@adapter(ILocalPortletAssignable, IPortletManager)
+@implementer(IMultiSearchPortletAssignmentMapping)
+def localPortletAssignmentMappingAdapter(context, manager):
+    """When adapting (context, manager), get an IPortletAssignmentMapping
+    by finding one in the object's annotations. The container will be created
+    if necessary.
+    """
+    if IAnnotations.providedBy(context):
+        annotations = context
+    else:
+        annotations = queryAdapter(context, IAnnotations)
+    local = annotations.get(CONTEXT_ASSIGNMENT_KEY, None)
+    if local is None:
+        local = annotations[CONTEXT_ASSIGNMENT_KEY] = OOBTree()
+    portlets = local.get(manager.__name__, None)
+    if portlets is None or not IMultiSearchPortletAssignmentMapping.providedBy(portlets):
+        if portlets is not None:
+            old_items = portlets.items()
+        else:
+            old_items = []
+        portlets = local[manager.__name__] = MultiSearchPortletAssignmentMapping(
+            manager=manager.__name__,
+            category=CONTEXT_CATEGORY)
+        # Inline migration.  Might be good in an upgrade step.
+        for key, value in old_items:
+            portlets[key] = value
+
+    return portlets
+
+class MultiSearchManagePortletAssignments(ManagePortletAssignments):
     def _nextUrl(self):
-        return '%s/@@manage-multisearch' % (self.context.aq_parent.absolute_url())
+        referer = self.request.get('referer')
+        if not referer:
+            context = aq_parent(aq_inner(self.context))
+            url = str(getMultiAdapter((context, self.request), name=u"absolute_url"))
+            referer = '%s/@@manage-multisearch' % (url,)

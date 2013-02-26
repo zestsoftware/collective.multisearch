@@ -37,6 +37,14 @@
       handler="collective.multisearch.migrations.add_allow_subscription_field"
       profile="collective.multisearch:default" />
 
+  <genericsetup:upgradeStep
+      title="Reapply portlets step"
+      description=""
+      source="1002"
+      destination="1003"
+      handler="collective.multisearch.migrations.reapply_portlets_step"
+      profile="collective.multisearch:default" />
+
   <subscriber handler=".events.dispatchToComponent" />
   <subscriber handler=".events.registerPortletManagerRenderer" />
   <subscriber handler=".events.unregisterPortletManagerRenderer" />  

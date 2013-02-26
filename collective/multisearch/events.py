@@ -4,6 +4,8 @@
 import zope.component
 
 from zope.interface import Interface
+from zope.interface import directlyProvides
+
 from zope.component.interfaces import IUtilityRegistration
 from zope.component.interfaces import IRegistrationEvent
 from zope.component.interfaces import IRegistered
@@ -16,6 +18,7 @@ from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletManagerRenderer
 
 from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
+from collective.multisearch.browser.interfaces import IMultiSearchPortletAssignmentMapping
 
 @zope.component.adapter(IUtilityRegistration, IRegistrationEvent)
 def dispatchToComponent(registration, event):
@@ -44,6 +47,10 @@ def registerPortletManagerRenderer(manager, registration, event):
                              required=(Interface, IBrowserRequest, IBrowserView),
                              provided=IMultiSearchPortletManagerRenderer,
                              name=registration.name)
+
+    portal = registry.aq_parent
+    mapping = portal.restrictedTraverse('++contextportlets++multisearch.MultisearchPortletManager')
+    directlyProvides(mapping, IMultiSearchPortletAssignmentMapping)
 
 
 @zope.component.adapter(IPortletManager, IUtilityRegistration, IUnregistered)

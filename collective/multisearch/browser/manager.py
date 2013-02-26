@@ -11,6 +11,7 @@ from zope.component import queryAdapter
 from zope.annotation.interfaces import IAnnotations
 
 from AccessControl import Unauthorized
+from Acquisition import aq_parent, aq_inner
 from BTrees.OOBTree import OOBTree
 from plone.app.portlets.browser.manage import ManageContextualPortlets
 
@@ -138,14 +139,28 @@ def localPortletAssignmentMappingAdapter(context, manager):
     if local is None:
         local = annotations[CONTEXT_ASSIGNMENT_KEY] = OOBTree()
     portlets = local.get(manager.__name__, None)
-    if portlets is None:
+    if portlets is None or not IMultiSearchPortletAssignmentMapping.providedBy(portlets):
+        if portlets is not None:
+            old_items = portlets.items()
+        else:
+            old_items = []
         portlets = local[manager.__name__] = MultiSearchPortletAssignmentMapping(
             manager=manager.__name__,
             category=CONTEXT_CATEGORY)
+        # Inline migration.  Might be good in an upgrade step.
+        for key, value in old_items:
+            portlets[key] = value
+            
     return portlets
 
 
 class MultiSearchManagePortletAssignments(ManagePortletAssignments):
+
     def _nextUrl(self):
-        return '@@manage-multisearch'
+        referer = self.request.get('referer')
+        if not referer:
+            context = aq_parent(aq_inner(self.context))
+            url = str(getMultiAdapter((context, self.request), name=u"absolute_url"))
+            referer = '%s/@@manage-multisearch' % (url,)
+        return referer
 

@@ -27,8 +27,8 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     remote_site_search_url = schema.TextLine(
         title=_(u'Remote site search page'),
         description=_(u'You can specify here a custom search page. If left blank, ' +\
-                      'it will use the address of the remote site and append "/search" ' +\
-                      '("http://www.example.com/search?SearchableText=%s" with the previous ' +\
+                      'it will use the address of the remote site and append /search ' +\
+                      '(http://www.example.com/search?SearchableText=%s with the previous ' +\
                       'example, note the %s part that allows to copy the searched text.)'),
         required = False)
 

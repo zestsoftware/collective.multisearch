@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-02-26 16:05+0000\n"
+"POT-Creation-Date: 2013-03-05 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,7 +106,7 @@ msgid "URL of the site were the search is performed (http://www.example.com)"
 msgstr ""
 
 #: ./browser/portlet_remote_search.py:29
-msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append \"/search\" (\"http://www.example.com/search?SearchableText=%s\" with the previous example, note the %s part that allows to copy the searched text.)"
+msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append "/search" ("http://www.example.com/search?SearchableText=%s" with the previous example, note the %s part that allows to copy the searched text.)"
 msgstr ""
 
 #. Default: "Number of columns in the search page"

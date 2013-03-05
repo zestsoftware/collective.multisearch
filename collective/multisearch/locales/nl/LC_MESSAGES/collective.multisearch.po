@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.multisearch 1.0\n"
-"POT-Creation-Date: 2013-02-26 16:05+0000\n"
+"POT-Creation-Date: 2013-03-05 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr "Toon RSS link"
 
 #: ./browser/portlet_local_search.py:56
 msgid "Assign the portlet to a fixed column. Otherwise multisearch will try to balance the result portlets to fill up the page the portlet is assigned to a particular column"
-msgstr ""
+msgstr "Zet het potlet op een vaste kolom. Anders zal multisearch proberen om de portlets zo gelijk mogelijk over de pagina te verdelen om alle kolommen even lang te maken."
 
 #: ./browser/portlet_local_search.py:55
 msgid "Column where the portlet is rendered"
@@ -103,13 +103,13 @@ msgid "URL of the site were the search is performed (http://www.example.com)"
 msgstr "URL van de website waar de zoekopdracht naar toe gaat (http://www.example.com)"
 
 #: ./browser/portlet_remote_search.py:29
-msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append \"/search\" (\"http://www.example.com/search?SearchableText=%s\" with the previous example, note the %s part that allows to copy the searched text.)"
-msgstr ""
+msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append "/search" ("http://www.example.com/search?SearchableText=%s" with the previous example, note the %s part that allows to copy the searched text.)"
+msgstr "Geef hier een aparte zoekurl pagina op. als deze leeg blijft, dan gebruikt de portlet het adres van de externe site en voegt "/search" toe (bijv. als resultaat "http://www.example.com/search?SearchableText=%s"). Let op de %s als het deel dat de gezochte tekst kopieert.)"
 
 #. Default: "Number of columns in the search page"
 #: ./browser/templates/edit-manager-contextual.pt:17
 msgid "label_column_count"
-msgstr ""
+msgstr "Aantal kolommen op de zoekpagina"
 
 #. Default: "Manage search portlets"
 #: ./browser/search_templates/multisearchview.pt:76

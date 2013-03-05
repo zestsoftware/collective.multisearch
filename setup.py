@@ -5,7 +5,7 @@ version = '1.0'
 
 setup(name='collective.multisearch',
       version=version,
-      description="Portlet based display for the search page",
+      description="Portlet based display for the Plone search page",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from

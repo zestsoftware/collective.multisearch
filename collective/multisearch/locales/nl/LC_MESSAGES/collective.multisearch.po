@@ -104,7 +104,7 @@ msgstr "URL van de website waar de zoekopdracht naar toe gaat (http://www.exampl
 
 #: ./browser/portlet_remote_search.py:29
 msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append /search (http://www.example.com/search?SearchableText=%s with the previous example, note the %s part that allows to copy the searched text.)"
-msgstr "Geef hier een aparte zoekurl pagina op. als deze leeg blijft, dan gebruikt de portlet het adres van de externe site en voegt "/search" toe (bijv. als resultaat "http://www.example.com/search?SearchableText=%s"). Let op de %s als het deel dat de gezochte tekst kopieert.)"
+msgstr "Geef hier een aparte zoekurl pagina op. als deze leeg blijft, dan gebruikt de portlet het adres van de externe site en voegt /search toe (bijv. als resultaat http://www.example.com/search?SearchableText=%s). Let op de %s als het deel dat de gezochte tekst kopieert.)"
 
 #. Default: "Number of columns in the search page"
 #: ./browser/templates/edit-manager-contextual.pt:17

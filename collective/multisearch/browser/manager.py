@@ -1,12 +1,10 @@
 # Custom manager for the multisearch portlet manager: inactive for the moment.
 
 from AccessControl import Unauthorized
-from Acquisition import aq_parent, aq_inner
 from BTrees.OOBTree import OOBTree
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from plone.app.portlets.browser.editmanager import ContextualEditPortletManagerRenderer
-from plone.app.portlets.browser.editmanager import ManagePortletAssignments
 from plone.app.portlets.browser.interfaces import IManageContextualPortletsView
 from plone.app.portlets.browser.manage import ManageContextualPortlets
 from plone.app.portlets.storage import PortletAssignmentMapping
@@ -148,7 +146,3 @@ def localPortletAssignmentMappingAdapter(context, manager):
             portlets[key] = value
 
     return portlets
-
-
-class MultiSearchManagePortletAssignments(ManagePortletAssignments):
-    pass

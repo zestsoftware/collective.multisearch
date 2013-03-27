@@ -151,10 +151,4 @@ def localPortletAssignmentMappingAdapter(context, manager):
 
 
 class MultiSearchManagePortletAssignments(ManagePortletAssignments):
-
-    def _nextUrl(self):
-        referer = self.request.get('referer')
-        if not referer:
-            context = aq_parent(aq_inner(self.context))
-            url = str(getMultiAdapter((context, self.request), name=u"absolute_url"))
-            referer = '%s/@@manage-multisearch' % (url,)
+    pass

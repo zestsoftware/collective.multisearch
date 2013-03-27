@@ -2,4 +2,5 @@
 *.pyo
 *.mo
 *.egg-info
-dist*
+bin
+dist

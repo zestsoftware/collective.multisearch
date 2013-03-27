@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import os
 
 version = '1.0.1.dev0'
 
@@ -7,7 +6,7 @@ setup(name='collective.multisearch',
       version=version,
       description="Portlet based display for the Plone search page",
       long_description=(open("README.txt").read() + "\n\n" +
-                        open(os.path.join("docs", "HISTORY.txt")).read()),
+                        open("CHANGES.rst").read()),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[

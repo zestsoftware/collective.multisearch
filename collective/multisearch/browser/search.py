@@ -7,16 +7,15 @@ from zope.component import queryMultiAdapter
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletRetriever
-from plone.portlets.interfaces import IPortletAssignmentMapping
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 
-from collective.multisearch.config import COLUMN_COUNT
 from collective.multisearch.config import CHARACTERS_PER_LINE
 
 from collective.multisearch.utils import assign_columns
 from collective.multisearch.utils import get_column_number
+
 
 class MultiSearchView(grok.View):
     grok.context(IPloneSiteRoot)

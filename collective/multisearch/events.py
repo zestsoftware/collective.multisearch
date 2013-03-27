@@ -14,10 +14,9 @@ from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.publisher.interfaces.browser import IBrowserView
 
 from plone.portlets.interfaces import IPortletManager
-from plone.portlets.interfaces import IPortletManagerRenderer
 
 from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
-from collective.multisearch.browser.interfaces import IMultiSearchPortletAssignmentMapping
+
 
 @zope.component.adapter(IUtilityRegistration, IRegistrationEvent)
 def dispatchToComponent(registration, event):
@@ -26,7 +25,7 @@ def dispatchToComponent(registration, event):
     """
     handlers = zope.component.subscribers((registration.component, registration, event), None)
     for handler in handlers:
-        pass # getting them does the work
+        pass  # getting them does the work
 
 
 @zope.component.adapter(IPortletManager, IUtilityRegistration, IRegistered)

@@ -8,27 +8,26 @@ from zope import schema
 from zope.formlib import form
 from zope.interface import implements
 
-from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.portlets.portlets import base
-
 
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.browser import portlet_local_search
 
 logger = logging.getLogger('collective.multisearch.browser.portlet_remote_search')
 
+
 class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     remote_site_url = schema.TextLine(
         title=_(u'Remote site URL'),
-        description=_(u'URL of the site were the search is performed ' + \
+        description=_(u'URL of the site were the search is performed '
                       '(http://www.example.com)'),
         required=True)
 
     remote_site_search_url = schema.TextLine(
         title=_(u'Remote site search page'),
-        description=_(u'You can specify here a custom search page. If left blank, ' +\
-                      'it will use the address of the remote site and append /search ' +\
-                      '(http://www.example.com/search?SearchableText=%s with the previous ' +\
+        description=_(u'You can specify here a custom search page. If left blank, '
+                      'it will use the address of the remote site and append /search '
+                      '(http://www.example.com/search?SearchableText=%s with the previous '
                       'example, note the %s part that allows to copy the searched text.)'),
         required = False)
 
@@ -63,7 +62,7 @@ class Renderer(portlet_local_search.Renderer):
 
         if self.data.remote_site_search_url:
             return self.data.remote_site_search_url % query
-        
+
         return '%s/search?SearchableText=%s' % (
             self.data.remote_site_url,
             quote_plus(query))

@@ -1,32 +1,30 @@
 # Local search portlet: customized for the multi_search view.
-from  urllib import quote_plus
+from urllib import quote_plus
 
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.app.portlets.portlets import base
+from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
 from zope.formlib import form
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleVocabulary
 
-from plone.app.portlets.portlets import base
-from plone.portlets.interfaces import IPortletDataProvider
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from collective.multisearch import MultiSearchMessageFactory as _
-from collective.multisearch.config import COLUMN_COUNT
 from collective.multisearch.config import CHARACTERS_PER_LINE
-
+from collective.multisearch.config import COLUMN_COUNT
 from collective.multisearch.utils import make_excerpt
 
 columnVocabulary = SimpleVocabulary.fromItems(
     [(_('No prefered column'), 0)] +
     [(x+1, x+1) for x in range(0, COLUMN_COUNT)])
 
+
 class ILocalSearchPortlet(IPortletDataProvider):
     dtitle = schema.TextLine(
         title=_(u'Title for the portlet'),
         description=_(u'Title shown in the header of the portlet'),
         required=False)
-    
+
     results_number = schema.Int(
         title=_(u'Number of results displayed'),
         description=_(u'Maximum number of results displayed'),
@@ -53,19 +51,19 @@ class ILocalSearchPortlet(IPortletDataProvider):
 
     assigned_column = schema.Choice(
         title=_(u'Column where the portlet is rendered'),
-        description=_(u'Assign the portlet to a fixed column. Otherwise ' + \
-                       'multisearch will try to balance the result portlets ' + \
-                       'to fill up the page the portlet is assigned to a ' + \
-                       'particular column'),
+        description=_(u'Assign the portlet to a fixed column. Otherwise '
+                      u'multisearch will try to balance the result portlets '
+                      u'to fill up the page the portlet is assigned to a '
+                      u'particular column'),
         required=True,
         vocabulary=columnVocabulary
         )
 
     show_if_no_results = schema.Bool(
         title=_(u'Show portlet even if no results are returned.'),
-        description=_(u'The portlet shows a message ' + \
-                      'that no results were found. Default behaviour is ' + \
-                      'to remove the portlet from the page results'),
+        description=_(u'The portlet shows a message '
+                      u'that no results were found. Default behaviour is '
+                      u'to remove the portlet from the page results'),
         required=False,
         default=True
         )
@@ -96,7 +94,7 @@ class Assignment(base.Assignment):
     @property
     def title(self):
         return self.dtitle
-    
+
 
 class Renderer(base.Renderer):
     render = ViewPageTemplateFile('templates/results_portlet.pt')

@@ -2,6 +2,7 @@ from Products.CMFCore.utils import getToolByName
 
 from collective.multisearch.config import DEFAULT_COLUMN
 
+
 def get_ms_props(context):
     pprops = getToolByName(context,
                            'portal_properties',
@@ -26,7 +27,8 @@ def get_column_number(context):
 def set_column_number(context, value):
     ms_props = get_ms_props(context)
     ms_props._setPropValue('column_number', value)
-    
+
+
 def make_excerpt(text, max_length, ellipsis=None):
     """ Makes a clean cut in words.
 
@@ -59,7 +61,7 @@ def make_excerpt(text, max_length, ellipsis=None):
     if len(text) <= max_length:
         return text
 
-    short =  text[:max_length]
+    short = text[:max_length]
 
     dot_split = short.split('.')
     space_split = short.split(' ')
@@ -68,7 +70,7 @@ def make_excerpt(text, max_length, ellipsis=None):
         # Well, no dots not spaces in the description,
         # should be a single word.
         return '%s%s' % (short, ellipsis)
-        
+
     if len(dot_split[-1]) > len(space_split[-1]):
         # As spaces are generally added just after the dots,
         # we check we're not i that case.
@@ -79,8 +81,9 @@ def make_excerpt(text, max_length, ellipsis=None):
         return '%s%s' % (
             ' '.join(space_split[:-1]),
             ellipsis)
-    
+
     return '%s.' % '.'.join(dot_split[:-1])
+
 
 def assign_columns(portlets, column_count):
     """ Takes a list of tuples (Assignment, Renderer) and
@@ -118,7 +121,7 @@ def assign_columns(portlets, column_count):
     ...                 (Assignment(0), Renderer(5))], 2)
     [[<Renderer: 10 results>],
      [<Renderer: 1 results>, <Renderer: 5 results>]]
-    
+
     >>> assign_columns([(Assignment(1), Renderer(10)),
     ...                 (Assignment(2), Renderer(1)),
     ...                 (Assignment(0), Renderer(15)),

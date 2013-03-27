@@ -1,44 +1,38 @@
 # Custom manager for the multisearch portlet manager: inactive for the moment.
 
-from zope.component import adapts
-from zope.component import adapter
-from zope.interface import implements
-from zope.interface import implementer
-from zope.interface import Interface
-from zope.component import getMultiAdapter
-from zope.component import queryMultiAdapter
-from zope.component import queryAdapter
-from zope.annotation.interfaces import IAnnotations
-
 from AccessControl import Unauthorized
 from Acquisition import aq_parent, aq_inner
 from BTrees.OOBTree import OOBTree
-from plone.app.portlets.browser.manage import ManageContextualPortlets
-
-from Products.statusmessages.interfaces import IStatusMessage
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.statusmessages.interfaces import IStatusMessage
 from plone.app.portlets.browser.editmanager import ContextualEditPortletManagerRenderer
-
-from plone.portlets.interfaces import IPortletManager
-from zope.publisher.interfaces.browser import IDefaultBrowserLayer
+from plone.app.portlets.browser.editmanager import ManagePortletAssignments
 from plone.app.portlets.browser.interfaces import IManageContextualPortletsView
+from plone.app.portlets.browser.manage import ManageContextualPortlets
 from plone.app.portlets.storage import PortletAssignmentMapping
-
 from plone.portlets.constants import CONTEXT_ASSIGNMENT_KEY
 from plone.portlets.constants import CONTEXT_CATEGORY
-
 from plone.portlets.interfaces import ILocalPortletAssignable
-from plone.app.portlets.browser.editmanager import ManagePortletAssignments
+from plone.portlets.interfaces import IPortletManager
+from zope.annotation.interfaces import IAnnotations
+from zope.component import adapter
+from zope.component import adapts
+from zope.component import getMultiAdapter
+from zope.component import queryAdapter
+from zope.component import queryMultiAdapter
+from zope.interface import Interface
+from zope.interface import implementer
+from zope.interface import implements
+from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
+from collective.multisearch import MultiSearchMessageFactory as _
+from collective.multisearch.browser.interfaces import IMultiSearchPortletAssignmentMapping
+from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
+from collective.multisearch.browser.interfaces import IMultisearchPortletManager
 from collective.multisearch.config import COLUMN_COUNT
 from collective.multisearch.config import DEFAULT_COLUMN
-
 from collective.multisearch.utils import get_column_number
 from collective.multisearch.utils import set_column_number
-from collective.multisearch import MultiSearchMessageFactory as _
-from collective.multisearch.browser.interfaces import IMultisearchPortletManager
-from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
-from collective.multisearch.browser.interfaces import IMultiSearchPortletAssignmentMapping
 
 
 class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManagerRenderer):
@@ -77,10 +71,10 @@ class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManag
                 return False
             return True
 
-        portlets =  [{
-            'title' : p.title,
-            'description' : p.description,
-            'addview' : '%s/+/%s' % (addviewbase, p.addview)
+        portlets = [{
+            'title': p.title,
+            'description': p.description,
+            'addview': '%s/+/%s' % (addviewbase, p.addview)
             } for p in self.manager.getAddablePortletTypes() if check_permission(p)]
 
         portlets.sort(key=sort_key)
@@ -118,11 +112,13 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
             IStatusMessage(self.request).addStatusMessage(
                 _('Invalid value for column number'),
                 'error')
-            
+
         return self.index()
+
 
 class MultiSearchPortletAssignmentMapping(PortletAssignmentMapping):
     implements(IMultiSearchPortletAssignmentMapping)
+
 
 @adapter(ILocalPortletAssignable, IPortletManager)
 @implementer(IMultiSearchPortletAssignmentMapping)
@@ -153,7 +149,9 @@ def localPortletAssignmentMappingAdapter(context, manager):
 
     return portlets
 
+
 class MultiSearchManagePortletAssignments(ManagePortletAssignments):
+
     def _nextUrl(self):
         referer = self.request.get('referer')
         if not referer:

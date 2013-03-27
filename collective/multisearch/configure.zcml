@@ -39,5 +39,5 @@
 
   <subscriber handler=".events.dispatchToComponent" />
   <subscriber handler=".events.registerPortletManagerRenderer" />
-  <subscriber handler=".events.unregisterPortletManagerRenderer" />  
+  <subscriber handler=".events.unregisterPortletManagerRenderer" />
 </configure>

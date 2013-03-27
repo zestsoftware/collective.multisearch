@@ -1,18 +1,18 @@
 import unittest
 import doctest
 
-from zope.testing import doctestunit
-from zope.component import testing
-from Testing import ZopeTestCase as ztc
-
 from Products.Five import fiveconfigure
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import PloneSite
-ptc.setupPloneSite()
+from Testing import ZopeTestCase as ztc
+from zope.component import testing
+from zope.testing import doctestunit
 
 import collective.multisearch
 
+ptc.setupPloneSite()
 OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
+
 
 class TestCase(ptc.PloneTestCase):
 

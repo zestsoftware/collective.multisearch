@@ -1,34 +1,31 @@
-# More or less a copy/paste of plone.portlets.events except we use our custom interface for the
-# PortletManagerRenderer.
-
-import zope.component
-
-from zope.interface import Interface
-
-from zope.component.interfaces import IUtilityRegistration
-from zope.component.interfaces import IRegistrationEvent
-from zope.component.interfaces import IRegistered
-from zope.component.interfaces import IUnregistered
-
-from zope.publisher.interfaces.browser import IBrowserRequest
-from zope.publisher.interfaces.browser import IBrowserView
+# More or less a copy/paste of plone.portlets.events except we use our
+# custom interface for the PortletManagerRenderer.
 
 from plone.portlets.interfaces import IPortletManager
+from zope.component import adapter
+from zope.component import subscribers
+from zope.component.interfaces import IRegistered
+from zope.component.interfaces import IRegistrationEvent
+from zope.component.interfaces import IUnregistered
+from zope.component.interfaces import IUtilityRegistration
+from zope.interface import Interface
+from zope.publisher.interfaces.browser import IBrowserRequest
+from zope.publisher.interfaces.browser import IBrowserView
 
 from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
 
 
-@zope.component.adapter(IUtilityRegistration, IRegistrationEvent)
+@adapter(IUtilityRegistration, IRegistrationEvent)
 def dispatchToComponent(registration, event):
     """When a utility is registered, dispatch to an event handler registered for
     the particular component registered, the registration and the event.
     """
-    handlers = zope.component.subscribers((registration.component, registration, event), None)
+    handlers = subscribers((registration.component, registration, event), None)
     for handler in handlers:
         pass  # getting them does the work
 
 
-@zope.component.adapter(IPortletManager, IUtilityRegistration, IRegistered)
+@adapter(IPortletManager, IUtilityRegistration, IRegistered)
 def registerPortletManagerRenderer(manager, registration, event):
     """When a portlet manager is registered as a utility, make an appropriate
     adapter registration for its IPortletManagerRenderer so that the
@@ -47,7 +44,7 @@ def registerPortletManagerRenderer(manager, registration, event):
                              name=registration.name)
 
 
-@zope.component.adapter(IPortletManager, IUtilityRegistration, IUnregistered)
+@adapter(IPortletManager, IUtilityRegistration, IUnregistered)
 def unregisterPortletManagerRenderer(manager, registration, event):
     """When a portlet manager is unregistered as a utility, unregister its
     IPortletManagerRenderer.

@@ -4,11 +4,10 @@ import feedparser
 import urllib2
 from  urllib import quote_plus
 
+from plone.app.portlets.portlets import base
 from zope import schema
 from zope.formlib import form
 from zope.interface import implements
-
-from plone.app.portlets.portlets import base
 
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.browser import portlet_local_search

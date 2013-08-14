@@ -77,26 +77,28 @@ class Assignment(portlet_local_search.Assignment):
 class Renderer(portlet_local_search.Renderer):
 
     def extra_results_link(self):
-        query = self.request.get('SearchableText', None)
-
+        # Note that this link is only shown if there are results, so
+        # it is never needed to return an empty string like in the
+        # rss_link method.
+        query = self.request.get('SearchableText', '')
+        query = quote_plus(query)
         if self.data.remote_site_search_url:
             return self.data.remote_site_search_url % query
 
         return '%s/search?SearchableText=%s' % (
-            self.data.remote_site_url,
-            quote_plus(query))
+            self.data.remote_site_url, query)
 
     def rss_link(self):
         query = self.request.get('SearchableText', None)
         if query is None:
-            return None
+            return ''
+        query = quote_plus(query)
 
         if self.data.remote_site_search_rss_url:
             return self.data.remote_site_search_rss_url % query
 
         return '%s/search_rss?SearchableText=%s' % (
-            self.data.remote_site_url,
-            quote_plus(query))
+            self.data.remote_site_url, query)
 
     def make_results(self):
         query = self.request.get('SearchableText', None)

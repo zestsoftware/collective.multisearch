@@ -48,6 +48,9 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
 
 class Assignment(portlet_local_search.Assignment):
     implements(IRemoteSearchPortlet)
+    # This field was added in 1.0.2.  Specifying a default here avoids
+    # problems viewing or editing older assignments:
+    remote_site_search_rss_url = ''
 
     def __init__(self,
                  dtitle='',

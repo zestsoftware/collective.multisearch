@@ -6,6 +6,11 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.multisearch">
 
+  <!-- Include packages for permissions. -->
+  <include package="Products.CMFCore" />
+  <include package="plone.app.portlets" />
+  <!-- Include five.grok so we can grok our package. -->
+  <include package="five.grok" />
   <five:registerPackage package="." initialize=".initialize" />
   <i18n:registerTranslations directory="locales" />
   <include package=".browser" />

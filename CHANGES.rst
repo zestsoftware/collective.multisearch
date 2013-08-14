@@ -4,6 +4,10 @@ Changelog
 1.0.2 (unreleased)
 ------------------
 
+- Set the User-Agent string to 'Mozilla/4.0' when querying remote
+  servers.  Otherwise, some bad servers return a 403 Forbidden error.
+  [maurits]
+
 - Load the zcml of some packages so Plone starts up correctly.
   [maurits]
 

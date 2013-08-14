@@ -84,8 +84,16 @@ class Renderer(portlet_local_search.Renderer):
             self.data.remote_site_url,
             quote_plus(query))
 
+        opener = urllib2.build_opener()
+        request = urllib2.Request(search_url)
+        # According to the 'curl' manual, some badly done CGIs fail if
+        # the User-Agent field isn't set to "Mozilla/4.0".  I
+        # [Maurits] have seen this in practice in one case, so let's
+        # indeed set the User-Agent header.  Note that normally the
+        # header is something like 'Python-urllib/2.7'.
+        request.add_header('User-Agent', 'Mozilla/4.0')
         try:
-            rss = urllib2.urlopen(search_url).read()
+            rss = opener.open(request).read()
         except urllib2.URLError:
             logger.info('Unable to open rss feed: %s' % search_url)
             return []

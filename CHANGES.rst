@@ -4,6 +4,12 @@ Changelog
 1.0.2 (unreleased)
 ------------------
 
+- Add field ``remote_site_search_rss_url`` so you can set an explicit
+  rss url that we use for querying the remote site, instead of
+  appending a hardcoded ``search_rss`` to the site url.  This means we
+  support non-Plone sites now.
+  [maurits]
+
 - Set the User-Agent string to 'Mozilla/4.0' when querying remote
   servers.  Otherwise, some bad servers return a 403 Forbidden error.
   [maurits]

@@ -33,6 +33,18 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
             "part where the searched text will be filled in."),
         required = False)
 
+    remote_site_search_rss_url = schema.TextLine(
+        title=_(u'Remote site search rss feed'),
+        description=_(
+            u"You can specify here a custom rss search feed. This will be "
+            "used to fetch the search results. If left blank, it will use "
+            "the address of the remote site and append "
+            "'/search_rss?SearchableText=%s', so "
+            "http://www.example.com/search_rss?SearchableText=%s with the "
+            "previous example, which is good for a Plone site. Note the '%s' "
+            "part where the searched text will be filled in."),
+        required = False)
+
 
 class Assignment(portlet_local_search.Assignment):
     implements(IRemoteSearchPortlet)
@@ -46,7 +58,8 @@ class Assignment(portlet_local_search.Assignment):
                  assigned_column=0,
                  show_if_no_results=True,
                  remote_site_url='',
-                 remote_site_search_url=''):
+                 remote_site_search_url='',
+                 remote_site_search_rss_url=''):
 
         if not dtitle:
             dtitle = 'Remote results for: %s' % remote_site_url
@@ -55,6 +68,7 @@ class Assignment(portlet_local_search.Assignment):
             dtitle, results_number, show_more_results, assigned_column, show_if_no_results)
         self.remote_site_url = remote_site_url
         self.remote_site_search_url = remote_site_search_url
+        self.remote_site_search_rss_url = remote_site_search_rss_url
 
 
 class Renderer(portlet_local_search.Renderer):
@@ -74,6 +88,9 @@ class Renderer(portlet_local_search.Renderer):
         if query is None:
             return None
 
+        if self.data.remote_site_search_rss_url:
+            return self.data.remote_site_search_rss_url % query
+
         return '%s/search_rss?SearchableText=%s' % (
             self.data.remote_site_url,
             quote_plus(query))
@@ -83,10 +100,9 @@ class Renderer(portlet_local_search.Renderer):
         if not query:
             return []
 
-        search_url = '%s/search_rss?SearchableText=%s' % (
-            self.data.remote_site_url,
-            quote_plus(query))
-
+        search_url = self.rss_link()
+        if not search_url:
+            return []
         opener = urllib2.build_opener()
         request = urllib2.Request(search_url)
         # According to the 'curl' manual, some badly done CGIs fail if

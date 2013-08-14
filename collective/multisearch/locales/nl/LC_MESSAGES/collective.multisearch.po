@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.multisearch 1.0\n"
-"POT-Creation-Date: 2013-03-05 14:35+0000\n"
+"POT-Creation-Date: 2013-08-14 19:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,97 +14,105 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.multisearch\n"
 
-#: ./browser/portlet_local_search.py:43
+#: ./browser/portlet_local_search.py:41
 msgid "Allow RSS subscription"
 msgstr "Toon RSS link"
 
-#: ./browser/portlet_local_search.py:56
+#: ./browser/portlet_local_search.py:54
 msgid "Assign the portlet to a fixed column. Otherwise multisearch will try to balance the result portlets to fill up the page the portlet is assigned to a particular column"
 msgstr "Zet het potlet op een vaste kolom. Anders zal multisearch proberen om de portlets zo gelijk mogelijk over de pagina te verdelen om alle kolommen even lang te maken."
 
-#: ./browser/portlet_local_search.py:55
+#: ./browser/portlet_local_search.py:53
 msgid "Column where the portlet is rendered"
 msgstr "Kolom waar de portlet wordt getoond"
 
-#: ./browser/portlet_local_search.py:38
+#: ./browser/portlet_local_search.py:36
 msgid "If selected, show a excerpt of the description"
 msgstr "Toon een ingekorte versie van de omschrijving"
 
-#: ./browser/portlet_local_search.py:44
+#: ./browser/portlet_local_search.py:42
 msgid "If selected, show an RSS icon in the title"
 msgstr "Toon een RSS pictogram in de titelbalk"
 
-#: ./browser/manager.py:119
+#: ./browser/manager.py:111
 msgid "Invalid value for column number"
 msgstr "Ongeldige waarde voor kolomnummer"
 
-#: ./browser/portlet_local_search.py:86
+#: ./browser/portlet_local_search.py:84
 msgid "Local results"
 msgstr "Lokale resultaten"
 
-#: ./browser/portlet_local_search.py:32
+#: ./browser/portlet_local_search.py:30
 msgid "Maximum number of results displayed"
 msgstr "Maximaal aantal getoonde resultaten"
 
-#: ./browser/search_portlet.py:15
+#: ./browser/search_portlet.py:17
 msgid "MultiSearch"
 msgstr "MultiSearch"
 
-#: ./browser/portlet_local_search.py:21
+#: ./browser/portlet_local_search.py:18
 msgid "No prefered column"
 msgstr "Geen voorkeurskolom"
 
-#: ./browser/portlet_local_search.py:31
+#: ./browser/portlet_local_search.py:29
 msgid "Number of results displayed"
 msgstr "Aantal getoonde resultaten"
 
-#: ./browser/manager.py:114
+#: ./browser/manager.py:106
 msgid "Properties updated"
 msgstr "Eigenschappen bijgewerkt"
 
-#: ./browser/portlet_remote_search.py:22
+#: ./browser/portlet_remote_search.py:20
 msgid "Remote site URL"
 msgstr "URL van de externe website"
 
-#: ./browser/portlet_remote_search.py:28
+#: ./browser/portlet_remote_search.py:26
 msgid "Remote site search page"
 msgstr "Zoekpagina van de externe website"
 
-#: ./browser/portlet_local_search.py:50
+#: ./browser/portlet_remote_search.py:37
+msgid "Remote site search rss feed"
+msgstr ""
+
+#: ./browser/portlet_local_search.py:48
 msgid "Show a link in the portlet footer to show more results"
 msgstr "Toon een link in de portlet naar meer resultaten"
 
-#: ./browser/portlet_local_search.py:49
+#: ./browser/portlet_local_search.py:47
 msgid "Show link for more results"
 msgstr "Toon link naar meer resultaten"
 
-#: ./browser/portlet_local_search.py:65
+#: ./browser/portlet_local_search.py:63
 msgid "Show portlet even if no results are returned."
 msgstr "Toon portlet ook als er geen resultaten zijn"
 
-#: ./browser/portlet_local_search.py:37
+#: ./browser/portlet_local_search.py:35
 msgid "Show result description"
 msgstr "Toon omschrijving in het resultaat"
 
-#: ./browser/portlet_local_search.py:66
+#: ./browser/portlet_local_search.py:64
 msgid "The portlet shows a message that no results were found. Default behaviour is to remove the portlet from the page results"
 msgstr "Het portlet toont een bericht dat er geen resultaten waren. Standaard worden portlets zonder zoekresultaten van de pagina verwijderd."
 
-#: ./browser/portlet_local_search.py:26
+#: ./browser/portlet_local_search.py:24
 msgid "Title for the portlet"
 msgstr "Titel voor de portlet"
 
-#: ./browser/portlet_local_search.py:27
+#: ./browser/portlet_local_search.py:25
 msgid "Title shown in the header of the portlet"
 msgstr "Tekst die getoond wordt in de titelbalk van de portlet"
 
-#: ./browser/portlet_remote_search.py:23
+#: ./browser/portlet_remote_search.py:21
 msgid "URL of the site were the search is performed (http://www.example.com)"
 msgstr "URL van de website waar de zoekopdracht naar toe gaat (http://www.example.com)"
 
-#: ./browser/portlet_remote_search.py:29
-msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append /search (http://www.example.com/search?SearchableText=%s with the previous example, note the %s part that allows to copy the searched text.)"
-msgstr "Geef hier een aparte zoekurl pagina op. als deze leeg blijft, dan gebruikt de portlet het adres van de externe site en voegt /search toe (bijv. als resultaat http://www.example.com/search?SearchableText=%s). Let op de %s als het deel dat de gezochte tekst kopieert.)"
+#: ./browser/portlet_remote_search.py:38
+msgid "You can specify here a custom rss search feed. This will be used to fetch the search results. If left blank, it will use the address of the remote site and append '/search_rss?SearchableText=%s', so http://www.example.com/search_rss?SearchableText=%s with the previous example, which is good for a Plone site. Note the '%s' part where the searched text will be filled in."
+msgstr "Geef hier een aparte zoekurl van een rss feed op. Deze wordt gebruikt om de zoekresultaten op te halen. Als deze leeg blijft, dan gebruikt de portlet het adres van de externe site en voegt '/search_rss?SearchableText=%s' toe, wat goed is voor een Plone site (bijvoorbeeld als resultaat http://www.example.com/search_rss?SearchableText=%s). Let op de %s als het deel dat de gezochte tekst kopieert.)"
+
+#: ./browser/portlet_remote_search.py:27
+msgid "You can specify here a custom search page. This will be used as link to extra results. If left blank, it will use the address of the remote site and append '/search?SearchableText=%s', so http://www.example.com/search?SearchableText=%s with the previous example, which is good for a Plone site. Note the '%s' part where the searched text will be filled in."
+msgstr "Geef hier een aparte zoekurl pagina op. Deze wordt gebruikt voor de link naar extra resultaten. Als deze leeg blijft, dan gebruikt de portlet het adres van de externe site en voegt '/search?SearchableText=%s' toe, wat goed is voor een Plone site (bijvoorbeeld als resultaat http://www.example.com/search?SearchableText=%s). Let op de %s als het deel dat de gezochte tekst kopieert.)"
 
 #. Default: "Number of columns in the search page"
 #: ./browser/templates/edit-manager-contextual.pt:17

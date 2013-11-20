@@ -1,7 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.multisearch 1.0\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2013-08-14 19:42+0000\n"
+=======
+"POT-Creation-Date: 2013-11-20 16:11+0000\n"
+>>>>>>> Add timeout for RSS remote searches
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,6 +62,14 @@ msgstr "Geen voorkeurskolom"
 msgid "Number of results displayed"
 msgstr "Aantal getoonde resultaten"
 
+#: ./browser/portlet_remote_search.py:50
+msgid "Number of seconds before we timeout the remote search request."
+msgstr "Aantal seconden voordat de zoekopdracht wordt afgebroken."
+
+#: ./browser/portlet_remote_search.py:22
+msgid "Please enter a timeout between 1 and 60 seconds."
+msgstr "Geef een geheel getal tussen de 1 en 60 seconden op."
+
 #: ./browser/manager.py:106
 msgid "Properties updated"
 msgstr "Eigenschappen bijgewerkt"
@@ -72,7 +84,19 @@ msgstr "Zoekpagina van de externe website"
 
 #: ./browser/portlet_remote_search.py:37
 msgid "Remote site search rss feed"
-msgstr ""
+msgstr "Externe site RSS feed"
+
+#: ./browser/portlet_remote_search.py:35
+msgid "Remote site URL"
+msgstr "URL van de externe website"
+
+#: ./browser/portlet_remote_search.py:41
+msgid "Remote site search page"
+msgstr "Zoekpagina van de externe website"
+
+#: ./browser/portlet_remote_search.py:49
+msgid "Request timeout"
+msgstr "Request timeout"
 
 #: ./browser/portlet_local_search.py:48
 msgid "Show a link in the portlet footer to show more results"

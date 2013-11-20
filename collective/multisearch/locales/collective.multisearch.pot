@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-08-14 19:42+0000\n"
+"POT-Creation-Date: 2013-11-20 16:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,6 +61,7 @@ msgstr ""
 msgid "Number of results displayed"
 msgstr ""
 
+<<<<<<< HEAD
 #: ./browser/manager.py:106
 msgid "Properties updated"
 msgstr ""
@@ -75,6 +76,30 @@ msgstr ""
 
 #: ./browser/portlet_remote_search.py:37
 msgid "Remote site search rss feed"
+=======
+#: ./browser/portlet_remote_search.py:50
+msgid "Number of seconds before we timeout the remote search request."
+msgstr ""
+
+#: ./browser/portlet_remote_search.py:22
+msgid "Please enter a timeout between 1 and 60 seconds."
+msgstr ""
+
+#: ./browser/manager.py:106
+msgid "Properties updated"
+msgstr ""
+
+#: ./browser/portlet_remote_search.py:35
+msgid "Remote site URL"
+msgstr ""
+
+#: ./browser/portlet_remote_search.py:41
+msgid "Remote site search page"
+msgstr ""
+
+#: ./browser/portlet_remote_search.py:49
+msgid "Request timeout"
+>>>>>>> Add timeout for RSS remote searches
 msgstr ""
 
 #: ./browser/portlet_local_search.py:48
@@ -105,6 +130,7 @@ msgstr ""
 msgid "Title shown in the header of the portlet"
 msgstr ""
 
+<<<<<<< HEAD
 #: ./browser/portlet_remote_search.py:21
 msgid "URL of the site were the search is performed (http://www.example.com)"
 msgstr ""
@@ -115,6 +141,14 @@ msgstr ""
 
 #: ./browser/portlet_remote_search.py:27
 msgid "You can specify here a custom search page. This will be used as link to extra results. If left blank, it will use the address of the remote site and append '/search?SearchableText=%s', so http://www.example.com/search?SearchableText=%s with the previous example, which is good for a Plone site. Note the '%s' part where the searched text will be filled in."
+=======
+#: ./browser/portlet_remote_search.py:36
+msgid "URL of the site were the search is performed (http://www.example.com)"
+msgstr ""
+
+#: ./browser/portlet_remote_search.py:42
+msgid "You can specify here a custom search page. If left blank, it will use the address of the remote site and append /search (http://www.example.com/search?SearchableText=%s with the previous example, note the %s part that allows to copy the searched text.)"
+>>>>>>> Add timeout for RSS remote searches
 msgstr ""
 
 #. Default: "Number of columns in the search page"

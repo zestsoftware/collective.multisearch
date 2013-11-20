@@ -14,6 +14,9 @@ Changelog
   servers.  Otherwise, some bad servers return a 403 Forbidden error.
   [maurits]
 
+- Add timeout value for remote RSS portlet searches. Default is 5 seconds. 
+  [fredvd]
+
 - Load the zcml of some packages so Plone starts up correctly.
   [maurits]
 

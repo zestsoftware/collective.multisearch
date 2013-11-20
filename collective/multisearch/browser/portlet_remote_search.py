@@ -85,7 +85,7 @@ class Assignment(portlet_local_search.Assignment):
                  show_if_no_results=True,
                  remote_site_url='',
                  remote_site_search_url='',
-                 remote_site_search_rss_url=''):
+                 remote_site_search_rss_url='',
                  rss_timeout=RSS_TIMEOUT):
 
         if not dtitle:
@@ -148,9 +148,10 @@ class Renderer(portlet_local_search.Renderer):
             logger.info('RSS feed timeout after %s seconds: %s' % (timeout, search_url))
             return []
         except urllib2.URLError, e:
+            # works for Python 2.6
             if isinstance(e.reason, socket.timeout):
-                    logger.info('RSS feed timeout after %s seconds: %s' % (timeout, search_url))
-                    return []
+                logger.info('RSS feed timeout after %s seconds: %s' % (timeout, search_url))
+                return []
             logger.info('Unable to open RSS feed: %s' % search_url)
             return []
 

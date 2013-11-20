@@ -24,15 +24,33 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
 
     remote_site_search_url = schema.TextLine(
         title=_(u'Remote site search page'),
-        description=_(u'You can specify here a custom search page. If left blank, '
-                      'it will use the address of the remote site and append /search '
-                      '(http://www.example.com/search?SearchableText=%s with the previous '
-                      'example, note the %s part that allows to copy the searched text.)'),
+        description=_(
+            u"You can specify here a custom search page. This will be used as "
+            "link to extra results. If left blank, it will use the address of "
+            "the remote site and append '/search?SearchableText=%s', so "
+            "http://www.example.com/search?SearchableText=%s with the "
+            "previous example, which is good for a Plone site. Note the '%s' "
+            "part where the searched text will be filled in."),
+        required = False)
+
+    remote_site_search_rss_url = schema.TextLine(
+        title=_(u'Remote site search rss feed'),
+        description=_(
+            u"You can specify here a custom rss search feed. This will be "
+            "used to fetch the search results. If left blank, it will use "
+            "the address of the remote site and append "
+            "'/search_rss?SearchableText=%s', so "
+            "http://www.example.com/search_rss?SearchableText=%s with the "
+            "previous example, which is good for a Plone site. Note the '%s' "
+            "part where the searched text will be filled in."),
         required = False)
 
 
 class Assignment(portlet_local_search.Assignment):
     implements(IRemoteSearchPortlet)
+    # This field was added in 1.0.2.  Specifying a default here avoids
+    # problems viewing or editing older assignments:
+    remote_site_search_rss_url = ''
 
     def __init__(self,
                  dtitle='',
@@ -43,7 +61,8 @@ class Assignment(portlet_local_search.Assignment):
                  assigned_column=0,
                  show_if_no_results=True,
                  remote_site_url='',
-                 remote_site_search_url=''):
+                 remote_site_search_url='',
+                 remote_site_search_rss_url=''):
 
         if not dtitle:
             dtitle = 'Remote results for: %s' % remote_site_url
@@ -52,40 +71,53 @@ class Assignment(portlet_local_search.Assignment):
             dtitle, results_number, show_more_results, assigned_column, show_if_no_results)
         self.remote_site_url = remote_site_url
         self.remote_site_search_url = remote_site_search_url
+        self.remote_site_search_rss_url = remote_site_search_rss_url
 
 
 class Renderer(portlet_local_search.Renderer):
 
     def extra_results_link(self):
-        query = self.request.get('SearchableText', None)
-
+        # Note that this link is only shown if there are results, so
+        # it is never needed to return an empty string like in the
+        # rss_link method.
+        query = self.request.get('SearchableText', '')
+        query = quote_plus(query)
         if self.data.remote_site_search_url:
             return self.data.remote_site_search_url % query
 
         return '%s/search?SearchableText=%s' % (
-            self.data.remote_site_url,
-            quote_plus(query))
+            self.data.remote_site_url, query)
 
     def rss_link(self):
         query = self.request.get('SearchableText', None)
         if query is None:
-            return None
+            return ''
+        query = quote_plus(query)
+
+        if self.data.remote_site_search_rss_url:
+            return self.data.remote_site_search_rss_url % query
 
         return '%s/search_rss?SearchableText=%s' % (
-            self.data.remote_site_url,
-            quote_plus(query))
+            self.data.remote_site_url, query)
 
     def make_results(self):
         query = self.request.get('SearchableText', None)
         if not query:
             return []
 
-        search_url = '%s/search_rss?SearchableText=%s' % (
-            self.data.remote_site_url,
-            quote_plus(query))
-
+        search_url = self.rss_link()
+        if not search_url:
+            return []
+        opener = urllib2.build_opener()
+        request = urllib2.Request(search_url)
+        # According to the 'curl' manual, some badly done CGIs fail if
+        # the User-Agent field isn't set to "Mozilla/4.0".  I
+        # [Maurits] have seen this in practice in one case, so let's
+        # indeed set the User-Agent header.  Note that normally the
+        # header is something like 'Python-urllib/2.7'.
+        request.add_header('User-Agent', 'Mozilla/4.0')
         try:
-            rss = urllib2.urlopen(search_url).read()
+            rss = opener.open(request).read()
         except urllib2.URLError:
             logger.info('Unable to open rss feed: %s' % search_url)
             return []

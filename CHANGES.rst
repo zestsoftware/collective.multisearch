@@ -4,7 +4,9 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Don't crash the remote search portlet if a feed item does not contain a
+  summary field. Happens when reading search results from a Plone 3.3.X site.
+  [f.vandijk]
 
 
 1.0.2 (2013-11-21)

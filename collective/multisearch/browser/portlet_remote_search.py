@@ -159,7 +159,7 @@ class Renderer(portlet_local_search.Renderer):
         return [
             {'title': x['title'],
              'url': x['links'][0]['href'],
-             'desc': x['summary']}
+             'desc': getattr(x, 'summary', u'')}
             for x in data['items']][:self.data.results_number]
 
 

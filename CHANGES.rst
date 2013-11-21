@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.2 (unreleased)
+1.0.2 (2013-11-21)
 ------------------
 
 - Add field ``remote_site_search_rss_url`` so you can set an explicit

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.3 (unreleased)
+1.0.3 (2013-11-21)
 ------------------
 
 - Don't crash the remote search portlet if a feed item does not contain a

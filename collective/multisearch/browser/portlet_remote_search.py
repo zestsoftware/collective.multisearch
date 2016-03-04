@@ -30,6 +30,17 @@ def isValidTimeout(value):
         raise InvalidTimeoutValue
 
 
+class InvalidSearchUrl(schema.ValidationError):
+    __doc__ = _(u"Please enter a url with '%s' in it.")
+
+
+def isValidSearchUrl(value):
+    """Must have %s in it."""
+    if value and '%s' not in value:
+        raise InvalidSearchUrl
+    return True
+
+
 class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     remote_site_url = schema.TextLine(
         title=_(u'Remote site URL'),
@@ -46,6 +57,7 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
             "http://www.example.com/search?SearchableText=%s with the "
             "previous example, which is good for a Plone site. Note the '%s' "
             "part where the searched text will be filled in."),
+        constraint=isValidSearchUrl,
         required = False)
 
     remote_site_search_rss_url = schema.TextLine(
@@ -58,6 +70,7 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
             "http://www.example.com/search_rss?SearchableText=%s with the "
             "previous example, which is good for a Plone site. Note the '%s' "
             "part where the searched text will be filled in."),
+        constraint=isValidSearchUrl,
         required = False)
 
     rss_timeout = schema.Int(

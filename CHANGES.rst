@@ -4,6 +4,9 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Give validation error when inputting a search url without ``%s``.
+  [maurits]
+
 - Catch "TypeError: not all arguments converted during string
   formatting" when the ``remote_site_search_url`` or the
   ``remote_site_search_rss_url`` does not contain a ``%s``.

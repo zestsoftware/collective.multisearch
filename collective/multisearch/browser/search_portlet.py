@@ -25,6 +25,7 @@ class Renderer(search.Renderer):
 
 
 class AddForm(search.AddForm):
+
     def create(self, data):
         return Assignment()
 

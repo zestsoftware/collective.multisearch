@@ -4,7 +4,7 @@ import feedparser
 import socket
 
 import urllib2
-from  urllib import quote_plus
+from urllib import quote_plus
 
 from plone.app.portlets.portlets import base
 from zope import schema
@@ -14,8 +14,8 @@ from zope.interface import implements
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.browser import portlet_local_search
 from collective.multisearch.config import RSS_TIMEOUT
-logger = logging.getLogger('collective.multisearch.browser.portlet_remote_search')
-
+logger = logging.getLogger(
+    'collective.multisearch.browser.portlet_remote_search')
 
 
 class InvalidTimeoutValue(schema.ValidationError):
@@ -24,7 +24,7 @@ class InvalidTimeoutValue(schema.ValidationError):
 
 def isValidTimeout(value):
     """check for a value between 1 and 60 seconds"""
-    if 0<int(value)<61:
+    if 0 < int(value) < 61:
         return True
     else:
         raise InvalidTimeoutValue
@@ -58,7 +58,7 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
             "previous example, which is good for a Plone site. Note the '%s' "
             "part where the searched text will be filled in."),
         constraint=isValidSearchUrl,
-        required = False)
+        required=False)
 
     remote_site_search_rss_url = schema.TextLine(
         title=_(u'Remote site search rss feed'),
@@ -71,14 +71,16 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
             "previous example, which is good for a Plone site. Note the '%s' "
             "part where the searched text will be filled in."),
         constraint=isValidSearchUrl,
-        required = False)
+        required=False)
 
     rss_timeout = schema.Int(
         title=_(u'Request timeout'),
-        description=_(u'Number of seconds before we timeout the remote search request.'),
+        description=_(
+            u'Number of seconds before we timeout the remote search request.'),
         required=True,
         default=RSS_TIMEOUT,
         constraint=isValidTimeout)
+
 
 class Assignment(portlet_local_search.Assignment):
     implements(IRemoteSearchPortlet)
@@ -164,16 +166,18 @@ class Renderer(portlet_local_search.Renderer):
         # header is something like 'Python-urllib/2.7'.
         request.add_header('User-Agent', 'Mozilla/4.0')
         try:
-            timeout=getattr(self.data, "rss_timeout", RSS_TIMEOUT)
+            timeout = getattr(self.data, "rss_timeout", RSS_TIMEOUT)
             rss = opener.open(request, timeout=timeout).read()
         except socket.timeout, e:
             # only works in Python 2.7
-            logger.info('RSS feed timeout after %s seconds: %s' % (timeout, search_url))
+            logger.info('RSS feed timeout after %s seconds: %s' %
+                        (timeout, search_url))
             return []
         except urllib2.URLError, e:
             # works for Python 2.6
             if isinstance(e.reason, socket.timeout):
-                logger.info('RSS feed timeout after %s seconds: %s' % (timeout, search_url))
+                logger.info('RSS feed timeout after %s seconds: %s' %
+                            (timeout, search_url))
                 return []
             logger.info('Unable to open RSS feed: %s' % search_url)
             return []

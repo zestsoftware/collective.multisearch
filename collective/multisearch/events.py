@@ -39,7 +39,8 @@ def registerPortletManagerRenderer(manager, registration, event):
     manager.__name__ = registration.name
     registry = registration.registry
     registry.registerAdapter(factory=manager,
-                             required=(Interface, IBrowserRequest, IBrowserView),
+                             required=(Interface, IBrowserRequest,
+                                       IBrowserView),
                              provided=IMultiSearchPortletManagerRenderer,
                              name=registration.name)
 
@@ -54,6 +55,7 @@ def unregisterPortletManagerRenderer(manager, registration, event):
 
     registry = registration.registry
     registry.unregisterAdapter(factory=manager,
-                               required=(Interface, IBrowserRequest, IBrowserView),
+                               required=(Interface, IBrowserRequest,
+                                         IBrowserView),
                                provided=IMultiSearchPortletManagerRenderer,
                                name=registration.name)

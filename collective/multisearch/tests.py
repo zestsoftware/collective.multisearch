@@ -33,7 +33,7 @@ def test_suite():
     return unittest.TestSuite([
 
         # Unit tests
-        #doctestunit.DocFileSuite(
+        # doctestunit.DocFileSuite(
         #    'README.txt', package='collective.multisearch',
         #    setUp=testing.setUp, tearDown=testing.tearDown),
 
@@ -45,15 +45,15 @@ def test_suite():
 
 
         # Integration tests that use PloneTestCase
-        #ztc.ZopeDocFileSuite(
+        # ztc.ZopeDocFileSuite(
         #    'README.txt', package='collective.multisearch',
         #    test_class=TestCase),
 
-        #ztc.FunctionalDocFileSuite(
+        # ztc.FunctionalDocFileSuite(
         #    'browser.txt', package='collective.multisearch',
         #    test_class=TestCase),
 
-        ])
+    ])
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

@@ -164,7 +164,8 @@ def assign_columns(portlets, column_count):
                     range(0, column_count + 1)])
 
     for assignment, renderer in portlets:
-        assignment_column = max(0, min(assignment.assigned_column, column_count))
+        assignment_column = max(
+            0, min(assignment.assigned_column, column_count))
         columns[assignment_column].append(renderer)
 
     if columns[0]:
@@ -173,7 +174,7 @@ def assign_columns(portlets, column_count):
         unplaced = sorted(
             [(renderer, renderer.lines_count)
              for renderer in columns[0]],
-            key = lambda x: x[1],
+            key=lambda x: x[1],
             reverse=True)
 
         sizes = dict(
@@ -183,7 +184,7 @@ def assign_columns(portlets, column_count):
 
         for portlet, p_size in unplaced:
             col_index = sorted(sizes.items(),
-                               key = lambda x: x[1])[0][0]
+                               key=lambda x: x[1])[0][0]
 
             columns[col_index].append(portlet)
             sizes[col_index] += p_size

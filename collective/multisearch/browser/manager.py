@@ -34,12 +34,13 @@ from collective.multisearch.utils import set_column_number
 
 
 class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManagerRenderer):
-    adapts(Interface, IDefaultBrowserLayer, IManageContextualPortletsView, IMultisearchPortletManager)
+    adapts(Interface, IDefaultBrowserLayer,
+           IManageContextualPortletsView, IMultisearchPortletManager)
     template = ViewPageTemplateFile('templates/edit-manager-contextual.pt')
 
     def get_column_number(self):
         return {'current': get_column_number(self.context),
-                'available': range(1, COLUMN_COUNT+1)}
+                'available': range(1, COLUMN_COUNT + 1)}
 
     def addable_portlets(self):
         """ We can't do a normal 'super', so it's a copy/paste form the base class.
@@ -73,13 +74,14 @@ class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManag
             'title': p.title,
             'description': p.description,
             'addview': '%s/+/%s' % (addviewbase, p.addview)
-            } for p in self.manager.getAddablePortletTypes() if check_permission(p)]
+        } for p in self.manager.getAddablePortletTypes() if check_permission(p)]
 
         portlets.sort(key=sort_key)
         return portlets
 
 
 class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
+
     def get_manager(self):
         editmanager = queryMultiAdapter(
             (self.context, self.request, self),

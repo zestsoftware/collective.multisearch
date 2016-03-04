@@ -12,7 +12,7 @@ setup(name='collective.multisearch',
       classifiers=[
           "Framework :: Plone",
           "Programming Language :: Python",
-          ],
+      ],
       keywords='',
       author='Zest Software',
       author_email='info@zestsoftware.nl',

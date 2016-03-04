@@ -16,7 +16,7 @@ from collective.multisearch.utils import make_excerpt
 
 columnVocabulary = SimpleVocabulary.fromItems(
     [(_('No prefered column'), 0)] +
-    [(x+1, x+1) for x in range(0, COLUMN_COUNT)])
+    [(x + 1, x + 1) for x in range(0, COLUMN_COUNT)])
 
 
 class ILocalSearchPortlet(IPortletDataProvider):
@@ -35,19 +35,20 @@ class ILocalSearchPortlet(IPortletDataProvider):
         title=_(u'Show result description'),
         description=_(u'If selected, show a excerpt of the description'),
         default=False,
-        )
+    )
 
     allow_rss_subscription = schema.Bool(
         title=_(u'Allow RSS subscription'),
         description=_(u'If selected, show an RSS icon in the title'),
         default=True,
-        )
+    )
 
     show_more_results = schema.Bool(
         title=_(u'Show link for more results'),
-        description=_(u'Show a link in the portlet footer to show more results'),
+        description=_(
+            u'Show a link in the portlet footer to show more results'),
         default=True
-        )
+    )
 
     assigned_column = schema.Choice(
         title=_(u'Column where the portlet is rendered'),
@@ -57,7 +58,7 @@ class ILocalSearchPortlet(IPortletDataProvider):
                       u'particular column'),
         required=True,
         vocabulary=columnVocabulary
-        )
+    )
 
     show_if_no_results = schema.Bool(
         title=_(u'Show portlet even if no results are returned.'),
@@ -66,7 +67,7 @@ class ILocalSearchPortlet(IPortletDataProvider):
                       u'to remove the portlet from the page results'),
         required=False,
         default=True
-        )
+    )
 
 
 class Assignment(base.Assignment):

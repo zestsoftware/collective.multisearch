@@ -4,7 +4,7 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added PloneTestCase to test requirements.  [maurits]
 
 
 1.0.3 (2013-11-21)
@@ -28,7 +28,7 @@ Changelog
   servers.  Otherwise, some bad servers return a 403 Forbidden error.
   [maurits]
 
-- Add timeout value for remote RSS portlet searches. Default is 5 seconds. 
+- Add timeout value for remote RSS portlet searches. Default is 5 seconds.
   [fredvd]
 
 - Load the zcml of some packages so Plone starts up correctly.

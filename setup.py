@@ -8,7 +8,7 @@ setup(name='collective.multisearch',
       long_description=(open("README.txt").read() + "\n\n" +
                         open("CHANGES.rst").read()),
       # Get more strings from
-      # http://pypi.python.org/pypi?:action=list_classifiers
+      # https://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
           "Framework :: Plone",
           "Programming Language :: Python",
@@ -27,9 +27,12 @@ setup(name='collective.multisearch',
           'five.grok',
           'feedparser',
       ],
+      extras_require={
+          'test': [
+              'Products.PloneTestCase',
+          ]
+      },
       entry_points="""
-      # -*- Entry points: -*-
-
       [z3c.autoinclude.plugin]
       target = plone
       """,

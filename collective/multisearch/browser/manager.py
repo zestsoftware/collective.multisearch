@@ -33,7 +33,8 @@ from collective.multisearch.utils import get_column_number
 from collective.multisearch.utils import set_column_number
 
 
-class MultiSearchContextualEditPortletManagerRenderer(ContextualEditPortletManagerRenderer):
+class MultiSearchContextualEditPortletManagerRenderer(
+        ContextualEditPortletManagerRenderer):
     adapts(Interface, IDefaultBrowserLayer,
            IManageContextualPortletsView, IMultisearchPortletManager)
     template = ViewPageTemplateFile('templates/edit-manager-contextual.pt')
@@ -135,7 +136,8 @@ def localPortletAssignmentMappingAdapter(context, manager):
     if local is None:
         local = annotations[CONTEXT_ASSIGNMENT_KEY] = OOBTree()
     portlets = local.get(manager.__name__, None)
-    if portlets is None or not IMultiSearchPortletAssignmentMapping.providedBy(portlets):
+    if portlets is None or not IMultiSearchPortletAssignmentMapping.providedBy(
+            portlets):
         if portlets is not None:
             old_items = portlets.items()
         else:

@@ -12,9 +12,11 @@ setup(
     # https://pypi.python.org/pypi?:action=list_classifiers
     classifiers=[
         "Framework :: Plone",
+        "Framework :: Plone :: 4.3",
         "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
     ],
-    keywords='',
+    keywords='multisearch portlet remote',
     author='Zest Software',
     author_email='info@zestsoftware.nl',
     url='https://github.com/zestsoftware/collective.multisearch',

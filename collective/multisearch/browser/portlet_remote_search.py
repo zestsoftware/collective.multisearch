@@ -74,7 +74,7 @@ class Assignment(portlet_local_search.Assignment):
     # problems viewing or editing older assignments:
     remote_site_search_rss_url = ''
     rss_timeout = RSS_TIMEOUT
-    
+
     def __init__(self,
                  dtitle='',
                  results_number=5,
@@ -107,7 +107,12 @@ class Renderer(portlet_local_search.Renderer):
         query = self.request.get('SearchableText', '')
         query = quote_plus(query)
         if self.data.remote_site_search_url:
-            return self.data.remote_site_search_url % query
+            try:
+                return self.data.remote_site_search_url % query
+            except TypeError:
+                logger.warn(
+                    'Cannot insert query in remote_site_search_url %s',
+                    self.data.remote_site_search_url)
 
         return '%s/search?SearchableText=%s' % (
             self.data.remote_site_url, query)
@@ -119,7 +124,12 @@ class Renderer(portlet_local_search.Renderer):
         query = quote_plus(query)
 
         if self.data.remote_site_search_rss_url:
-            return self.data.remote_site_search_rss_url % query
+            try:
+                return self.data.remote_site_search_rss_url % query
+            except TypeError:
+                logger.warn(
+                    'Cannot insert query in remote_site_search_rss_url %s',
+                    self.data.remote_site_search_rss_url)
 
         return '%s/search_rss?SearchableText=%s' % (
             self.data.remote_site_url, query)

@@ -168,12 +168,12 @@ class Renderer(portlet_local_search.Renderer):
         try:
             timeout = getattr(self.data, "rss_timeout", RSS_TIMEOUT)
             rss = opener.open(request, timeout=timeout).read()
-        except socket.timeout, e:
+        except socket.timeout as e:
             # only works in Python 2.7
             logger.info('RSS feed timeout after %s seconds: %s' %
                         (timeout, search_url))
             return []
-        except urllib2.URLError, e:
+        except urllib2.URLError as e:
             # works for Python 2.6
             if isinstance(e.reason, socket.timeout):
                 logger.info('RSS feed timeout after %s seconds: %s' %

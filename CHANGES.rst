@@ -4,6 +4,10 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Bring search results page more in line with Plone 4.3 html/css. Default 
+  view should already be reasonable.
+  [fredvd]
+
 - Add viewlets.xml ordering that hides the default plone.searchbox viewlet and
   adds the collective.multisearch widget on the same location (no upgrade step
   on purpose, installed base should be fine and already have catered for this)

@@ -12,7 +12,14 @@
       description="Installs the collective.multisearch package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  <!-- -*- extra stuff goes here -*- -->
+
+  <gs:registerProfile
+      name="uninstall"
+      title="uninstall collective.multisearch"
+      directory="profiles/uninstall"
+      description="Uninstalls the collective.multisearch package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
 
   <gs:upgradeStep
       title="Add 'show description' field to portlets"

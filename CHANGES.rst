@@ -4,6 +4,9 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Add uninstall profile. Doesn't remove portlet assignments yet.
+  [fredvd]
+
 - Bring search results page more in line with Plone 4.3 html/css. Default 
   view should already be reasonable.
   [fredvd]

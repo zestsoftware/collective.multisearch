@@ -4,6 +4,11 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Add verify_ssl option to remote search portlet to disable ssl certificate
+  validation when you have to query a 'secure' internal site over firewalls
+  that ruin the certificate chain.
+  [fredvd]
+
 - Give validation error when inputting a search url without ``%s``.
   [maurits]
 

@@ -174,7 +174,8 @@ class Renderer(portlet_local_search.Renderer):
         # turn of ssl certificate checking if explicitly turned off in the
         # portlet settings: http://stackoverflow.com/questions/19268548
 
-        if not self.verify_ssl:
+        verify_ssl = getattr(self.data, "verify_ssl", True)
+        if not verify_ssl:
             ctx = ssl.create_default_context()
             ctx.check_hostname = False
             ctx.verify_mode = ssl.CERT_NONE

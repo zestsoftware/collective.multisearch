@@ -12,3 +12,6 @@ eggs
 local.cfg
 parts
 var
+.Python
+lib
+include

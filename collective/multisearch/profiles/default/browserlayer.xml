@@ -1,0 +1,6 @@
+<layers>
+    <layer
+        name="collective.multisearch"
+         interface="collective.multisearch.interfaces.IAddOnInstalled"
+         />
+</layers>

@@ -43,6 +43,7 @@
         name="multisearch.searchbox"
         manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
         class=".search_viewlet.SearchBoxViewlet"
+        layer="..interfaces.IAddOnInstalled"
         permission="zope2.View"
         />
 
@@ -52,6 +53,16 @@
         name="manage-multisearch"
         template="templates/manage-multisearch.pt"
         permission="plone.app.portlets.ManagePortlets"
+        layer="..interfaces.IAddOnInstalled"
+        />
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+        class=".search.MultiSearchView"
+        name="multisearch"
+        template="templates/multisearch.pt"
+        permission="zope2.View"
+        layer="..interfaces.IAddOnInstalled"
         />
 
     <browser:resource

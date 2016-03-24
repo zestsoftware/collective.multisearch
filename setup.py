@@ -27,7 +27,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
-        'five.grok',
         'feedparser',
     ],
     extras_require={

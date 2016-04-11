@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.0.4 (unreleased)
-------------------
+1.1 (2016-04-11)
+----------------
 
 - Add uninstall profile. Doesn't remove portlet assignments yet.
   [fredvd]

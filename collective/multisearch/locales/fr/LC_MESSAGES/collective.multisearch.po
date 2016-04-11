@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.multisearch 1.0\n"
-"POT-Creation-Date: 2013-11-20 21:27+0000\n"
+"POT-Creation-Date: 2016-04-11 12:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,16 @@ msgstr ""
 msgid "Allow RSS subscription"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:54
+#: ./browser/portlet_local_search.py:55
 msgid "Assign the portlet to a fixed column. Otherwise multisearch will try to balance the result portlets to fill up the page the portlet is assigned to a particular column"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:53
+#: ./browser/portlet_local_search.py:54
 msgid "Column where the portlet is rendered"
+msgstr ""
+
+#: ./browser/portlet_remote_search.py:90
+msgid "For https request: should we verify the certificates? Only disable this if you know what you are doing."
 msgstr ""
 
 #: ./browser/portlet_local_search.py:36
@@ -34,11 +38,15 @@ msgstr ""
 msgid "If selected, show an RSS icon in the title"
 msgstr ""
 
-#: ./browser/manager.py:111
+#: ./profiles.zcml:14
+msgid "Installs the collective.multisearch package"
+msgstr ""
+
+#: ./browser/manager.py:114
 msgid "Invalid value for column number"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:84
+#: ./browser/portlet_local_search.py:85
 msgid "Local results"
 msgstr "Résultats locaux"
 
@@ -58,31 +66,35 @@ msgstr ""
 msgid "Number of results displayed"
 msgstr "Nombre de résultats affichés"
 
-#: ./browser/portlet_remote_search.py:65
+#: ./browser/portlet_remote_search.py:81
 msgid "Number of seconds before we timeout the remote search request."
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:22
+#: ./browser/portlet_remote_search.py:24
 msgid "Please enter a timeout between 1 and 60 seconds."
 msgstr ""
 
-#: ./browser/manager.py:106
+#: ./browser/portlet_remote_search.py:36
+msgid "Please enter a url with '%s' in it."
+msgstr ""
+
+#: ./browser/manager.py:109
 msgid "Properties updated"
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:35
+#: ./browser/portlet_remote_search.py:48
 msgid "Remote site URL"
 msgstr "Adresse du site"
 
-#: ./browser/portlet_remote_search.py:41
+#: ./browser/portlet_remote_search.py:54
 msgid "Remote site search page"
 msgstr "Résultats de recherche sur un site distant"
 
-#: ./browser/portlet_remote_search.py:52
+#: ./browser/portlet_remote_search.py:66
 msgid "Remote site search rss feed"
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:64
+#: ./browser/portlet_remote_search.py:80
 msgid "Request timeout"
 msgstr ""
 
@@ -94,7 +106,7 @@ msgstr ""
 msgid "Show link for more results"
 msgstr "Afficher le lien 'plus de résultats'"
 
-#: ./browser/portlet_local_search.py:63
+#: ./browser/portlet_local_search.py:64
 msgid "Show portlet even if no results are returned."
 msgstr ""
 
@@ -102,7 +114,7 @@ msgstr ""
 msgid "Show result description"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:64
+#: ./browser/portlet_local_search.py:65
 msgid "The portlet shows a message that no results were found. Default behaviour is to remove the portlet from the page results"
 msgstr ""
 
@@ -114,16 +126,28 @@ msgstr "Titre de la portlet"
 msgid "Title shown in the header of the portlet"
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:36
+#: ./browser/portlet_remote_search.py:49
 msgid "URL of the site were the search is performed (http://www.example.com)"
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:53
+#: ./profiles.zcml:22
+msgid "Uninstalls the collective.multisearch package"
+msgstr ""
+
+#: ./browser/portlet_remote_search.py:89
+msgid "Verify https request certificates"
+msgstr ""
+
+#: ./browser/portlet_remote_search.py:67
 msgid "You can specify here a custom rss search feed. This will be used to fetch the search results. If left blank, it will use the address of the remote site and append '/search_rss?SearchableText=%s', so http://www.example.com/search_rss?SearchableText=%s with the previous example, which is good for a Plone site. Note the '%s' part where the searched text will be filled in."
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:42
+#: ./browser/portlet_remote_search.py:55
 msgid "You can specify here a custom search page. This will be used as link to extra results. If left blank, it will use the address of the remote site and append '/search?SearchableText=%s', so http://www.example.com/search?SearchableText=%s with the previous example, which is good for a Plone site. Note the '%s' part where the searched text will be filled in."
+msgstr ""
+
+#: ./profiles.zcml:14
+msgid "collective.multisearch"
 msgstr ""
 
 #. Default: "Number of columns in the search page"
@@ -132,8 +156,8 @@ msgid "label_column_count"
 msgstr ""
 
 #. Default: "Manage search portlets"
-#: ./browser/search_templates/multisearchview.pt:76
 #: ./browser/templates/manage-multisearch.pt:17
+#: ./browser/templates/multisearch.pt:81
 msgid "label_manage_multisearch"
 msgstr "Gérer les portlets de recherche"
 
@@ -147,3 +171,6 @@ msgstr "Voir plus de résultats"
 msgid "label_no_results"
 msgstr "Désolé, aucun résultat trouvé"
 
+#: ./profiles.zcml:22
+msgid "uninstall collective.multisearch"
+msgstr ""

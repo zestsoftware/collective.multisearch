@@ -9,40 +9,14 @@
   <!-- Include packages for permissions. -->
   <include package="Products.CMFCore" />
   <include package="plone.app.portlets" />
-  <!-- Include five.grok so we can grok our package. -->
-  <include package="five.grok" />
   <five:registerPackage package="." initialize=".initialize" />
   <i18n:registerTranslations directory="locales" />
   <include package=".browser" />
-
-  <grok:grok package="." />
-
-  <genericsetup:registerProfile
-      name="default"
-      title="collective.multisearch"
-      directory="profiles/default"
-      description="Installs the collective.multisearch package"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
-  <!-- -*- extra stuff goes here -*- -->
-
-  <genericsetup:upgradeStep
-      title="Add 'show description' field to portlets"
-      description=""
-      source="1000"
-      destination="1001"
-      handler="collective.multisearch.migrations.add_show_description_field"
-      profile="collective.multisearch:default" />
-
-  <genericsetup:upgradeStep
-      title="Add 'allow_rss_subscription' field to portlets"
-      description=""
-      source="1001"
-      destination="1002"
-      handler="collective.multisearch.migrations.add_allow_subscription_field"
-      profile="collective.multisearch:default" />
+  <include file="profiles.zcml" />
 
   <subscriber handler=".events.dispatchToComponent" />
   <subscriber handler=".events.registerPortletManagerRenderer" />
   <subscriber handler=".events.unregisterPortletManagerRenderer" />
+
+  
 </configure>

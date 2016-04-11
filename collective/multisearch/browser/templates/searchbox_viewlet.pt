@@ -4,7 +4,7 @@
                  search_input_id view/search_input_id;">
 
     <form name="searchform" id="searchGadget_form"
-          action="@@search"
+          action="@@multisearch"
           tal:attributes="action string:${navigation_root_url}/@@multisearch;
                           id string:${search_input_id}_form;">
 
@@ -53,7 +53,7 @@
     <div id="portal-advanced-search"
          class="hiddenStructure">
         <a href="#"
-           tal:attributes="href string:${navigation_root_url}/@@search"
+           tal:attributes="href string:${navigation_root_url}/@@multisearch"
            i18n:translate="label_advanced_search"
            accesskey="5">
             Advanced Search&hellip;

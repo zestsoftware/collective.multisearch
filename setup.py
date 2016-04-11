@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.0.4.dev0'
+version = '1.1.dev1'
 
 setup(
     name='collective.multisearch',
@@ -27,7 +27,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
-        'five.grok',
         'feedparser',
     ],
     extras_require={

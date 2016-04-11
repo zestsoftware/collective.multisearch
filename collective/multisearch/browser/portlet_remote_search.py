@@ -6,6 +6,8 @@ import socket
 import urllib2
 from urllib import quote_plus
 
+import ssl
+
 from plone.app.portlets.portlets import base
 from zope import schema
 from zope.formlib import form
@@ -71,7 +73,8 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
             "previous example, which is good for a Plone site. Note the '%s' "
             "part where the searched text will be filled in."),
         constraint=isValidSearchUrl,
-        required=False)
+        required=False
+    )
 
     rss_timeout = schema.Int(
         title=_(u'Request timeout'),
@@ -79,16 +82,25 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
             u'Number of seconds before we timeout the remote search request.'),
         required=True,
         default=RSS_TIMEOUT,
-        constraint=isValidTimeout)
+        constraint=isValidTimeout
+    )
 
+    verify_ssl = schema.Bool(
+        title=_(u'Verify https request certificates'),
+        description=_(
+            u'For https request: should we verify the certificates? Only disable '
+            u'this if you know what you are doing.'),
+        required=True,
+        default=True
+    )
 
 class Assignment(portlet_local_search.Assignment):
     implements(IRemoteSearchPortlet)
 
-    # These fields were added in 1.0.2.  Specifying a default here avoids
-    # problems viewing or editing older assignments:
+    # Specifying a default here avoids problems viewing or editing older assignments:
     remote_site_search_rss_url = ''
     rss_timeout = RSS_TIMEOUT
+    verify_ssl = True
 
     def __init__(self,
                  dtitle='',
@@ -101,6 +113,7 @@ class Assignment(portlet_local_search.Assignment):
                  remote_site_url='',
                  remote_site_search_url='',
                  remote_site_search_rss_url='',
+                 verify_ssl=True,
                  rss_timeout=RSS_TIMEOUT):
 
         if not dtitle:
@@ -111,7 +124,7 @@ class Assignment(portlet_local_search.Assignment):
         self.remote_site_url = remote_site_url
         self.remote_site_search_url = remote_site_search_url
         self.remote_site_search_rss_url = remote_site_search_rss_url
-
+        self.verify_ssl = verify_ssl
 
 class Renderer(portlet_local_search.Renderer):
 
@@ -157,7 +170,18 @@ class Renderer(portlet_local_search.Renderer):
         search_url = self.rss_link()
         if not search_url:
             return []
-        opener = urllib2.build_opener()
+
+        # turn of ssl certificate checking if explicitly turned off in the
+        # portlet settings: http://stackoverflow.com/questions/19268548
+
+        verify_ssl = getattr(self.data, "verify_ssl", True)
+        if not verify_ssl:
+            ctx = ssl.create_default_context()
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+            opener = urllib2.build_opener(urllib2.HTTPSHandler(context=ctx))
+        else:
+            opener = urllib2.build_opener()
         request = urllib2.Request(search_url)
         # According to the 'curl' manual, some badly done CGIs fail if
         # the User-Agent field isn't set to "Mozilla/4.0".  I

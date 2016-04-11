@@ -4,6 +4,33 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Add uninstall profile. Doesn't remove portlet assignments yet.
+  [fredvd]
+
+- Bring search results page more in line with Plone 4.3 html/css. Default 
+  view should already be reasonable.
+  [fredvd]
+
+- Add viewlets.xml ordering that hides the default plone.searchbox viewlet and
+  adds the collective.multisearch widget on the same location (no upgrade step
+  on purpose, installed base should be fine and already have catered for this)
+  [fredvd]
+
+- Add browserlayer for add'on installed and register the viewlets/views on this
+  specific layer so we don't pollute the site when nothing is installed.
+  [fredvd]
+
+- Always disable liveview on multisearch viewlet.
+  [fredvd]
+
+- Remove dependency on five.grok.
+  [fredvd]
+
+- Add verify_ssl option to remote search portlet to disable ssl certificate
+  validation when you have to query a 'secure' internal site over firewalls
+  that ruin the certificate chain.
+  [fredvd]
+
 - Give validation error when inputting a search url without ``%s``.
   [maurits]
 
@@ -12,7 +39,8 @@ Changelog
   ``remote_site_search_rss_url`` does not contain a ``%s``.
   [maurits]
 
-- Added PloneTestCase to test requirements.  [maurits]
+- Added PloneTestCase to test requirements.
+  [maurits]
 
 
 1.0.3 (2013-11-21)

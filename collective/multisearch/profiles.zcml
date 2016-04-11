@@ -1,0 +1,55 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.multisearch">
+
+  <gs:registerProfile
+      name="default"
+      title="collective.multisearch"
+      directory="profiles/default"
+      description="Installs the collective.multisearch package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <gs:registerProfile
+      name="uninstall"
+      title="uninstall collective.multisearch"
+      directory="profiles/uninstall"
+      description="Uninstalls the collective.multisearch package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <gs:upgradeStep
+      title="Add 'show description' field to portlets"
+      description=""
+      source="1000"
+      destination="1001"
+      handler="collective.multisearch.migrations.add_show_description_field"
+      profile="collective.multisearch:default" />
+
+  <gs:upgradeStep
+      title="Add 'allow_rss_subscription' field to portlets"
+      description=""
+      source="1001"
+      destination="1002"
+      handler="collective.multisearch.migrations.add_allow_subscription_field"
+      profile="collective.multisearch:default" />
+
+      <gs:upgradeSteps
+          source="1002"
+          destination="1003"
+          profile="collective.multisearch:default" >
+        <gs:upgradeStep
+            title="Add browserlayer"
+            description=""
+            handler="collective.multisearch.migrations.run_browserlayer_step" />
+        <gs:upgradeStep
+            title="Add verify_ssl field to search_portlet"
+            description=""
+            handler="collective.multisearch.migrations.add_verify_ssl_field" />
+      </gs:upgradeSteps>
+
+
+</configure>

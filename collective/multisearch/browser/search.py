@@ -1,6 +1,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
-from five import grok
+from Products.Five.browser import BrowserView
+
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletRetriever
@@ -13,10 +14,7 @@ from collective.multisearch.utils import assign_columns
 from collective.multisearch.utils import get_column_number
 
 
-class MultiSearchView(grok.View):
-    grok.context(IPloneSiteRoot)
-    grok.name('multisearch')
-    grok.require('zope2.View')
+class MultiSearchView(BrowserView):
 
     def can_manage_portlets(self):
         mtool = getToolByName(self.context, 'portal_membership')

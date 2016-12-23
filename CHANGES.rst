@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2 (unreleased)
+1.2 (2016-12-23)
 ----------------
 
 - Don't double urlquote the parameters in the link to more search results in

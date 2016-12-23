@@ -4,7 +4,9 @@ Changelog
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Don't double urlquote the parameters in the link to more search results in
+  the local search portlet. [fredvd]
+
 
 
 1.1 (2016-04-11)

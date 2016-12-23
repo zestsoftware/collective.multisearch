@@ -136,7 +136,6 @@ class Renderer(base.Renderer):
         # it is never needed to return an empty string like in the
         # rss_link method.
         query = self.request.get('SearchableText', '')
-        query = quote_plus(query)
         return '%s/search?SearchableText=%s' % (
             self.context.absolute_url(),
             quote_plus(query))
@@ -145,7 +144,6 @@ class Renderer(base.Renderer):
         query = self.request.get('SearchableText', None)
         if query is None:
             return ''
-        query = quote_plus(query)
         return '%s/search_rss?SearchableText=%s' % (
             self.context.absolute_url(),
             quote_plus(query))

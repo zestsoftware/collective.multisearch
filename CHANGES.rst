@@ -4,8 +4,8 @@ Changelog
 1.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Catch socket errors when requesting a remote search source. If we don't the
+  whole search results page fails with an error/traceback. [fredvd]
 
 1.2 (2016-12-23)
 ----------------

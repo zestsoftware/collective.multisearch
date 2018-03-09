@@ -205,6 +205,17 @@ class Renderer(portlet_local_search.Renderer):
                 return []
             logger.info('Unable to open RSS feed: %s' % search_url)
             return []
+        except socket.error as e:
+            if type(e) is tuple:
+                errmsg = e[1]
+            elif type(e) is str:
+                errmsg = e
+            else:
+                errmsg = "Uknonwn"
+                
+            logger.info('RSS feed socket error \'%s\' on url %s' % (errmsg, search_url))
+            return []
+
 
         data = feedparser.parse(rss)
         return [

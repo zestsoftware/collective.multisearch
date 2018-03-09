@@ -7,12 +7,12 @@ Changelog
 - Catch socket errors when requesting a remote search source. If we don't the
   whole search results page fails with an error/traceback. [fredvd]
 
+
 1.2 (2016-12-23)
 ----------------
 
 - Don't double urlquote the parameters in the link to more search results in
   the local search portlet. [fredvd]
-
 
 
 1.1 (2016-04-11)
@@ -21,7 +21,7 @@ Changelog
 - Add uninstall profile. Doesn't remove portlet assignments yet.
   [fredvd]
 
-- Bring search results page more in line with Plone 4.3 html/css. Default 
+- Bring search results page more in line with Plone 4.3 html/css. Default
   view should already be reasonable.
   [fredvd]
 

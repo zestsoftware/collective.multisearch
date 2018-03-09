@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.3 (unreleased)
+1.3 (2018-03-09)
 ----------------
 
 - Catch socket errors when requesting a remote search source. If we don't the

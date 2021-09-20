@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0.0 (unreleased)
-------------------
+2.0.0a1 (2021-09-20)
+--------------------
 
 - Updated to Plone 5.2 and Python 2/3.
   TODO: load css, and replace portal_properties use with registry.

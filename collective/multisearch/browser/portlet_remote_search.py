@@ -11,7 +11,7 @@ import ssl
 from plone.app.portlets.portlets import base
 from zope import schema
 from zope.formlib import form
-from zope.interface import implements
+from zope.interface import implementer
 
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.browser import portlet_local_search
@@ -94,8 +94,9 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
         default=True
     )
 
+
+@implementer(IRemoteSearchPortlet)
 class Assignment(portlet_local_search.Assignment):
-    implements(IRemoteSearchPortlet)
 
     # Specifying a default here avoids problems viewing or editing older assignments:
     remote_site_search_rss_url = ''
@@ -212,7 +213,7 @@ class Renderer(portlet_local_search.Renderer):
                 errmsg = e
             else:
                 errmsg = "Uknonwn"
-                
+
             logger.info('RSS feed socket error \'%s\' on url %s' % (errmsg, search_url))
             return []
 

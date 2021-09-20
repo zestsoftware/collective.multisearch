@@ -14,13 +14,11 @@ from plone.portlets.interfaces import ILocalPortletAssignable
 from plone.portlets.interfaces import IPortletManager
 from zope.annotation.interfaces import IAnnotations
 from zope.component import adapter
-from zope.component import adapts
 from zope.component import getMultiAdapter
 from zope.component import queryAdapter
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
 from zope.interface import implementer
-from zope.interface import implements
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 from collective.multisearch import MultiSearchMessageFactory as _
@@ -34,10 +32,10 @@ from collective.multisearch.utils import set_column_number
 from six.moves import range
 
 
+@adapter(Interface, IDefaultBrowserLayer,
+         IManageContextualPortletsView, IMultisearchPortletManager)
 class MultiSearchContextualEditPortletManagerRenderer(
         ContextualEditPortletManagerRenderer):
-    adapts(Interface, IDefaultBrowserLayer,
-           IManageContextualPortletsView, IMultisearchPortletManager)
     template = ViewPageTemplateFile('templates/edit-manager-contextual.pt')
 
     def get_column_number(self):
@@ -118,8 +116,9 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
         return self.index()
 
 
+@implementer(IMultiSearchPortletAssignmentMapping)
 class MultiSearchPortletAssignmentMapping(PortletAssignmentMapping):
-    implements(IMultiSearchPortletAssignmentMapping)
+    pass
 
 
 @adapter(ILocalPortletAssignable, IPortletManager)

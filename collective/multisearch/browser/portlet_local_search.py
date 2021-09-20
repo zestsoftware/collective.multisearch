@@ -6,7 +6,7 @@ from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
 from zope.formlib import form
-from zope.interface import implements
+from zope.interface import implementer
 from zope.schema.vocabulary import SimpleVocabulary
 
 from collective.multisearch import MultiSearchMessageFactory as _
@@ -71,8 +71,8 @@ class ILocalSearchPortlet(IPortletDataProvider):
     )
 
 
+@implementer(ILocalSearchPortlet)
 class Assignment(base.Assignment):
-    implements(ILocalSearchPortlet)
 
     def __init__(self,
                  dtitle='',

@@ -5,7 +5,6 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
-from zope.formlib import form
 from zope.interface import implementer
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -184,7 +183,7 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    form_fields = form.Fields(ILocalSearchPortlet)
+    schema = ILocalSearchPortlet
     label = "Add Local Search Portlet"
 
     def create(self, data):
@@ -192,5 +191,5 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    form_fields = form.Fields(ILocalSearchPortlet)
+    schema = ILocalSearchPortlet
     label = "Edit Local Search Portlet"

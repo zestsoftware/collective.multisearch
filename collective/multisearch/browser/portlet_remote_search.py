@@ -10,7 +10,6 @@ import ssl
 
 from plone.app.portlets.portlets import base
 from zope import schema
-from zope.formlib import form
 from zope.interface import implementer
 
 from collective.multisearch import MultiSearchMessageFactory as _
@@ -227,7 +226,7 @@ class Renderer(portlet_local_search.Renderer):
 
 
 class AddForm(base.AddForm):
-    form_fields = form.Fields(IRemoteSearchPortlet)
+    schema = IRemoteSearchPortlet
     label = "Add Remote Search Portlet"
 
     def create(self, data):
@@ -235,5 +234,5 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    form_fields = form.Fields(IRemoteSearchPortlet)
+    schema = IRemoteSearchPortlet
     label = "Edit Remote Search Portlet"

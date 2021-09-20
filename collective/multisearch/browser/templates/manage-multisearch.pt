@@ -4,12 +4,6 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="collective.multisearch">
-<head>
-    <div metal:fill-slot="javascript_head_slot" tal:omit-tag="">
-        <link type="text/css" rel="kinetic-stylesheet"
-            tal:attributes="href string:${context/absolute_url}/++resource++manage-portlets.kss"/>
-    </div>
-</head>
 <body>
   <metal:column_one fill-slot="column_one_slot" />
   <metal:column_one fill-slot="column_two_slot" />

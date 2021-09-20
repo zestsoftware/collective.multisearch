@@ -1,18 +1,18 @@
 # Local search portlet: customized for the multi_search view.
-from urllib import quote_plus
+from six.moves.urllib.parse import quote_plus
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
-from zope.formlib import form
-from zope.interface import implements
+from zope.interface import implementer
 from zope.schema.vocabulary import SimpleVocabulary
 
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.config import CHARACTERS_PER_LINE
 from collective.multisearch.config import COLUMN_COUNT
 from collective.multisearch.utils import make_excerpt
+from six.moves import range
 
 columnVocabulary = SimpleVocabulary.fromItems(
     [(_('No prefered column'), 0)] +
@@ -70,8 +70,8 @@ class ILocalSearchPortlet(IPortletDataProvider):
     )
 
 
+@implementer(ILocalSearchPortlet)
 class Assignment(base.Assignment):
-    implements(ILocalSearchPortlet)
 
     def __init__(self,
                  dtitle='',
@@ -183,7 +183,7 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    form_fields = form.Fields(ILocalSearchPortlet)
+    schema = ILocalSearchPortlet
     label = "Add Local Search Portlet"
 
     def create(self, data):
@@ -191,5 +191,5 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    form_fields = form.Fields(ILocalSearchPortlet)
+    schema = ILocalSearchPortlet
     label = "Edit Local Search Portlet"

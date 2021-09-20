@@ -12,15 +12,14 @@ from plone.portlets.constants import CONTEXT_ASSIGNMENT_KEY
 from plone.portlets.constants import CONTEXT_CATEGORY
 from plone.portlets.interfaces import ILocalPortletAssignable
 from plone.portlets.interfaces import IPortletManager
+from plone.protect.auto import safeWrite
 from zope.annotation.interfaces import IAnnotations
 from zope.component import adapter
-from zope.component import adapts
 from zope.component import getMultiAdapter
 from zope.component import queryAdapter
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
 from zope.interface import implementer
-from zope.interface import implements
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 from collective.multisearch import MultiSearchMessageFactory as _
@@ -31,17 +30,18 @@ from collective.multisearch.config import COLUMN_COUNT
 from collective.multisearch.config import DEFAULT_COLUMN
 from collective.multisearch.utils import get_column_number
 from collective.multisearch.utils import set_column_number
+from six.moves import range
 
 
+@adapter(Interface, IDefaultBrowserLayer,
+         IManageContextualPortletsView, IMultisearchPortletManager)
 class MultiSearchContextualEditPortletManagerRenderer(
         ContextualEditPortletManagerRenderer):
-    adapts(Interface, IDefaultBrowserLayer,
-           IManageContextualPortletsView, IMultisearchPortletManager)
     template = ViewPageTemplateFile('templates/edit-manager-contextual.pt')
 
     def get_column_number(self):
         return {'current': get_column_number(self.context),
-                'available': range(1, COLUMN_COUNT + 1)}
+                'available': list(range(1, COLUMN_COUNT + 1))}
 
     def addable_portlets(self):
         """ We can't do a normal 'super', so it's a copy/paste form the base class.
@@ -95,7 +95,7 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
     def getAssignmentsForManager(self, manager):
         assignments = getMultiAdapter((self.context, manager),
                                       IMultiSearchPortletAssignmentMapping)
-        return assignments.values()
+        return list(assignments.values())
 
     def __call__(self):
         if self.request.get('REQUEST_METHOD') != 'POST':
@@ -117,8 +117,9 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
         return self.index()
 
 
+@implementer(IMultiSearchPortletAssignmentMapping)
 class MultiSearchPortletAssignmentMapping(PortletAssignmentMapping):
-    implements(IMultiSearchPortletAssignmentMapping)
+    pass
 
 
 @adapter(ILocalPortletAssignable, IPortletManager)
@@ -135,11 +136,13 @@ def localPortletAssignmentMappingAdapter(context, manager):
     local = annotations.get(CONTEXT_ASSIGNMENT_KEY, None)
     if local is None:
         local = annotations[CONTEXT_ASSIGNMENT_KEY] = OOBTree()
+        # Prevent plone.protect phishing warning for new tree.
+        safeWrite(local)
     portlets = local.get(manager.__name__, None)
     if portlets is None or not IMultiSearchPortletAssignmentMapping.providedBy(
             portlets):
         if portlets is not None:
-            old_items = portlets.items()
+            old_items = list(portlets.items())
         else:
             old_items = []
         portlets = local[manager.__name__] = MultiSearchPortletAssignmentMapping(
@@ -148,5 +151,7 @@ def localPortletAssignmentMappingAdapter(context, manager):
         # Inline migration.  Might be good in an upgrade step.
         for key, value in old_items:
             portlets[key] = value
+        # Prevent plone.protect phishing warning for changed tree.
+        safeWrite(local)
 
     return portlets

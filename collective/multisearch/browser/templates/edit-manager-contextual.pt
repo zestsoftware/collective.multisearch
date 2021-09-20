@@ -3,11 +3,13 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       tal:omit-tag="">
-<div class="portlets-manager"
+<div class="portlets-manager pat-manage-portlets row"
      tal:attributes="id string:portletmanager-${view/normalized_manager_name};"
      i18n:domain="plone">
 
-  <div metal:use-macro="context/@@manage-portlets-macros/macros/portlet-add-form" />
+  <div class="container">
+    <div metal:use-macro="context/@@manage-portlets-macros/macros/portlet-add-form" />
+  </div>
 
   <div metal:use-macro="context/@@manage-portlets-macros/macros/current-portlets-list" />
   <p />

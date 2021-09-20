@@ -1,6 +1,6 @@
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets.portlets import search
-from zope.interface import implements
+from zope.interface import implementer
 
 from collective.multisearch import MultiSearchMessageFactory as _
 
@@ -9,8 +9,8 @@ class ISearchPortlet(search.ISearchPortlet):
     pass
 
 
+@implementer(ISearchPortlet)
 class Assignment(search.Assignment):
-    implements(ISearchPortlet)
 
     @property
     def title(self):

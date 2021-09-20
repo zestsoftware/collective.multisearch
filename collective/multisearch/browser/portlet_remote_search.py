@@ -3,15 +3,14 @@ import logging
 import feedparser
 import socket
 
-import urllib2
-from urllib import quote_plus
+import six.moves.urllib.request, six.moves.urllib.error, six.moves.urllib.parse
+from six.moves.urllib.parse import quote_plus
 
 import ssl
 
 from plone.app.portlets.portlets import base
 from zope import schema
-from zope.formlib import form
-from zope.interface import implements
+from zope.interface import implementer
 
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.browser import portlet_local_search
@@ -94,8 +93,9 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
         default=True
     )
 
+
+@implementer(IRemoteSearchPortlet)
 class Assignment(portlet_local_search.Assignment):
-    implements(IRemoteSearchPortlet)
 
     # Specifying a default here avoids problems viewing or editing older assignments:
     remote_site_search_rss_url = ''
@@ -179,10 +179,10 @@ class Renderer(portlet_local_search.Renderer):
             ctx = ssl.create_default_context()
             ctx.check_hostname = False
             ctx.verify_mode = ssl.CERT_NONE
-            opener = urllib2.build_opener(urllib2.HTTPSHandler(context=ctx))
+            opener = six.moves.urllib.request.build_opener(six.moves.urllib.request.HTTPSHandler(context=ctx))
         else:
-            opener = urllib2.build_opener()
-        request = urllib2.Request(search_url)
+            opener = six.moves.urllib.request.build_opener()
+        request = six.moves.urllib.request.Request(search_url)
         # According to the 'curl' manual, some badly done CGIs fail if
         # the User-Agent field isn't set to "Mozilla/4.0".  I
         # [Maurits] have seen this in practice in one case, so let's
@@ -197,7 +197,7 @@ class Renderer(portlet_local_search.Renderer):
             logger.info('RSS feed timeout after %s seconds: %s' %
                         (timeout, search_url))
             return []
-        except urllib2.URLError as e:
+        except six.moves.urllib.error.URLError as e:
             # works for Python 2.6
             if isinstance(e.reason, socket.timeout):
                 logger.info('RSS feed timeout after %s seconds: %s' %
@@ -212,7 +212,7 @@ class Renderer(portlet_local_search.Renderer):
                 errmsg = e
             else:
                 errmsg = "Uknonwn"
-                
+
             logger.info('RSS feed socket error \'%s\' on url %s' % (errmsg, search_url))
             return []
 
@@ -226,7 +226,7 @@ class Renderer(portlet_local_search.Renderer):
 
 
 class AddForm(base.AddForm):
-    form_fields = form.Fields(IRemoteSearchPortlet)
+    schema = IRemoteSearchPortlet
     label = "Add Remote Search Portlet"
 
     def create(self, data):
@@ -234,5 +234,5 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    form_fields = form.Fields(IRemoteSearchPortlet)
+    schema = IRemoteSearchPortlet
     label = "Edit Remote Search Portlet"

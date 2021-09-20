@@ -31,6 +31,7 @@ from collective.multisearch.config import COLUMN_COUNT
 from collective.multisearch.config import DEFAULT_COLUMN
 from collective.multisearch.utils import get_column_number
 from collective.multisearch.utils import set_column_number
+from six.moves import range
 
 
 class MultiSearchContextualEditPortletManagerRenderer(
@@ -41,7 +42,7 @@ class MultiSearchContextualEditPortletManagerRenderer(
 
     def get_column_number(self):
         return {'current': get_column_number(self.context),
-                'available': range(1, COLUMN_COUNT + 1)}
+                'available': list(range(1, COLUMN_COUNT + 1))}
 
     def addable_portlets(self):
         """ We can't do a normal 'super', so it's a copy/paste form the base class.
@@ -95,7 +96,7 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
     def getAssignmentsForManager(self, manager):
         assignments = getMultiAdapter((self.context, manager),
                                       IMultiSearchPortletAssignmentMapping)
-        return assignments.values()
+        return list(assignments.values())
 
     def __call__(self):
         if self.request.get('REQUEST_METHOD') != 'POST':
@@ -139,7 +140,7 @@ def localPortletAssignmentMappingAdapter(context, manager):
     if portlets is None or not IMultiSearchPortletAssignmentMapping.providedBy(
             portlets):
         if portlets is not None:
-            old_items = portlets.items()
+            old_items = list(portlets.items())
         else:
             old_items = []
         portlets = local[manager.__name__] = MultiSearchPortletAssignmentMapping(

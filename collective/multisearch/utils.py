@@ -1,6 +1,7 @@
 from Products.CMFCore.utils import getToolByName
 
 from collective.multisearch.config import DEFAULT_COLUMN
+from six.moves import range
 
 
 def get_ms_props(context):
@@ -10,7 +11,7 @@ def get_ms_props(context):
     if pprops is None:
         return DEFAULT_COLUMN
 
-    if 'multisearch_properties' not in pprops.keys():
+    if 'multisearch_properties' not in list(pprops.keys()):
         pprops.addPropertySheet('multisearch_properties')
 
     return pprops.get('multisearch_properties')
@@ -183,7 +184,7 @@ def assign_columns(portlets, column_count):
              for index in columns.keys() if index])
 
         for portlet, p_size in unplaced:
-            col_index = sorted(sizes.items(),
+            col_index = sorted(list(sizes.items()),
                                key=lambda x: x[1])[0][0]
 
             columns[col_index].append(portlet)

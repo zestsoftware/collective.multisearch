@@ -1,5 +1,5 @@
 # Local search portlet: customized for the multi_search view.
-from urllib import quote_plus
+from six.moves.urllib.parse import quote_plus
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets.portlets import base
@@ -13,6 +13,7 @@ from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.config import CHARACTERS_PER_LINE
 from collective.multisearch.config import COLUMN_COUNT
 from collective.multisearch.utils import make_excerpt
+from six.moves import range
 
 columnVocabulary = SimpleVocabulary.fromItems(
     [(_('No prefered column'), 0)] +

@@ -12,6 +12,7 @@ from plone.portlets.constants import CONTEXT_ASSIGNMENT_KEY
 from plone.portlets.constants import CONTEXT_CATEGORY
 from plone.portlets.interfaces import ILocalPortletAssignable
 from plone.portlets.interfaces import IPortletManager
+from plone.protect.auto import safeWrite
 from zope.annotation.interfaces import IAnnotations
 from zope.component import adapter
 from zope.component import getMultiAdapter
@@ -135,6 +136,8 @@ def localPortletAssignmentMappingAdapter(context, manager):
     local = annotations.get(CONTEXT_ASSIGNMENT_KEY, None)
     if local is None:
         local = annotations[CONTEXT_ASSIGNMENT_KEY] = OOBTree()
+        # Prevent plone.protect phishing warning for new tree.
+        safeWrite(local)
     portlets = local.get(manager.__name__, None)
     if portlets is None or not IMultiSearchPortletAssignmentMapping.providedBy(
             portlets):
@@ -148,5 +151,7 @@ def localPortletAssignmentMappingAdapter(context, manager):
         # Inline migration.  Might be good in an upgrade step.
         for key, value in old_items:
             portlets[key] = value
+        # Prevent plone.protect phishing warning for changed tree.
+        safeWrite(local)
 
     return portlets

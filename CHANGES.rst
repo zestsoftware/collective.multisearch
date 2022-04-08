@@ -4,7 +4,7 @@ Changelog
 2.0.0a2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Fixed zope.component ImportErrors in Plone 6.  [maurits]
 
 
 2.0.0a1 (2021-09-20)

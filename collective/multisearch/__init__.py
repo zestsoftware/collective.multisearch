@@ -1,5 +1,6 @@
 from zope.i18nmessageid import MessageFactory
 
+
 MultiSearchMessageFactory = MessageFactory(u'collective.multisearch')
 
 

@@ -1,8 +1,7 @@
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone.app.portlets.portlets import search
-from zope.interface import implementer
-
 from collective.multisearch import MultiSearchMessageFactory as _
+from plone.app.portlets.portlets import search
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.interface import implementer
 
 
 class ISearchPortlet(search.ISearchPortlet):

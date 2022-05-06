@@ -1,20 +1,21 @@
 # Remote search portlet
-import logging
-import feedparser
-import socket
-
-import six.moves.urllib.request, six.moves.urllib.error, six.moves.urllib.parse
-from six.moves.urllib.parse import quote_plus
-
-import ssl
-
-from plone.app.portlets.portlets import base
-from zope import schema
-from zope.interface import implementer
-
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.browser import portlet_local_search
 from collective.multisearch.config import RSS_TIMEOUT
+from plone.app.portlets.portlets import base
+from six.moves.urllib.parse import quote_plus
+from zope import schema
+from zope.interface import implementer
+
+import feedparser
+import logging
+import six.moves.urllib.error
+import six.moves.urllib.parse
+import six.moves.urllib.request
+import socket
+import ssl
+
+
 logger = logging.getLogger(
     'collective.multisearch.browser.portlet_remote_search')
 

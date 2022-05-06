@@ -2,8 +2,16 @@
 
 from AccessControl import Unauthorized
 from BTrees.OOBTree import OOBTree
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.statusmessages.interfaces import IStatusMessage
+from collective.multisearch import MultiSearchMessageFactory as _
+from collective.multisearch.browser.interfaces import (
+    IMultiSearchPortletAssignmentMapping,
+)
+from collective.multisearch.browser.interfaces import IMultisearchPortletManager
+from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
+from collective.multisearch.config import COLUMN_COUNT
+from collective.multisearch.config import DEFAULT_COLUMN
+from collective.multisearch.utils import get_column_number
+from collective.multisearch.utils import set_column_number
 from plone.app.portlets.browser.editmanager import ContextualEditPortletManagerRenderer
 from plone.app.portlets.browser.interfaces import IManageContextualPortletsView
 from plone.app.portlets.browser.manage import ManageContextualPortlets
@@ -13,24 +21,17 @@ from plone.portlets.constants import CONTEXT_CATEGORY
 from plone.portlets.interfaces import ILocalPortletAssignable
 from plone.portlets.interfaces import IPortletManager
 from plone.protect.auto import safeWrite
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.statusmessages.interfaces import IStatusMessage
+from six.moves import range
 from zope.annotation.interfaces import IAnnotations
 from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.component import queryAdapter
 from zope.component import queryMultiAdapter
-from zope.interface import Interface
 from zope.interface import implementer
+from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
-
-from collective.multisearch import MultiSearchMessageFactory as _
-from collective.multisearch.browser.interfaces import IMultiSearchPortletAssignmentMapping
-from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
-from collective.multisearch.browser.interfaces import IMultisearchPortletManager
-from collective.multisearch.config import COLUMN_COUNT
-from collective.multisearch.config import DEFAULT_COLUMN
-from collective.multisearch.utils import get_column_number
-from collective.multisearch.utils import set_column_number
-from six.moves import range
 
 
 @adapter(Interface, IDefaultBrowserLayer,

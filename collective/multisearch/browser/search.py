@@ -1,17 +1,15 @@
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
-from Products.Five.browser import BrowserView
-
-from plone.portlets.interfaces import IPortletManager
-from plone.portlets.interfaces import IPortletRenderer
-from plone.portlets.interfaces import IPortletRetriever
-from zope.component import getMultiAdapter
-from zope.component import getUtility
-from zope.component import queryMultiAdapter
-
 from collective.multisearch.config import CHARACTERS_PER_LINE
 from collective.multisearch.utils import assign_columns
 from collective.multisearch.utils import get_column_number
+from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import IPortletRenderer
+from plone.portlets.interfaces import IPortletRetriever
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
+from Products.Five.browser import BrowserView
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.component import queryMultiAdapter
 
 
 class MultiSearchView(BrowserView):

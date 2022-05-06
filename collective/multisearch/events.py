@@ -1,18 +1,17 @@
 # More or less a copy/paste of plone.portlets.events except we use our
 # custom interface for the PortletManagerRenderer.
 
+from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
 from plone.portlets.interfaces import IPortletManager
 from zope.component import adapter
 from zope.component import subscribers
+from zope.interface import Interface
 from zope.interface.interfaces import IRegistered
 from zope.interface.interfaces import IRegistrationEvent
 from zope.interface.interfaces import IUnregistered
 from zope.interface.interfaces import IUtilityRegistration
-from zope.interface import Interface
 from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.publisher.interfaces.browser import IBrowserView
-
-from collective.multisearch.browser.interfaces import IMultiSearchPortletManagerRenderer
 
 
 @adapter(IUtilityRegistration, IRegistrationEvent)

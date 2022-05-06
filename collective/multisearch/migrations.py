@@ -1,10 +1,10 @@
-import logging
-
-from zope.component import getUtility
-from zope.component import getMultiAdapter
-
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRetriever
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+
+import logging
+
 
 PROFILE_ID = 'profile-collective.multisearch:default'
 

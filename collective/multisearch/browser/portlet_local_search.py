@@ -1,18 +1,17 @@
 # Local search portlet: customized for the multi_search view.
-from six.moves.urllib.parse import quote_plus
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone.app.portlets.portlets import base
-from plone.portlets.interfaces import IPortletDataProvider
-from zope import schema
-from zope.interface import implementer
-from zope.schema.vocabulary import SimpleVocabulary
-
 from collective.multisearch import MultiSearchMessageFactory as _
 from collective.multisearch.config import CHARACTERS_PER_LINE
 from collective.multisearch.config import COLUMN_COUNT
 from collective.multisearch.utils import make_excerpt
+from plone.app.portlets.portlets import base
+from plone.portlets.interfaces import IPortletDataProvider
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from six.moves import range
+from six.moves.urllib.parse import quote_plus
+from zope import schema
+from zope.interface import implementer
+from zope.schema.vocabulary import SimpleVocabulary
+
 
 columnVocabulary = SimpleVocabulary.fromItems(
     [(_('No prefered column'), 0)] +

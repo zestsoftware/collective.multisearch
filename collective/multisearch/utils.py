@@ -1,6 +1,5 @@
-from Products.CMFCore.utils import getToolByName
-
 from collective.multisearch.config import DEFAULT_COLUMN
+from Products.CMFCore.utils import getToolByName
 from six.moves import range
 
 

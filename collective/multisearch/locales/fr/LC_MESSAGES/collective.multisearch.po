@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.multisearch 1.0\n"
-"POT-Creation-Date: 2016-04-11 12:06+0000\n"
+"POT-Creation-Date: 2022-05-06 16:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,27 +14,27 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.multisearch\n"
 
-#: ./browser/portlet_local_search.py:41
+#: ./browser/portlet_local_search.py:43
 msgid "Allow RSS subscription"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:55
+#: ./browser/portlet_local_search.py:58
 msgid "Assign the portlet to a fixed column. Otherwise multisearch will try to balance the result portlets to fill up the page the portlet is assigned to a particular column"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:54
+#: ./browser/portlet_local_search.py:57
 msgid "Column where the portlet is rendered"
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:90
+#: ./browser/portlet_remote_search.py:93
 msgid "For https request: should we verify the certificates? Only disable this if you know what you are doing."
 msgstr ""
 
-#: ./browser/portlet_local_search.py:36
+#: ./browser/portlet_local_search.py:37
 msgid "If selected, show a excerpt of the description"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:42
+#: ./browser/portlet_local_search.py:44
 msgid "If selected, show an RSS icon in the title"
 msgstr ""
 
@@ -42,11 +42,11 @@ msgstr ""
 msgid "Installs the collective.multisearch package"
 msgstr ""
 
-#: ./browser/manager.py:114
+#: ./browser/manager.py:132
 msgid "Invalid value for column number"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:85
+#: ./browser/portlet_local_search.py:93
 msgid "Local results"
 msgstr "Résultats locaux"
 
@@ -54,79 +54,87 @@ msgstr "Résultats locaux"
 msgid "Maximum number of results displayed"
 msgstr ""
 
-#: ./browser/search_portlet.py:17
+#: ./browser/search_portlet.py:15
 msgid "MultiSearch"
 msgstr "Recherche multiple"
 
-#: ./browser/portlet_local_search.py:18
+#: ./browser/portlet_local_search.py:17
 msgid "No prefered column"
+msgstr ""
+
+#: ./interfaces.py:14
+msgid "Number of columns"
+msgstr ""
+
+#: ./interfaces.py:15
+msgid "Number of columns shown on the multisearch page."
 msgstr ""
 
 #: ./browser/portlet_local_search.py:29
 msgid "Number of results displayed"
 msgstr "Nombre de résultats affichés"
 
-#: ./browser/portlet_remote_search.py:81
+#: ./browser/portlet_remote_search.py:83
 msgid "Number of seconds before we timeout the remote search request."
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:24
+#: ./browser/portlet_remote_search.py:22
 msgid "Please enter a timeout between 1 and 60 seconds."
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:36
+#: ./browser/portlet_remote_search.py:33
 msgid "Please enter a url with '%s' in it."
 msgstr ""
 
-#: ./browser/manager.py:109
+#: ./browser/manager.py:127
 msgid "Properties updated"
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:48
+#: ./browser/portlet_remote_search.py:45
 msgid "Remote site URL"
 msgstr "Adresse du site"
 
-#: ./browser/portlet_remote_search.py:54
+#: ./browser/portlet_remote_search.py:53
 msgid "Remote site search page"
 msgstr "Résultats de recherche sur un site distant"
 
-#: ./browser/portlet_remote_search.py:66
+#: ./browser/portlet_remote_search.py:67
 msgid "Remote site search rss feed"
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:80
+#: ./browser/portlet_remote_search.py:82
 msgid "Request timeout"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:48
+#: ./browser/portlet_local_search.py:51
 msgid "Show a link in the portlet footer to show more results"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:47
+#: ./browser/portlet_local_search.py:50
 msgid "Show link for more results"
 msgstr "Afficher le lien 'plus de résultats'"
 
-#: ./browser/portlet_local_search.py:64
+#: ./browser/portlet_local_search.py:69
 msgid "Show portlet even if no results are returned."
 msgstr ""
 
-#: ./browser/portlet_local_search.py:35
+#: ./browser/portlet_local_search.py:36
 msgid "Show result description"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:65
+#: ./browser/portlet_local_search.py:70
 msgid "The portlet shows a message that no results were found. Default behaviour is to remove the portlet from the page results"
 msgstr ""
 
-#: ./browser/portlet_local_search.py:24
+#: ./browser/portlet_local_search.py:23
 msgid "Title for the portlet"
 msgstr "Titre de la portlet"
 
-#: ./browser/portlet_local_search.py:25
+#: ./browser/portlet_local_search.py:24
 msgid "Title shown in the header of the portlet"
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:49
+#: ./browser/portlet_remote_search.py:46
 msgid "URL of the site were the search is performed (http://www.example.com)"
 msgstr ""
 
@@ -134,15 +142,15 @@ msgstr ""
 msgid "Uninstalls the collective.multisearch package"
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:89
+#: ./browser/portlet_remote_search.py:92
 msgid "Verify https request certificates"
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:67
+#: ./browser/portlet_remote_search.py:68
 msgid "You can specify here a custom rss search feed. This will be used to fetch the search results. If left blank, it will use the address of the remote site and append '/search_rss?SearchableText=%s', so http://www.example.com/search_rss?SearchableText=%s with the previous example, which is good for a Plone site. Note the '%s' part where the searched text will be filled in."
 msgstr ""
 
-#: ./browser/portlet_remote_search.py:55
+#: ./browser/portlet_remote_search.py:54
 msgid "You can specify here a custom search page. This will be used as link to extra results. If left blank, it will use the address of the remote site and append '/search?SearchableText=%s', so http://www.example.com/search?SearchableText=%s with the previous example, which is good for a Plone site. Note the '%s' part where the searched text will be filled in."
 msgstr ""
 
@@ -151,12 +159,12 @@ msgid "collective.multisearch"
 msgstr ""
 
 #. Default: "Number of columns in the search page"
-#: ./browser/templates/edit-manager-contextual.pt:17
+#: ./browser/templates/edit-manager-contextual.pt:19
 msgid "label_column_count"
 msgstr ""
 
 #. Default: "Manage search portlets"
-#: ./browser/templates/manage-multisearch.pt:17
+#: ./browser/templates/manage-multisearch.pt:11
 #: ./browser/templates/multisearch.pt:81
 msgid "label_manage_multisearch"
 msgstr "Gérer les portlets de recherche"

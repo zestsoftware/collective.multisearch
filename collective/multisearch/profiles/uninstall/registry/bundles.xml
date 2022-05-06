@@ -2,7 +2,7 @@
 <registry>
 
   <records prefix="plone.bundles/collective.multisearch"
-           interface="plone.base.interfaces.IBundleRegistry"
+           interface="Products.CMFPlone.interfaces.IBundleRegistry"
            remove="true" />
 
 </registry>

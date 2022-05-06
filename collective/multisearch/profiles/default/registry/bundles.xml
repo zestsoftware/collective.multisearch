@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <registry>
 
-  <records prefix="plone.bundles/collective.multisearch" interface="plone.base.interfaces.IBundleRegistry">
+  <records prefix="plone.bundles/collective.multisearch" interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="enabled">True</value>
     <value key="jscompilation"></value>
     <value key="csscompilation">++plone++collective.multisearch/multisearch.css</value>

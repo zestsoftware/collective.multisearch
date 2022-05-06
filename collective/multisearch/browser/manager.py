@@ -47,7 +47,7 @@ class MultiSearchContextualEditPortletManagerRenderer(
 
     def get_column_number(self):
         return {
-            "current": get_column_number(self.context),
+            "current": get_column_number(),
             "available": list(range(1, COLUMN_COUNT + 1)),
         }
 
@@ -122,7 +122,7 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
 
         try:
             column_count = int(self.request.form.get("column_count", DEFAULT_COLUMN))
-            set_column_number(self.context, column_count)
+            set_column_number(column_count)
             IStatusMessage(self.request).addStatusMessage(
                 _("Properties updated"), "info"
             )

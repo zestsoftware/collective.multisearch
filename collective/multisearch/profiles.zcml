@@ -51,5 +51,17 @@
             handler="collective.multisearch.migrations.add_verify_ssl_field" />
       </gs:upgradeSteps>
 
+    <gs:upgradeSteps
+        source="1003"
+        destination="1004"
+        profile="collective.multisearch:default" >
+      <gs:upgradeDepends
+          title="Add settings in configuration registry"
+          import_steps="plone.app.registry" />
+      <gs:upgradeStep
+          title="Migrate site_properties to configuration registry"
+          handler=".migrations.migrate_to_configuration_registry" />
+    </gs:upgradeSteps>
+
 
 </configure>

@@ -1,30 +1,17 @@
-from collective.multisearch.config import DEFAULT_COLUMN
-from Products.CMFCore.utils import getToolByName
+from .config import DEFAULT_COLUMN
+from .interfaces import IMultisearchSettings
+from plone import api
 from six.moves import range
 
 
-def get_ms_props(context):
-    pprops = getToolByName(context, "portal_properties", None)
-    if pprops is None:
-        return DEFAULT_COLUMN
-
-    if "multisearch_properties" not in list(pprops.keys()):
-        pprops.addPropertySheet("multisearch_properties")
-
-    return pprops.get("multisearch_properties")
+def get_column_number():
+    return api.portal.get_registry_record(name="collective.multisearch.column_number")
 
 
-def get_column_number(context):
-    ms_props = get_ms_props(context)
-    if not ms_props.hasProperty("column_number"):
-        ms_props._setProperty("column_number", DEFAULT_COLUMN, "int")
-
-    return ms_props.column_number
-
-
-def set_column_number(context, value):
-    ms_props = get_ms_props(context)
-    ms_props._setPropValue("column_number", value)
+def set_column_number(value):
+    return api.portal.set_registry_record(
+        name="collective.multisearch.column_number", value=value
+    )
 
 
 def make_excerpt(text, max_length, ellipsis=None):

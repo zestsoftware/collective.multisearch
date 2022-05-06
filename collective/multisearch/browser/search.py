@@ -17,7 +17,7 @@ class MultiSearchView(BrowserView):
         return mtool.checkPermission("plone.app.portlets.ManagePortlets", self.context)
 
     def get_column_number(self):
-        return get_column_number(self.context)
+        return get_column_number()
 
     def get_portlets(self):
         manager = getUtility(
@@ -28,7 +28,7 @@ class MultiSearchView(BrowserView):
 
         retriever = getMultiAdapter((self.context, manager), IPortletRetriever)
 
-        columns_number = get_column_number(self.context)
+        columns_number = get_column_number()
         max_length = CHARACTERS_PER_LINE / columns_number
         portlets = []
 

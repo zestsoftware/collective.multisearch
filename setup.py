@@ -34,6 +34,7 @@ setup(
     install_requires=[
         "setuptools",
         "feedparser",
+        "plone.api",
     ],
     entry_points="""
     [z3c.autoinclude.plugin]

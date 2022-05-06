@@ -1,3 +1,5 @@
+from .utils import set_column_number
+from plone import api
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRetriever
 from zope.component import getMultiAdapter
@@ -52,3 +54,22 @@ def run_browserlayer_step(context):
 def add_verify_ssl_field(context):
     update_schemas(context, [("verify_ssl", True)])
     logger.info("Added verify_ssl field to search portlets")
+
+
+def migrate_to_configuration_registry(context):
+    # Move our settings from portal_properties to the registry.
+    try:
+        pprops = api.portal.get_tool("portal_properties")
+    except api.exc.InvalidParameterError:
+        return
+    sheet_name = "multisearch_properties"
+    if sheet_name not in list(pprops.keys()):
+        return
+    ms_props = pprops.get(sheet_name)
+    if not ms_props.hasProperty("column_number"):
+        return
+    old_value = ms_props.column_number
+    # This saves it to the registry:
+    set_column_number(old_value)
+    # Remove the old sheet.
+    pprops._delObject(sheet_name)

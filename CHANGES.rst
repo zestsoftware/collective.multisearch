@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.0a2 (unreleased)
+2.0.0a2 (2022-05-06)
 --------------------
 
 - Register a bundle in the resource registry instead of using portal_css.  [maurits]

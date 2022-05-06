@@ -216,7 +216,7 @@ class Renderer(portlet_local_search.Renderer):
             elif type(e) is str:
                 errmsg = e
             else:
-                errmsg = "Uknonwn"
+                errmsg = "Unknown"
 
             logger.info('RSS feed socket error \'%s\' on url %s' % (errmsg, search_url))
             return []

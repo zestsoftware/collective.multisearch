@@ -26,5 +26,5 @@ msgstr ""
 msgid "Multi search portlet"
 msgstr ""
 
-msgid "Search portlet (overriden to point to multisearch)"
+msgid "Search portlet (overridden to point to multisearch)"
 msgstr ""

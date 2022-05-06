@@ -23,5 +23,5 @@ msgstr "Recherche (pointe vers la page de recherche multiple)"
 msgid "Remote search results portlet"
 msgstr "Résultats de recherche distante"
 
-msgid "Search portlet (overriden to point to multisearch)"
+msgid "Search portlet (overridden to point to multisearch)"
 msgstr "Portlet de recherche pointant vers la page de recherche multiple"

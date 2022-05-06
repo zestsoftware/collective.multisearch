@@ -22,7 +22,7 @@
   <portlet
     addview="multisearch.SearchPortlet"
     title="Multi search portlet"
-    description="Search portlet (overriden to point to multisearch)">
+    description="Search portlet (overridden to point to multisearch)">
   </portlet>
 
 </portlets>

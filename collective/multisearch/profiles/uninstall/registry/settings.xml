@@ -1,0 +1,4 @@
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="plone">
+  <records interface="collective.multisearch.interfaces.IMultisearchSettings" prefix="collective.multisearch" remove="true" />
+</registry>

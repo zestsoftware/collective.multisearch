@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<portlets>
+  <portletmanager name="multisearch.MultisearchPortletManager" remove="true" />
+  <portlet addview="multisearch.RemoteSearchPortlet" remove="true" />
+  <portlet addview="multisearch.LocalSearchPortlet" remove="true" />
+  <portlet addview="multisearch.SearchPortlet" remove="true" />
+</portlets>

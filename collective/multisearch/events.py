@@ -32,7 +32,7 @@ def registerPortletManagerRenderer(manager, registration, event):
     the same as the name of the utility, which will also be the name of the
     adapter.
     """
-    if registration.name != 'multisearch.MultisearchPortletManager':
+    if registration.name != "multisearch.MultisearchPortletManager":
         return
 
     manager.__name__ = registration.name
@@ -50,7 +50,7 @@ def unregisterPortletManagerRenderer(manager, registration, event):
     """When a portlet manager is unregistered as a utility, unregister its
     IPortletManagerRenderer.
     """
-    if registration.name != 'multisearch.MultisearchPortletManager':
+    if registration.name != "multisearch.MultisearchPortletManager":
         return
 
     registry = registration.registry

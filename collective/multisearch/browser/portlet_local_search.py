@@ -14,63 +14,63 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 
 columnVocabulary = SimpleVocabulary.fromItems(
-    [(_('No prefered column'), 0)] + [(x + 1, x + 1) for x in range(0, COLUMN_COUNT)]
+    [(_("No prefered column"), 0)] + [(x + 1, x + 1) for x in range(0, COLUMN_COUNT)]
 )
 
 
 class ILocalSearchPortlet(IPortletDataProvider):
     dtitle = schema.TextLine(
-        title=_(u'Title for the portlet'),
-        description=_(u'Title shown in the header of the portlet'),
+        title=_(u"Title for the portlet"),
+        description=_(u"Title shown in the header of the portlet"),
         required=False,
     )
 
     results_number = schema.Int(
-        title=_(u'Number of results displayed'),
-        description=_(u'Maximum number of results displayed'),
+        title=_(u"Number of results displayed"),
+        description=_(u"Maximum number of results displayed"),
         required=True,
         default=5,
     )
 
     show_description = schema.Bool(
-        title=_(u'Show result description'),
-        description=_(u'If selected, show a excerpt of the description'),
+        title=_(u"Show result description"),
+        description=_(u"If selected, show a excerpt of the description"),
         default=False,
         required=False,
     )
 
     allow_rss_subscription = schema.Bool(
-        title=_(u'Allow RSS subscription'),
-        description=_(u'If selected, show an RSS icon in the title'),
+        title=_(u"Allow RSS subscription"),
+        description=_(u"If selected, show an RSS icon in the title"),
         default=True,
         required=False,
     )
 
     show_more_results = schema.Bool(
-        title=_(u'Show link for more results'),
-        description=_(u'Show a link in the portlet footer to show more results'),
+        title=_(u"Show link for more results"),
+        description=_(u"Show a link in the portlet footer to show more results"),
         default=True,
         required=False,
     )
 
     assigned_column = schema.Choice(
-        title=_(u'Column where the portlet is rendered'),
+        title=_(u"Column where the portlet is rendered"),
         description=_(
-            u'Assign the portlet to a fixed column. Otherwise '
-            u'multisearch will try to balance the result portlets '
-            u'to fill up the page the portlet is assigned to a '
-            u'particular column'
+            u"Assign the portlet to a fixed column. Otherwise "
+            u"multisearch will try to balance the result portlets "
+            u"to fill up the page the portlet is assigned to a "
+            u"particular column"
         ),
         required=True,
         vocabulary=columnVocabulary,
     )
 
     show_if_no_results = schema.Bool(
-        title=_(u'Show portlet even if no results are returned.'),
+        title=_(u"Show portlet even if no results are returned."),
         description=_(
-            u'The portlet shows a message '
-            u'that no results were found. Default behaviour is '
-            u'to remove the portlet from the page results'
+            u"The portlet shows a message "
+            u"that no results were found. Default behaviour is "
+            u"to remove the portlet from the page results"
         ),
         required=False,
         default=True,
@@ -81,7 +81,7 @@ class ILocalSearchPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     def __init__(
         self,
-        dtitle='',
+        dtitle="",
         results_number=5,
         show_more_results=True,
         show_description=False,
@@ -90,7 +90,7 @@ class Assignment(base.Assignment):
         show_if_no_results=True,
     ):
         if not dtitle:
-            dtitle = _('Local results')
+            dtitle = _("Local results")
 
         self.dtitle = dtitle
         self.show_more_results = show_more_results
@@ -106,7 +106,7 @@ class Assignment(base.Assignment):
 
 
 class Renderer(base.Renderer):
-    render = ViewPageTemplateFile('templates/results_portlet.pt')
+    render = ViewPageTemplateFile("templates/results_portlet.pt")
 
     @property
     def has_results(self):
@@ -134,7 +134,7 @@ class Renderer(base.Renderer):
         count = 0
         for res in results:
             count += 1
-            if res['s_desc']:
+            if res["s_desc"]:
                 count += 1
 
         return count
@@ -143,17 +143,17 @@ class Renderer(base.Renderer):
         # Note that this link is only shown if there are results, so
         # it is never needed to return an empty string like in the
         # rss_link method.
-        query = self.request.get('SearchableText', '')
-        return '%s/search?SearchableText=%s' % (
+        query = self.request.get("SearchableText", "")
+        return "%s/search?SearchableText=%s" % (
             self.context.absolute_url(),
             quote_plus(query),
         )
 
     def rss_link(self):
-        query = self.request.get('SearchableText', None)
+        query = self.request.get("SearchableText", None)
         if query is None:
-            return ''
-        return '%s/search_rss?SearchableText=%s' % (
+            return ""
+        return "%s/search_rss?SearchableText=%s" % (
             self.context.absolute_url(),
             quote_plus(query),
         )
@@ -162,29 +162,29 @@ class Renderer(base.Renderer):
         return self.data.show_more_results and self.has_results
 
     def make_results(self):
-        query = self.request.get('SearchableText', None)
+        query = self.request.get("SearchableText", None)
         if not query:
             return []
 
-        search_view = self.context.restrictedTraverse('@@search')
+        search_view = self.context.restrictedTraverse("@@search")
         results = search_view.results(b_size=self.data.results_number)
 
         return [
-            {'title': x.Title(), 'url': x.getURL(), 'desc': x.Description()}
+            {"title": x.Title(), "url": x.getURL(), "desc": x.Description()}
             for x in results
         ]
 
     def make_excerpt(self, desc):
         if not self.data.show_description or not desc:
             return
-        max_length = getattr(self, 'max_length', CHARACTERS_PER_LINE)
+        max_length = getattr(self, "max_length", CHARACTERS_PER_LINE)
         return make_excerpt(desc, max_length)
 
     def results(self):
-        if not hasattr(self, '_results'):
+        if not hasattr(self, "_results"):
             results = self.make_results()
             for res in results:
-                res['s_desc'] = self.make_excerpt(res.get('desc', ''))
+                res["s_desc"] = self.make_excerpt(res.get("desc", ""))
 
             self._results = results
 

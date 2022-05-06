@@ -15,11 +15,11 @@ import socket
 import ssl
 
 
-logger = logging.getLogger('collective.multisearch.browser.portlet_remote_search')
+logger = logging.getLogger("collective.multisearch.browser.portlet_remote_search")
 
 
 class InvalidTimeoutValue(schema.ValidationError):
-    __doc__ = _(u'Please enter a timeout between 1 and 60 seconds.')
+    __doc__ = _(u"Please enter a timeout between 1 and 60 seconds.")
 
 
 def isValidTimeout(value):
@@ -35,22 +35,22 @@ class InvalidSearchUrl(schema.ValidationError):
 
 def isValidSearchUrl(value):
     """Must have %s in it."""
-    if value and '%s' not in value:
+    if value and "%s" not in value:
         raise InvalidSearchUrl
     return True
 
 
 class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     remote_site_url = schema.TextLine(
-        title=_(u'Remote site URL'),
+        title=_(u"Remote site URL"),
         description=_(
-            u'URL of the site were the search is performed ' '(http://www.example.com)'
+            u"URL of the site were the search is performed " "(http://www.example.com)"
         ),
         required=True,
     )
 
     remote_site_search_url = schema.TextLine(
-        title=_(u'Remote site search page'),
+        title=_(u"Remote site search page"),
         description=_(
             u"You can specify here a custom search page. This will be used as "
             "link to extra results. If left blank, it will use the address of "
@@ -64,7 +64,7 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     )
 
     remote_site_search_rss_url = schema.TextLine(
-        title=_(u'Remote site search rss feed'),
+        title=_(u"Remote site search rss feed"),
         description=_(
             u"You can specify here a custom rss search feed. This will be "
             "used to fetch the search results. If left blank, it will use "
@@ -79,9 +79,9 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     )
 
     rss_timeout = schema.Int(
-        title=_(u'Request timeout'),
+        title=_(u"Request timeout"),
         description=_(
-            u'Number of seconds before we timeout the remote search request.'
+            u"Number of seconds before we timeout the remote search request."
         ),
         required=True,
         default=RSS_TIMEOUT,
@@ -89,10 +89,10 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     )
 
     verify_ssl = schema.Bool(
-        title=_(u'Verify https request certificates'),
+        title=_(u"Verify https request certificates"),
         description=_(
-            u'For https request: should we verify the certificates? Only disable '
-            u'this if you know what you are doing.'
+            u"For https request: should we verify the certificates? Only disable "
+            u"this if you know what you are doing."
         ),
         required=False,
         default=True,
@@ -103,28 +103,28 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
 class Assignment(portlet_local_search.Assignment):
 
     # Specifying a default here avoids problems viewing or editing older assignments:
-    remote_site_search_rss_url = ''
+    remote_site_search_rss_url = ""
     rss_timeout = RSS_TIMEOUT
     verify_ssl = True
 
     def __init__(
         self,
-        dtitle='',
+        dtitle="",
         results_number=5,
         show_more_results=True,
         show_description=False,
         allow_rss_subscription=True,
         assigned_column=0,
         show_if_no_results=True,
-        remote_site_url='',
-        remote_site_search_url='',
-        remote_site_search_rss_url='',
+        remote_site_url="",
+        remote_site_search_url="",
+        remote_site_search_rss_url="",
         verify_ssl=True,
         rss_timeout=RSS_TIMEOUT,
     ):
 
         if not dtitle:
-            dtitle = 'Remote results for: %s' % remote_site_url
+            dtitle = "Remote results for: %s" % remote_site_url
 
         super(Assignment, self).__init__(
             dtitle,
@@ -144,23 +144,23 @@ class Renderer(portlet_local_search.Renderer):
         # Note that this link is only shown if there are results, so
         # it is never needed to return an empty string like in the
         # rss_link method.
-        query = self.request.get('SearchableText', '')
+        query = self.request.get("SearchableText", "")
         query = quote_plus(query)
         if self.data.remote_site_search_url:
             try:
                 return self.data.remote_site_search_url % query
             except TypeError:
                 logger.warn(
-                    'Cannot insert query in remote_site_search_url %s',
+                    "Cannot insert query in remote_site_search_url %s",
                     self.data.remote_site_search_url,
                 )
 
-        return '%s/search?SearchableText=%s' % (self.data.remote_site_url, query)
+        return "%s/search?SearchableText=%s" % (self.data.remote_site_url, query)
 
     def rss_link(self):
-        query = self.request.get('SearchableText', None)
+        query = self.request.get("SearchableText", None)
         if query is None:
-            return ''
+            return ""
         query = quote_plus(query)
 
         if self.data.remote_site_search_rss_url:
@@ -168,14 +168,14 @@ class Renderer(portlet_local_search.Renderer):
                 return self.data.remote_site_search_rss_url % query
             except TypeError:
                 logger.warn(
-                    'Cannot insert query in remote_site_search_rss_url %s',
+                    "Cannot insert query in remote_site_search_rss_url %s",
                     self.data.remote_site_search_rss_url,
                 )
 
-        return '%s/search_rss?SearchableText=%s' % (self.data.remote_site_url, query)
+        return "%s/search_rss?SearchableText=%s" % (self.data.remote_site_url, query)
 
     def make_results(self):
-        query = self.request.get('SearchableText', None)
+        query = self.request.get("SearchableText", None)
         if not query:
             return []
 
@@ -202,13 +202,13 @@ class Renderer(portlet_local_search.Renderer):
         # [Maurits] have seen this in practice in one case, so let's
         # indeed set the User-Agent header.  Note that normally the
         # header is something like 'Python-urllib/2.7'.
-        request.add_header('User-Agent', 'Mozilla/4.0')
+        request.add_header("User-Agent", "Mozilla/4.0")
         try:
             timeout = getattr(self.data, "rss_timeout", RSS_TIMEOUT)
             rss = opener.open(request, timeout=timeout).read()
         except socket.timeout:
             # only works in Python 2.7
-            logger.info('RSS feed timeout after %s seconds: %s' % (timeout, search_url))
+            logger.info("RSS feed timeout after %s seconds: %s" % (timeout, search_url))
             return []
         except socket.error as e:
             if type(e) is tuple:
@@ -218,17 +218,17 @@ class Renderer(portlet_local_search.Renderer):
             else:
                 errmsg = "Unknown"
 
-            logger.info('RSS feed socket error \'%s\' on url %s' % (errmsg, search_url))
+            logger.info("RSS feed socket error '%s' on url %s" % (errmsg, search_url))
             return []
 
         data = feedparser.parse(rss)
         return [
             {
-                'title': x['title'],
-                'url': x['links'][0]['href'],
-                'desc': getattr(x, 'summary', u''),
+                "title": x["title"],
+                "url": x["links"][0]["href"],
+                "desc": getattr(x, "summary", u""),
             }
-            for x in data['items']
+            for x in data["items"]
         ][: self.data.results_number]
 
 

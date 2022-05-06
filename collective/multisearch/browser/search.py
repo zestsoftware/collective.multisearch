@@ -13,8 +13,8 @@ from zope.component import queryMultiAdapter
 
 class MultiSearchView(BrowserView):
     def can_manage_portlets(self):
-        mtool = getToolByName(self.context, 'portal_membership')
-        return mtool.checkPermission('plone.app.portlets.ManagePortlets', self.context)
+        mtool = getToolByName(self.context, "portal_membership")
+        return mtool.checkPermission("plone.app.portlets.ManagePortlets", self.context)
 
     def get_column_number(self):
         return get_column_number(self.context)
@@ -22,7 +22,7 @@ class MultiSearchView(BrowserView):
     def get_portlets(self):
         manager = getUtility(
             IPortletManager,
-            name='multisearch.MultisearchPortletManager',
+            name="multisearch.MultisearchPortletManager",
             context=self.context,
         )
 
@@ -33,7 +33,7 @@ class MultiSearchView(BrowserView):
         portlets = []
 
         for portlet in retriever.getPortlets():
-            assignment = portlet.get('assignment', None)
+            assignment = portlet.get("assignment", None)
             if assignment is None:
                 continue
 

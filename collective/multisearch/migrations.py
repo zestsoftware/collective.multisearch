@@ -6,14 +6,14 @@ from zope.component import getUtility
 import logging
 
 
-PROFILE_ID = 'profile-collective.multisearch:default'
+PROFILE_ID = "profile-collective.multisearch:default"
 
 logger = logging.getLogger("collective.multisearch")
 
 
 def update_schemas(context, new_fields=[]):
     manager = getUtility(
-        IPortletManager, name='multisearch.MultisearchPortletManager', context=context
+        IPortletManager, name="multisearch.MultisearchPortletManager", context=context
     )
 
     retriever = getMultiAdapter((context, manager), IPortletRetriever)
@@ -21,7 +21,7 @@ def update_schemas(context, new_fields=[]):
     portlets = retriever.getPortlets()
 
     for portlet in portlets:
-        assignment = portlet.get('assignment', None)
+        assignment = portlet.get("assignment", None)
         if assignment is None:
             continue
 
@@ -33,22 +33,22 @@ def update_schemas(context, new_fields=[]):
 
 
 def add_show_description_field(context):
-    update_schemas(context, [('show_description', False)])
+    update_schemas(context, [("show_description", False)])
 
 
 def add_allow_subscription_field(context):
-    update_schemas(context, [('allow_rss_subscription', True)])
+    update_schemas(context, [("allow_rss_subscription", True)])
 
 
 def reapply_portlets_step(context):
-    context.runImportStepFromProfile(PROFILE_ID, 'portlets')
+    context.runImportStepFromProfile(PROFILE_ID, "portlets")
 
 
 def run_browserlayer_step(context):
-    context.runImportStepFromProfile(PROFILE_ID, 'browserlayer')
+    context.runImportStepFromProfile(PROFILE_ID, "browserlayer")
     logger.info("Add browserlayer for collective.multisearch")
 
 
 def add_verify_ssl_field(context):
-    update_schemas(context, [('verify_ssl', True)])
+    update_schemas(context, [("verify_ssl", True)])
     logger.info("Added verify_ssl field to search portlets")

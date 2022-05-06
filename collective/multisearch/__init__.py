@@ -1,7 +1,7 @@
 from zope.i18nmessageid import MessageFactory
 
 
-MultiSearchMessageFactory = MessageFactory(u'collective.multisearch')
+MultiSearchMessageFactory = MessageFactory(u"collective.multisearch")
 
 
 def initialize(context):

@@ -16,10 +16,10 @@ class Assignment(search.Assignment):
 
 
 class Renderer(search.Renderer):
-    render = ViewPageTemplateFile('templates/search_portlet.pt')
+    render = ViewPageTemplateFile("templates/search_portlet.pt")
 
     def search_action(self):
-        return '%s/@@multisearch' % self.navigation_root_url
+        return "%s/@@multisearch" % self.navigation_root_url
 
 
 class AddForm(search.AddForm):

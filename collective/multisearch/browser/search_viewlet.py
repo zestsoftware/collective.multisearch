@@ -3,7 +3,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class SearchBoxViewlet(common.SearchBoxViewlet):
-    index = ViewPageTemplateFile('templates/searchbox_viewlet.pt')
+    index = ViewPageTemplateFile("templates/searchbox_viewlet.pt")
 
     def update(self):
         super(SearchBoxViewlet, self).update()

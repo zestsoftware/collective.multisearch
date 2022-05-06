@@ -2,10 +2,10 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = '2.0.0a2.dev0'
+version = "2.0.0a2.dev0"
 
 setup(
-    name='collective.multisearch',
+    name="collective.multisearch",
     version=version,
     description="Portlet based display for the Plone search page",
     long_description=(open("README.txt").read() + "\n\n" + open("CHANGES.rst").read()),
@@ -22,18 +22,18 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
-    keywords='multisearch portlet remote',
-    author='Zest Software',
-    author_email='info@zestsoftware.nl',
-    url='https://github.com/zestsoftware/collective.multisearch',
-    license='GPL',
-    packages=find_packages(exclude=['ez_setup']),
-    namespace_packages=['collective'],
+    keywords="multisearch portlet remote",
+    author="Zest Software",
+    author_email="info@zestsoftware.nl",
+    url="https://github.com/zestsoftware/collective.multisearch",
+    license="GPL",
+    packages=find_packages(exclude=["ez_setup"]),
+    namespace_packages=["collective"],
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'setuptools',
-        'feedparser',
+        "setuptools",
+        "feedparser",
     ],
     entry_points="""
     [z3c.autoinclude.plugin]

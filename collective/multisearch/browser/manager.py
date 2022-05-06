@@ -43,21 +43,21 @@ from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 class MultiSearchContextualEditPortletManagerRenderer(
     ContextualEditPortletManagerRenderer
 ):
-    template = ViewPageTemplateFile('templates/edit-manager-contextual.pt')
+    template = ViewPageTemplateFile("templates/edit-manager-contextual.pt")
 
     def get_column_number(self):
         return {
-            'current': get_column_number(self.context),
-            'available': list(range(1, COLUMN_COUNT + 1)),
+            "current": get_column_number(self.context),
+            "available": list(range(1, COLUMN_COUNT + 1)),
         }
 
     def addable_portlets(self):
         """We can't do a normal 'super', so it's a copy/paste form the base class."""
         baseUrl = self.baseUrl()
-        addviewbase = baseUrl.replace(self.context_url(), '')
+        addviewbase = baseUrl.replace(self.context_url(), "")
 
         def sort_key(v):
-            return v.get('title')
+            return v.get("title")
 
         def check_permission(p):
             addview = p.addview
@@ -73,7 +73,7 @@ class MultiSearchContextualEditPortletManagerRenderer(
                 addviewbase,
                 addview,
             )
-            if addview.startswith('/'):
+            if addview.startswith("/"):
                 addview = addview[1:]
             try:
                 self.context.restrictedTraverse(str(addview))
@@ -87,9 +87,9 @@ class MultiSearchContextualEditPortletManagerRenderer(
 
         portlets = [
             {
-                'title': p.title,
-                'description': p.description,
-                'addview': '%s/+/%s' % (addviewbase, p.addview),
+                "title": p.title,
+                "description": p.description,
+                "addview": "%s/+/%s" % (addviewbase, p.addview),
             }
             for p in self.manager.getAddablePortletTypes()
             if check_permission(p)
@@ -104,7 +104,7 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
         editmanager = queryMultiAdapter(
             (self.context, self.request, self),
             IMultiSearchPortletManagerRenderer,
-            'multisearch.MultisearchPortletManager',
+            "multisearch.MultisearchPortletManager",
         )
 
         editmanager.update()
@@ -117,19 +117,19 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
         return list(assignments.values())
 
     def __call__(self):
-        if self.request.get('REQUEST_METHOD') != 'POST':
+        if self.request.get("REQUEST_METHOD") != "POST":
             return self.index()
 
         try:
-            column_count = int(self.request.form.get('column_count', DEFAULT_COLUMN))
+            column_count = int(self.request.form.get("column_count", DEFAULT_COLUMN))
             set_column_number(self.context, column_count)
             IStatusMessage(self.request).addStatusMessage(
-                _('Properties updated'), 'info'
+                _("Properties updated"), "info"
             )
-            return self.request.response.redirect('@@multisearch')
+            return self.request.response.redirect("@@multisearch")
         except Exception:
             IStatusMessage(self.request).addStatusMessage(
-                _('Invalid value for column number'), 'error'
+                _("Invalid value for column number"), "error"
             )
 
         return self.index()

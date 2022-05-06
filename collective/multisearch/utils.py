@@ -4,57 +4,57 @@ from six.moves import range
 
 
 def get_ms_props(context):
-    pprops = getToolByName(context, 'portal_properties', None)
+    pprops = getToolByName(context, "portal_properties", None)
     if pprops is None:
         return DEFAULT_COLUMN
 
-    if 'multisearch_properties' not in list(pprops.keys()):
-        pprops.addPropertySheet('multisearch_properties')
+    if "multisearch_properties" not in list(pprops.keys()):
+        pprops.addPropertySheet("multisearch_properties")
 
-    return pprops.get('multisearch_properties')
+    return pprops.get("multisearch_properties")
 
 
 def get_column_number(context):
     ms_props = get_ms_props(context)
-    if not ms_props.hasProperty('column_number'):
-        ms_props._setProperty('column_number', DEFAULT_COLUMN, 'int')
+    if not ms_props.hasProperty("column_number"):
+        ms_props._setProperty("column_number", DEFAULT_COLUMN, "int")
 
     return ms_props.column_number
 
 
 def set_column_number(context, value):
     ms_props = get_ms_props(context)
-    ms_props._setPropValue('column_number', value)
+    ms_props._setPropValue("column_number", value)
 
 
 def make_excerpt(text, max_length, ellipsis=None):
     """Makes a clean cut in words."""
     if ellipsis is None:
-        ellipsis = '&hellip;'
+        ellipsis = "&hellip;"
 
     if len(text) <= max_length:
         return text
 
     short = text[:max_length]
 
-    dot_split = short.split('.')
-    space_split = short.split(' ')
+    dot_split = short.split(".")
+    space_split = short.split(" ")
 
     if len(dot_split) == len(space_split) == 1:
         # Well, no dots not spaces in the description,
         # should be a single word.
-        return '%s%s' % (short, ellipsis)
+        return "%s%s" % (short, ellipsis)
 
     if len(dot_split[-1]) > len(space_split[-1]):
         # As spaces are generally added just after the dots,
         # we check we're not i that case.
-        if dot_split[-1] == ' %s' % space_split[-1]:
-            return '%s.' % '.'.join(dot_split[:-1])
+        if dot_split[-1] == " %s" % space_split[-1]:
+            return "%s." % ".".join(dot_split[:-1])
 
         # There's a space after the last dot.
-        return '%s%s' % (' '.join(space_split[:-1]), ellipsis)
+        return "%s%s" % (" ".join(space_split[:-1]), ellipsis)
 
-    return '%s.' % '.'.join(dot_split[:-1])
+    return "%s." % ".".join(dot_split[:-1])
 
 
 def assign_columns(portlets, column_count):

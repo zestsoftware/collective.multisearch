@@ -9,7 +9,6 @@ from zope.interface import implementer
 
 import feedparser
 import logging
-import six.moves.urllib.error
 import six.moves.urllib.parse
 import six.moves.urllib.request
 import socket
@@ -210,15 +209,6 @@ class Renderer(portlet_local_search.Renderer):
         except socket.timeout:
             # only works in Python 2.7
             logger.info('RSS feed timeout after %s seconds: %s' % (timeout, search_url))
-            return []
-        except six.moves.urllib.error.URLError as e:
-            # works for Python 2.6
-            if isinstance(e.reason, socket.timeout):
-                logger.info(
-                    'RSS feed timeout after %s seconds: %s' % (timeout, search_url)
-                )
-                return []
-            logger.info('Unable to open RSS feed: %s' % search_url)
             return []
         except socket.error as e:
             if type(e) is tuple:

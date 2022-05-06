@@ -36,18 +36,21 @@ class ILocalSearchPortlet(IPortletDataProvider):
         title=_(u'Show result description'),
         description=_(u'If selected, show a excerpt of the description'),
         default=False,
+        required=False,
     )
 
     allow_rss_subscription = schema.Bool(
         title=_(u'Allow RSS subscription'),
         description=_(u'If selected, show an RSS icon in the title'),
         default=True,
+        required=False,
     )
 
     show_more_results = schema.Bool(
         title=_(u'Show link for more results'),
         description=_(u'Show a link in the portlet footer to show more results'),
         default=True,
+        required=False,
     )
 
     assigned_column = schema.Choice(

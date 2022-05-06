@@ -94,7 +94,7 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
             u'For https request: should we verify the certificates? Only disable '
             u'this if you know what you are doing.'
         ),
-        required=True,
+        required=False,
         default=True,
     )
 

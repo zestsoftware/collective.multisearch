@@ -27,8 +27,7 @@ def isValidTimeout(value):
     """check for a value between 1 and 60 seconds"""
     if 0 < int(value) < 61:
         return True
-    else:
-        raise InvalidTimeoutValue
+    raise InvalidTimeoutValue
 
 
 class InvalidSearchUrl(schema.ValidationError):
@@ -208,7 +207,7 @@ class Renderer(portlet_local_search.Renderer):
         try:
             timeout = getattr(self.data, "rss_timeout", RSS_TIMEOUT)
             rss = opener.open(request, timeout=timeout).read()
-        except socket.timeout as e:
+        except socket.timeout:
             # only works in Python 2.7
             logger.info('RSS feed timeout after %s seconds: %s' % (timeout, search_url))
             return []

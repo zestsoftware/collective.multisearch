@@ -66,7 +66,7 @@ class MultiSearchContextualEditPortletManagerRenderer(
 
             # We only use portlets that are specifically
             # designed for this manager.
-            if not IMultisearchPortletManager in p.for_:
+            if IMultisearchPortletManager not in p.for_:
                 return False
 
             addview = "%s/+/%s" % (
@@ -127,7 +127,7 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
                 _('Properties updated'), 'info'
             )
             return self.request.response.redirect('@@multisearch')
-        except:
+        except Exception:
             IStatusMessage(self.request).addStatusMessage(
                 _('Invalid value for column number'), 'error'
             )

@@ -3,6 +3,7 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:browser="http://namespaces.zope.org/browser">
 
+    <include package="plone.resource" file="meta.zcml" />
     <adapter factory=".manager.localPortletAssignmentMappingAdapter" />
     <plone:portlet
         name="multisearch.RemoteSearchPortlet"
@@ -65,9 +66,10 @@
         layer="..interfaces.IAddOnInstalled"
         />
 
-    <browser:resource
-        name="multisearch.css"
-        file="resources/multisearch.css"
+    <plone:static
+        directory="resources"
+        type="plone"
+        name="collective.multisearch"
         />
 
 </configure>

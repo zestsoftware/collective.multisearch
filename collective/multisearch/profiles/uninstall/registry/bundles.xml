@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<registry>
+
+  <records prefix="plone.bundles/collective.multisearch"
+           interface="plone.base.interfaces.IBundleRegistry"
+           remove="true" />
+
+</registry>

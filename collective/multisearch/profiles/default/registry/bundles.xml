@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<registry>
+
+  <records prefix="plone.bundles/collective.multisearch" interface="plone.base.interfaces.IBundleRegistry">
+    <value key="enabled">True</value>
+    <value key="jscompilation"></value>
+    <value key="csscompilation">++plone++collective.multisearch/multisearch.css</value>
+    <value key="load_async">False</value>
+    <value key="load_defer">False</value>
+  </records>
+
+</registry>

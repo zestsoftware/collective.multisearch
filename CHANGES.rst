@@ -4,6 +4,8 @@ Changelog
 2.0.0a2 (unreleased)
 --------------------
 
+- Register a bundle in the resource registry instead of using portal_css.  [maurits]
+
 - Use the configuration registry instead of portal_properties.  [maurits]
 
 - Fixed zope.component ImportErrors in Plone 6.  [maurits]

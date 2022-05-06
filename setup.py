@@ -8,8 +8,7 @@ setup(
     name='collective.multisearch',
     version=version,
     description="Portlet based display for the Plone search page",
-    long_description=(open("README.txt").read() + "\n\n" +
-                      open("CHANGES.rst").read()),
+    long_description=(open("README.txt").read() + "\n\n" + open("CHANGES.rst").read()),
     # Get more strings from https://pypi.org/classifiers/
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -40,4 +39,4 @@ setup(
     [z3c.autoinclude.plugin]
     target = plone
     """,
-    )
+)

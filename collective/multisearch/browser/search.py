@@ -13,22 +13,21 @@ from zope.component import queryMultiAdapter
 
 
 class MultiSearchView(BrowserView):
-
     def can_manage_portlets(self):
         mtool = getToolByName(self.context, 'portal_membership')
-        return mtool.checkPermission('plone.app.portlets.ManagePortlets',
-                                     self.context)
+        return mtool.checkPermission('plone.app.portlets.ManagePortlets', self.context)
 
     def get_column_number(self):
         return get_column_number(self.context)
 
     def get_portlets(self):
-        manager = getUtility(IPortletManager,
-                             name='multisearch.MultisearchPortletManager',
-                             context=self.context)
+        manager = getUtility(
+            IPortletManager,
+            name='multisearch.MultisearchPortletManager',
+            context=self.context,
+        )
 
-        retriever = getMultiAdapter((self.context, manager),
-                                    IPortletRetriever)
+        retriever = getMultiAdapter((self.context, manager), IPortletRetriever)
 
         columns_number = get_column_number(self.context)
         max_length = CHARACTERS_PER_LINE / columns_number
@@ -41,7 +40,8 @@ class MultiSearchView(BrowserView):
 
             renderer = queryMultiAdapter(
                 (self.context, self.request, self, manager, assignment),
-                IPortletRenderer)
+                IPortletRenderer,
+            )
             renderer.max_length = max_length
 
             if not renderer.available:

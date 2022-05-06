@@ -9,5 +9,4 @@ class SearchBoxViewlet(common.SearchBoxViewlet):
         super(SearchBoxViewlet, self).update()
 
         # Disable live search as we don't know the sources yet
-        self.search_input_id = "nolivesearchGadget" # don't use "" here!
-        
+        self.search_input_id = "nolivesearchGadget"  # don't use "" here!

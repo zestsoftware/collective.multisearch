@@ -14,21 +14,23 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 
 columnVocabulary = SimpleVocabulary.fromItems(
-    [(_('No prefered column'), 0)] +
-    [(x + 1, x + 1) for x in range(0, COLUMN_COUNT)])
+    [(_('No prefered column'), 0)] + [(x + 1, x + 1) for x in range(0, COLUMN_COUNT)]
+)
 
 
 class ILocalSearchPortlet(IPortletDataProvider):
     dtitle = schema.TextLine(
         title=_(u'Title for the portlet'),
         description=_(u'Title shown in the header of the portlet'),
-        required=False)
+        required=False,
+    )
 
     results_number = schema.Int(
         title=_(u'Number of results displayed'),
         description=_(u'Maximum number of results displayed'),
         required=True,
-        default=5)
+        default=5,
+    )
 
     show_description = schema.Bool(
         title=_(u'Show result description'),
@@ -44,42 +46,46 @@ class ILocalSearchPortlet(IPortletDataProvider):
 
     show_more_results = schema.Bool(
         title=_(u'Show link for more results'),
-        description=_(
-            u'Show a link in the portlet footer to show more results'),
-        default=True
+        description=_(u'Show a link in the portlet footer to show more results'),
+        default=True,
     )
 
     assigned_column = schema.Choice(
         title=_(u'Column where the portlet is rendered'),
-        description=_(u'Assign the portlet to a fixed column. Otherwise '
-                      u'multisearch will try to balance the result portlets '
-                      u'to fill up the page the portlet is assigned to a '
-                      u'particular column'),
+        description=_(
+            u'Assign the portlet to a fixed column. Otherwise '
+            u'multisearch will try to balance the result portlets '
+            u'to fill up the page the portlet is assigned to a '
+            u'particular column'
+        ),
         required=True,
-        vocabulary=columnVocabulary
+        vocabulary=columnVocabulary,
     )
 
     show_if_no_results = schema.Bool(
         title=_(u'Show portlet even if no results are returned.'),
-        description=_(u'The portlet shows a message '
-                      u'that no results were found. Default behaviour is '
-                      u'to remove the portlet from the page results'),
+        description=_(
+            u'The portlet shows a message '
+            u'that no results were found. Default behaviour is '
+            u'to remove the portlet from the page results'
+        ),
         required=False,
-        default=True
+        default=True,
     )
 
 
 @implementer(ILocalSearchPortlet)
 class Assignment(base.Assignment):
-
-    def __init__(self,
-                 dtitle='',
-                 results_number=5,
-                 show_more_results=True,
-                 show_description=False,
-                 allow_rss_subscription=True,
-                 assigned_column=0,
-                 show_if_no_results=True):
+    def __init__(
+        self,
+        dtitle='',
+        results_number=5,
+        show_more_results=True,
+        show_description=False,
+        allow_rss_subscription=True,
+        assigned_column=0,
+        show_if_no_results=True,
+    ):
         if not dtitle:
             dtitle = _('Local results')
 
@@ -112,7 +118,7 @@ class Renderer(base.Renderer):
 
     @property
     def lines_count(self):
-        """ Count the number of lines displayed.
+        """Count the number of lines displayed.
         Basically, the number of results + the number of
         available short description.
         Return 1 when there is no results (in order to take
@@ -137,7 +143,8 @@ class Renderer(base.Renderer):
         query = self.request.get('SearchableText', '')
         return '%s/search?SearchableText=%s' % (
             self.context.absolute_url(),
-            quote_plus(query))
+            quote_plus(query),
+        )
 
     def rss_link(self):
         query = self.request.get('SearchableText', None)
@@ -145,7 +152,8 @@ class Renderer(base.Renderer):
             return ''
         return '%s/search_rss?SearchableText=%s' % (
             self.context.absolute_url(),
-            quote_plus(query))
+            quote_plus(query),
+        )
 
     def show_more_results(self):
         return self.data.show_more_results and self.has_results
@@ -159,10 +167,9 @@ class Renderer(base.Renderer):
         results = search_view.results(b_size=self.data.results_number)
 
         return [
-            {'title': x.Title(),
-             'url': x.getURL(),
-             'desc': x.Description()}
-            for x in results]
+            {'title': x.Title(), 'url': x.getURL(), 'desc': x.Description()}
+            for x in results
+        ]
 
     def make_excerpt(self, desc):
         if not self.data.show_description or not desc:

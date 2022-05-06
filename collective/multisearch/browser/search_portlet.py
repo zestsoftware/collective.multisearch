@@ -10,7 +10,6 @@ class ISearchPortlet(search.ISearchPortlet):
 
 @implementer(ISearchPortlet)
 class Assignment(search.Assignment):
-
     @property
     def title(self):
         return _(u"MultiSearch")
@@ -24,7 +23,6 @@ class Renderer(search.Renderer):
 
 
 class AddForm(search.AddForm):
-
     def create(self, data):
         return Assignment()
 

@@ -34,19 +34,25 @@ from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
-@adapter(Interface, IDefaultBrowserLayer,
-         IManageContextualPortletsView, IMultisearchPortletManager)
+@adapter(
+    Interface,
+    IDefaultBrowserLayer,
+    IManageContextualPortletsView,
+    IMultisearchPortletManager,
+)
 class MultiSearchContextualEditPortletManagerRenderer(
-        ContextualEditPortletManagerRenderer):
+    ContextualEditPortletManagerRenderer
+):
     template = ViewPageTemplateFile('templates/edit-manager-contextual.pt')
 
     def get_column_number(self):
-        return {'current': get_column_number(self.context),
-                'available': list(range(1, COLUMN_COUNT + 1))}
+        return {
+            'current': get_column_number(self.context),
+            'available': list(range(1, COLUMN_COUNT + 1)),
+        }
 
     def addable_portlets(self):
-        """ We can't do a normal 'super', so it's a copy/paste form the base class.
-        """
+        """We can't do a normal 'super', so it's a copy/paste form the base class."""
         baseUrl = self.baseUrl()
         addviewbase = baseUrl.replace(self.context_url(), '')
 
@@ -63,39 +69,51 @@ class MultiSearchContextualEditPortletManagerRenderer(
             if not IMultisearchPortletManager in p.for_:
                 return False
 
-            addview = "%s/+/%s" % (addviewbase, addview,)
+            addview = "%s/+/%s" % (
+                addviewbase,
+                addview,
+            )
             if addview.startswith('/'):
                 addview = addview[1:]
             try:
                 self.context.restrictedTraverse(str(addview))
-            except (AttributeError, KeyError, Unauthorized,):
+            except (
+                AttributeError,
+                KeyError,
+                Unauthorized,
+            ):
                 return False
             return True
 
-        portlets = [{
-            'title': p.title,
-            'description': p.description,
-            'addview': '%s/+/%s' % (addviewbase, p.addview)
-        } for p in self.manager.getAddablePortletTypes() if check_permission(p)]
+        portlets = [
+            {
+                'title': p.title,
+                'description': p.description,
+                'addview': '%s/+/%s' % (addviewbase, p.addview),
+            }
+            for p in self.manager.getAddablePortletTypes()
+            if check_permission(p)
+        ]
 
         portlets.sort(key=sort_key)
         return portlets
 
 
 class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
-
     def get_manager(self):
         editmanager = queryMultiAdapter(
             (self.context, self.request, self),
             IMultiSearchPortletManagerRenderer,
-            'multisearch.MultisearchPortletManager')
+            'multisearch.MultisearchPortletManager',
+        )
 
         editmanager.update()
         return editmanager.render()
 
     def getAssignmentsForManager(self, manager):
-        assignments = getMultiAdapter((self.context, manager),
-                                      IMultiSearchPortletAssignmentMapping)
+        assignments = getMultiAdapter(
+            (self.context, manager), IMultiSearchPortletAssignmentMapping
+        )
         return list(assignments.values())
 
     def __call__(self):
@@ -103,17 +121,16 @@ class MultiSearchManagerContextualPortlets(ManageContextualPortlets):
             return self.index()
 
         try:
-            column_count = int(self.request.form.get('column_count',
-                                                     DEFAULT_COLUMN))
+            column_count = int(self.request.form.get('column_count', DEFAULT_COLUMN))
             set_column_number(self.context, column_count)
             IStatusMessage(self.request).addStatusMessage(
-                _('Properties updated'),
-                'info')
+                _('Properties updated'), 'info'
+            )
             return self.request.response.redirect('@@multisearch')
         except:
             IStatusMessage(self.request).addStatusMessage(
-                _('Invalid value for column number'),
-                'error')
+                _('Invalid value for column number'), 'error'
+            )
 
         return self.index()
 
@@ -141,14 +158,15 @@ def localPortletAssignmentMappingAdapter(context, manager):
         safeWrite(local)
     portlets = local.get(manager.__name__, None)
     if portlets is None or not IMultiSearchPortletAssignmentMapping.providedBy(
-            portlets):
+        portlets
+    ):
         if portlets is not None:
             old_items = list(portlets.items())
         else:
             old_items = []
         portlets = local[manager.__name__] = MultiSearchPortletAssignmentMapping(
-            manager=manager.__name__,
-            category=CONTEXT_CATEGORY)
+            manager=manager.__name__, category=CONTEXT_CATEGORY
+        )
         # Inline migration.  Might be good in an upgrade step.
         for key, value in old_items:
             portlets[key] = value

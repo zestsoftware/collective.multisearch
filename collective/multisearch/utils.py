@@ -4,9 +4,7 @@ from six.moves import range
 
 
 def get_ms_props(context):
-    pprops = getToolByName(context,
-                           'portal_properties',
-                           None)
+    pprops = getToolByName(context, 'portal_properties', None)
     if pprops is None:
         return DEFAULT_COLUMN
 
@@ -54,9 +52,7 @@ def make_excerpt(text, max_length, ellipsis=None):
             return '%s.' % '.'.join(dot_split[:-1])
 
         # There's a space after the last dot.
-        return '%s%s' % (
-            ' '.join(space_split[:-1]),
-            ellipsis)
+        return '%s%s' % (' '.join(space_split[:-1]), ellipsis)
 
     return '%s.' % '.'.join(dot_split[:-1])
 
@@ -69,31 +65,31 @@ def assign_columns(portlets, column_count):
 
     It returns a list of lists with the Renderers per column.
     """
-    columns = dict([(index, []) for index in
-                    range(0, column_count + 1)])
+    columns = dict([(index, []) for index in range(0, column_count + 1)])
 
     for assignment, renderer in portlets:
-        assignment_column = max(
-            0, min(assignment.assigned_column, column_count))
+        assignment_column = max(0, min(assignment.assigned_column, column_count))
         columns[assignment_column].append(renderer)
 
     if columns[0]:
         # We need to place the portlets in the existing columns.
         # First we sort them by size.
         unplaced = sorted(
-            [(renderer, renderer.lines_count)
-             for renderer in columns[0]],
+            [(renderer, renderer.lines_count) for renderer in columns[0]],
             key=lambda x: x[1],
-            reverse=True)
+            reverse=True,
+        )
 
         sizes = dict(
-            [(index, sum([renderer.lines_count
-                          for renderer in columns[index]]))
-             for index in columns.keys() if index])
+            [
+                (index, sum([renderer.lines_count for renderer in columns[index]]))
+                for index in columns.keys()
+                if index
+            ]
+        )
 
         for portlet, p_size in unplaced:
-            col_index = sorted(list(sizes.items()),
-                               key=lambda x: x[1])[0][0]
+            col_index = sorted(list(sizes.items()), key=lambda x: x[1])[0][0]
 
             columns[col_index].append(portlet)
             sizes[col_index] += p_size

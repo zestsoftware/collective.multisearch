@@ -16,8 +16,7 @@ import socket
 import ssl
 
 
-logger = logging.getLogger(
-    'collective.multisearch.browser.portlet_remote_search')
+logger = logging.getLogger('collective.multisearch.browser.portlet_remote_search')
 
 
 class InvalidTimeoutValue(schema.ValidationError):
@@ -46,9 +45,11 @@ def isValidSearchUrl(value):
 class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
     remote_site_url = schema.TextLine(
         title=_(u'Remote site URL'),
-        description=_(u'URL of the site were the search is performed '
-                      '(http://www.example.com)'),
-        required=True)
+        description=_(
+            u'URL of the site were the search is performed ' '(http://www.example.com)'
+        ),
+        required=True,
+    )
 
     remote_site_search_url = schema.TextLine(
         title=_(u'Remote site search page'),
@@ -58,9 +59,11 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
             "the remote site and append '/search?SearchableText=%s', so "
             "http://www.example.com/search?SearchableText=%s with the "
             "previous example, which is good for a Plone site. Note the '%s' "
-            "part where the searched text will be filled in."),
+            "part where the searched text will be filled in."
+        ),
         constraint=isValidSearchUrl,
-        required=False)
+        required=False,
+    )
 
     remote_site_search_rss_url = schema.TextLine(
         title=_(u'Remote site search rss feed'),
@@ -71,27 +74,30 @@ class IRemoteSearchPortlet(portlet_local_search.ILocalSearchPortlet):
             "'/search_rss?SearchableText=%s', so "
             "http://www.example.com/search_rss?SearchableText=%s with the "
             "previous example, which is good for a Plone site. Note the '%s' "
-            "part where the searched text will be filled in."),
+            "part where the searched text will be filled in."
+        ),
         constraint=isValidSearchUrl,
-        required=False
+        required=False,
     )
 
     rss_timeout = schema.Int(
         title=_(u'Request timeout'),
         description=_(
-            u'Number of seconds before we timeout the remote search request.'),
+            u'Number of seconds before we timeout the remote search request.'
+        ),
         required=True,
         default=RSS_TIMEOUT,
-        constraint=isValidTimeout
+        constraint=isValidTimeout,
     )
 
     verify_ssl = schema.Bool(
         title=_(u'Verify https request certificates'),
         description=_(
             u'For https request: should we verify the certificates? Only disable '
-            u'this if you know what you are doing.'),
+            u'this if you know what you are doing.'
+        ),
         required=True,
-        default=True
+        default=True,
     )
 
 
@@ -103,32 +109,39 @@ class Assignment(portlet_local_search.Assignment):
     rss_timeout = RSS_TIMEOUT
     verify_ssl = True
 
-    def __init__(self,
-                 dtitle='',
-                 results_number=5,
-                 show_more_results=True,
-                 show_description=False,
-                 allow_rss_subscription=True,
-                 assigned_column=0,
-                 show_if_no_results=True,
-                 remote_site_url='',
-                 remote_site_search_url='',
-                 remote_site_search_rss_url='',
-                 verify_ssl=True,
-                 rss_timeout=RSS_TIMEOUT):
+    def __init__(
+        self,
+        dtitle='',
+        results_number=5,
+        show_more_results=True,
+        show_description=False,
+        allow_rss_subscription=True,
+        assigned_column=0,
+        show_if_no_results=True,
+        remote_site_url='',
+        remote_site_search_url='',
+        remote_site_search_rss_url='',
+        verify_ssl=True,
+        rss_timeout=RSS_TIMEOUT,
+    ):
 
         if not dtitle:
             dtitle = 'Remote results for: %s' % remote_site_url
 
         super(Assignment, self).__init__(
-            dtitle, results_number, show_more_results, assigned_column, show_if_no_results)
+            dtitle,
+            results_number,
+            show_more_results,
+            assigned_column,
+            show_if_no_results,
+        )
         self.remote_site_url = remote_site_url
         self.remote_site_search_url = remote_site_search_url
         self.remote_site_search_rss_url = remote_site_search_rss_url
         self.verify_ssl = verify_ssl
 
-class Renderer(portlet_local_search.Renderer):
 
+class Renderer(portlet_local_search.Renderer):
     def extra_results_link(self):
         # Note that this link is only shown if there are results, so
         # it is never needed to return an empty string like in the
@@ -141,10 +154,10 @@ class Renderer(portlet_local_search.Renderer):
             except TypeError:
                 logger.warn(
                     'Cannot insert query in remote_site_search_url %s',
-                    self.data.remote_site_search_url)
+                    self.data.remote_site_search_url,
+                )
 
-        return '%s/search?SearchableText=%s' % (
-            self.data.remote_site_url, query)
+        return '%s/search?SearchableText=%s' % (self.data.remote_site_url, query)
 
     def rss_link(self):
         query = self.request.get('SearchableText', None)
@@ -158,10 +171,10 @@ class Renderer(portlet_local_search.Renderer):
             except TypeError:
                 logger.warn(
                     'Cannot insert query in remote_site_search_rss_url %s',
-                    self.data.remote_site_search_rss_url)
+                    self.data.remote_site_search_rss_url,
+                )
 
-        return '%s/search_rss?SearchableText=%s' % (
-            self.data.remote_site_url, query)
+        return '%s/search_rss?SearchableText=%s' % (self.data.remote_site_url, query)
 
     def make_results(self):
         query = self.request.get('SearchableText', None)
@@ -180,7 +193,9 @@ class Renderer(portlet_local_search.Renderer):
             ctx = ssl.create_default_context()
             ctx.check_hostname = False
             ctx.verify_mode = ssl.CERT_NONE
-            opener = six.moves.urllib.request.build_opener(six.moves.urllib.request.HTTPSHandler(context=ctx))
+            opener = six.moves.urllib.request.build_opener(
+                six.moves.urllib.request.HTTPSHandler(context=ctx)
+            )
         else:
             opener = six.moves.urllib.request.build_opener()
         request = six.moves.urllib.request.Request(search_url)
@@ -195,14 +210,14 @@ class Renderer(portlet_local_search.Renderer):
             rss = opener.open(request, timeout=timeout).read()
         except socket.timeout as e:
             # only works in Python 2.7
-            logger.info('RSS feed timeout after %s seconds: %s' %
-                        (timeout, search_url))
+            logger.info('RSS feed timeout after %s seconds: %s' % (timeout, search_url))
             return []
         except six.moves.urllib.error.URLError as e:
             # works for Python 2.6
             if isinstance(e.reason, socket.timeout):
-                logger.info('RSS feed timeout after %s seconds: %s' %
-                            (timeout, search_url))
+                logger.info(
+                    'RSS feed timeout after %s seconds: %s' % (timeout, search_url)
+                )
                 return []
             logger.info('Unable to open RSS feed: %s' % search_url)
             return []
@@ -217,13 +232,15 @@ class Renderer(portlet_local_search.Renderer):
             logger.info('RSS feed socket error \'%s\' on url %s' % (errmsg, search_url))
             return []
 
-
         data = feedparser.parse(rss)
         return [
-            {'title': x['title'],
-             'url': x['links'][0]['href'],
-             'desc': getattr(x, 'summary', u'')}
-            for x in data['items']][:self.data.results_number]
+            {
+                'title': x['title'],
+                'url': x['links'][0]['href'],
+                'desc': getattr(x, 'summary', u''),
+            }
+            for x in data['items']
+        ][: self.data.results_number]
 
 
 class AddForm(base.AddForm):

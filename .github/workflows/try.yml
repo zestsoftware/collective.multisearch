@@ -30,8 +30,9 @@ jobs:
       fail-fast: true
       matrix:
         # python-version: [${{ inputs.python-version }}]
-        - if ${{ inputs.py27}}: python-version: "2.7"
-        - if ${{ inputs.py38}}: python-version: "3.8"
+        -include:
+          - if ${{ inputs.py27 }}: python-version: "2.7"
+          - if ${{ inputs.py38 }}: python-version: "3.8"
     steps:
     - name: Try it
       run: |

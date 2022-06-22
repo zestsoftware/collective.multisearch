@@ -12,5 +12,8 @@ jobs:
     # uses: collective/.github/.github/workflows/tox.yml@main
     uses: ./.github/workflows/tox.yml
     with:
-      python-version: >-
-        ["2.7", "3.6", "3.7", "3.8", "3.9"]
+      # For the strange syntax, see https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
+      # This one fails for me:
+      # python-version: >-
+      #   ["2.7", "3.6", "3.7", "3.8", "3.9"]
+      python-version: "['2.7', '3.6', '3.7', '3.8', '3.9']"

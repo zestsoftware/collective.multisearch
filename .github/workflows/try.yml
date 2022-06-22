@@ -31,8 +31,10 @@ jobs:
       matrix:
         # python-version: [${{ inputs.python-version }}]
         -include:
-          - if ${{ inputs.py27 }}: python-version: "2.7"
-          - if ${{ inputs.py38 }}: python-version: "3.8"
+          - if: inputs.py27:
+            python-version: "2.7"
+          - if: inputs.py38:
+            python-version: "3.8"
     steps:
     - name: Try it
       run: |

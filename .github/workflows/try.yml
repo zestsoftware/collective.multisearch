@@ -16,7 +16,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: "${{ inputs.python-version }}"
     steps:
     - name: Try it
       run: |
         echo ${{ inputs.python-version}}
+        echo ${{ matrix.python-version}}

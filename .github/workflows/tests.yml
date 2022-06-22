@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 jobs:
   test:
-    name: Run tests on all relevant Python versions
+    name: Run tests
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true

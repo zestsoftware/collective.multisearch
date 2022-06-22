@@ -9,15 +9,13 @@ on:
 jobs:
   test:
     name: Run tests on all relevant Python versions
-    # uses: collective/.github/.github/workflows/tox.yml@main
-    # uses: ./.github/workflows/tox.yml
-    uses: ./.github/workflows/try.yml
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+      - python-version: ["2.7", "3.6", "3.7", "3.8", "3.9"]
+steps:
+  - name: Test Py ${{ matrix.python-version }}
+    uses: collective/tox-action
     with:
-      # For the strange syntax, see https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
-      # This one fails for me:
-      # python-version: >-
-      #   ["2.7", "3.6", "3.7", "3.8", "3.9"]
-      # python-version: "[\"2.7\", \"3.6\", \"3.7\", \"3.8\", \"3.9\"]"
-      # python-version: "[\"2.7\", \"3.6\"]"
-      # python-version: '"2.7", "3.6"'
-      py27: true
+      python-version: ${{ matrix.python-version }}

@@ -38,4 +38,4 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-eggs-${{ matrix.python-version }}-
     - name: Test
-      run: tox -e ${{ matrix.config[1] }}
+      run: tox

@@ -2,7 +2,7 @@ name: CI
 on:
   push:
     branches:
-      - 'master'
+      - "master"
   pull_request:
   # Allow to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -14,4 +14,4 @@ jobs:
       # For the strangely looking syntax, see
       # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
       python-version: >-
-        ['2.7', '3.6', '3.7', '3.8', '3.9']
+        ["2.7", "3.6", "3.7", "3.8", "3.9"]

@@ -11,7 +11,4 @@ jobs:
     name: Run tests on all relevant Python versions
     uses: collective/.github/.github/workflows/tox.yml@main
     with:
-      # For the strangely looking syntax, see
-      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
-      python-version: >-
-        ["2.7", "3.6", "3.7", "3.8", "3.9"]
+      python-version: '["2.7", "3.6", "3.7", "3.8", "3.9"]'

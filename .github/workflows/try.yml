@@ -13,15 +13,26 @@ on:
         required: false
         default: "3.8"
         type: string
+      py27:
+        description: "Use Python 2.7"
+        required: false
+        default: false
+        type: boolean
+      py38:
+        description: "Use Python 3.8"
+        required: false
+        default: true
+        type: boolean
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
-        python-version: [${{ inputs.python-version }}]
+        # python-version: [${{ inputs.python-version }}]
+        - if ${{ inputs.py27}}: python-version: "2.7"
+        - if ${{ inputs.py38}}: python-version: "3.8"
     steps:
     - name: Try it
       run: |
-        echo ${{ inputs.python-version}}
         echo ${{ matrix.python-version}}

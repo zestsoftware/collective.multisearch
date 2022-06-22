@@ -11,8 +11,8 @@ on:
       python-version:
         description: "Python version to use. Can be a list, if you spell it correctly."
         required: false
-        default: "3.8"
-        type: string
+        default: ["3.8"]
+        type: sequence
 jobs:
   build:
     runs-on: ubuntu-latest

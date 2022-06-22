@@ -32,13 +32,15 @@ jobs:
         python-version: ["2.7", "3.7", "3.8"]
         py27: ${{ inputs.py27 }}
         py38: ${{ inputs.py38 }}
-        exclude:
-          - py27: false
-            python-version: "2.7"
-          - py38: false
-            python-version: "3.8"
+        # exclude:
+        #   - py27: false
+        #     python-version: "2.7"
+        #   - py38: false
+        #     python-version: "3.8"
     steps:
     - name: Try it
       run: |
         echo ${{ matrix.python-version }}
+        echo ${{ matrix.py27 }}
+        echo ${{ matrix.py38 }}
         echo ${{ matrix }}

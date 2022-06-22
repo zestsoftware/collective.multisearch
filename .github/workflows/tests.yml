@@ -10,7 +10,8 @@ jobs:
   test:
     name: Run tests on all relevant Python versions
     # uses: collective/.github/.github/workflows/tox.yml@main
-    uses: ./.github/workflows/tox.yml
+    # uses: ./.github/workflows/tox.yml
+    uses: ./.github/workflows/try.yml
     with:
       # For the strange syntax, see https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
       # This one fails for me:

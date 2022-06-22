@@ -1,0 +1,22 @@
+# This is a reusable GitHub Action workflow.
+# It tests a package on multiple Python versions using tox.
+# We expect that tox sets up a buildout, so we set up an egg cache for it.
+# If buildout is not used, the egg cache is useless, but should be harmless.
+# Example usage: https://github.com/zestsoftware/collective.multisearch/pull/6
+name: Test with tox
+# This makes us a reusable workflow:
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        description: "Python version to use. Can be a list, if you spell it correctly."
+        required: false
+        default: "3.8"
+        type: string
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Try it
+      run: |
+        echo ${{ inputs.python-version}}

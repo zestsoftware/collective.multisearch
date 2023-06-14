@@ -177,7 +177,7 @@ class Renderer(base.Renderer):
     def make_excerpt(self, desc):
         if not self.data.show_description or not desc:
             return
-        max_length = getattr(self, "max_length", CHARACTERS_PER_LINE)
+        max_length = int(getattr(self, "max_length", CHARACTERS_PER_LINE))
         return make_excerpt(desc, max_length)
 
     def results(self):

@@ -30,21 +30,6 @@
                     DateTime python:modules['DateTime'].DateTime;"
         tal:attributes="action python: '%s/@@multisearch' % here_url">
 
-    <fieldset class="noborder" id="search-field">
-      <input name="SearchableText"
-             class="searchPage"
-             type="text"
-             size="25"
-             title="Search Site"
-             i18n:attributes="title title_search_title;"
-             tal:attributes="value st;"
-             />
-      <input class="searchPage searchButton allowMultiSubmit"
-             type="submit"
-             value="Search"
-             i18n:attributes="value label_search;"/>
-    </fieldset>
-
     <div class="row">
       <div class="cell width-full position-0">
         <h1 class="documentFirstHeading"
@@ -56,34 +41,54 @@
             i18n:translate=""
             tal:condition="st">
           Search results for
-          <strong id="search-term" tal:content="st" i18n:name="term">
+          <span id="search-term" class="text-muted" tal:content="st" i18n:name="term">
             Search Term
-          </strong>
+          </span>
         </h1>
       </div>
     </div>
-  </form>
-  <div class="visualClear"><!-- --></div>
-  <div class="row">
-  <tal:block tal:define="columns view/get_portlets;
-                         column_number view/get_column_number">
-    <div class="col" tal:repeat="column columns">
-      <div tal:define="column_index repeat/column/index"
-           tal:attributes="class python: 'multi_search_column multi_search_column-%s' % column_number;
-                           id python: 'multi_search_column-%s' % column_index">
-        <span tal:repeat="portlet column"
-              tal:replace="structure portlet/render" />
-      </div>
-    </div>
-  </tal:block>
 
-  <div class="visualClear"><!-- --></div>
-  <a tal:define="here_url here/absolute_url"
-     tal:condition="view/can_manage_portlets"
-     tal:attributes="href python: '%s/@@manage-multisearch' % here_url"
-     i18n:domain="collective.multisearch"
-     i18n:translate="label_manage_multisearch">Manage search portlets</a>
-</div>
+    <fieldset class="input-group mb-4" id="search-field">
+      <input name="SearchableText"
+             class="searchPage form-control"
+             type="text"
+             size="25"
+             title="Search Site"
+             i18n:attributes="title title_search_title;"
+             tal:attributes="value st;"
+             />
+      <input class="searchPage searchButton allowMultiSubmit btn btn-primary"
+             type="submit"
+             value="Search"
+             i18n:attributes="value label_search;"/>
+    </fieldset>
+  </form>
+
+  <div class="row">
+    <tal:block tal:define="columns view/get_portlets;
+                           column_number view/get_column_number;
+                           column_width python: 12 // column_number">
+      <tal:block tal:repeat="column columns">
+        <div tal:define="column_index repeat/column/index"
+             tal:attributes="class python: 'col-lg-%s multisearch-column mb-4' % column_width;
+                             id python: 'multi_search_column-%s' % column_index">
+          <div class="portletWrapper"
+               tal:repeat="portlet column"
+               tal:content="structure portlet/render" />
+        </div>
+      </tal:block>
+    </tal:block>
+  </div>
+
+  <div class="text-center"
+       tal:condition="view/can_manage_portlets">
+    <a class="btn btn-outline-secondary btn-sm"
+       tal:define="here_url here/absolute_url"
+       tal:attributes="href python: '%s/@@manage-multisearch' % here_url"
+       i18n:domain="collective.multisearch"
+       i18n:translate="label_manage_multisearch">Manage search portlets</a>
+  </div>
+
 </div>
 </body>
 </html>

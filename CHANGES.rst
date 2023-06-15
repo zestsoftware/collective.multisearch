@@ -4,7 +4,7 @@ Changelog
 2.0.0a3 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Use Boostrap classes and Plone 6 search results and fields construction in analogy with standard site search. [in.vandenbroeck]
 
 
 2.0.0a2 (2022-05-06)

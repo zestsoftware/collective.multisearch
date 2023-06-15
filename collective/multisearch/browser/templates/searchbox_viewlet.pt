@@ -1,14 +1,15 @@
 <div id="portal-searchbox"
+     class="d-flex flex-column position-relative"
      i18n:domain="plone"
      tal:define="navigation_root_url view/navigation_root_url;
                  search_input_id view/search_input_id;">
 
     <form name="searchform" id="searchGadget_form"
           action="@@multisearch"
+          class="d-flex pat-livesearch show_images"
           tal:attributes="action string:${navigation_root_url}/@@multisearch;
                           id string:${search_input_id}_form;">
 
-        <div class="LSBox">
         <label class="hiddenStructure"
                tal:attributes="for search_input_id"
                i18n:translate="text_search">Search Site</label>
@@ -24,12 +25,13 @@
                                 placeholder title_search_site"
                tal:attributes="value request/form/SearchableText|nothing;
                                id search_input_id"
-               class="searchField" />
+               class="searchField form-control me-2" />
 
-        <input class="searchButton"
-               type="submit"
-               value="Search"
-               i18n:attributes="value label_search;" />
+        <button class="searchButton btn btn-outline-light"
+                type="submit"
+                value="Search"
+                i18n:attributes="value label_search;" 
+                i18n:translate="label_search">Search</button>
 
         <div class="searchSection">
             <input id="searchbox_currentfolder_only"
@@ -47,7 +49,6 @@
         </div>
 
         <div class="LSResult" id="LSResult" style=""><div class="LSShadow" id="LSShadow"></div></div>
-        </div>
     </form>
 
     <div id="portal-advanced-search"

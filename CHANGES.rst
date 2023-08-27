@@ -4,7 +4,9 @@ Changelog
 2.0.0a3 (unreleased)
 --------------------
 
-- Use Boostrap classes and Plone 6 search results and fields construction in analogy with standard site search. [in.vandenbroeck]
+- Fix max_length float/int conversion for Plone 6. [f.vandijk]
+
+- Use Bootstrap classes and Plone 6 search results and fields construction in analogy with standard site search. [in.vandenbroeck]
 
 
 2.0.0a2 (2022-05-06)
